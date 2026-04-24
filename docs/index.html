@@ -90,7 +90,7 @@
         <section id="projets">
           <h2>Projets</h2>
           <div class="grid">
-            <div class="card">
+            <div class="card col-12">
               <h3>Credit Scoring API</h3>
               <p class="small mt-0">
                 Projet de déploiement, monitoring et optimisation d’un modèle de scoring crédit réalisé dans un contexte MLOps — Avec API FastAPI : prédiction & décision `ACCEPTED/REFUSED` à partir d'un seuil métier.
@@ -221,7 +221,10 @@
                 <span class="badge">EDA</span>
                 <span class="badge">Régression logistique</span>
                 <span class="badge">Imbalance</span>
-                <span class="badge">Precision/Recall</span>
+                <span class="badge">Validation croisée</span>
+                <span class="badge">Seuil de décision</span>
+                <span class="badge">One‑Hot Encoding</span>
+                <span class="badge">Analyse d’erreurs</span>
               </div>
 
               <ul>
@@ -230,6 +233,31 @@
                 <li>Modèle retenu (extrait) : régression logistique ; recall(« départ ») ≈ 0.68.</li>
                 <li>Compromis métier : ajustement du seuil (precision/recall) pour « mieux alerter que rater ».</li>
               </ul>
+
+              <hr />
+              <div class="small">
+                Ce que le projet démontre (POC) :
+                <ul>
+                  <li>Fusion multi-sources RH : structurer un dataset unique à partir de 3 fichiers (SIRH, évaluations annuelles, sondage) avec recouvrement via identifiants.</li>
+                  <li>Préparation : nettoyage, suppression de colonnes non pertinentes/constantes, encodage catégoriel (One‑Hot), gestion de corrélations fortes.</li>
+                  <li>Évaluation adaptée au déséquilibre : aller au-delà de l’accuracy (precision/recall, matrice de confusion) et comparer des modèles via validation croisée.</li>
+                  <li>Décision métier : piloter le compromis faux positifs / faux négatifs avec un seuil de décision ajustable.</li>
+                  <li>Interprétation : lecture des coefficients (logistique) + analyse FN/FP pour comprendre les limites du modèle.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Chiffres (extraits) :
+                <ul>
+                  <li>Données : 3 sources (SIRH, évaluations annuelles, sondage).</li>
+                  <li>Classe minoritaire : 237 démissionnés (~16%).</li>
+                  <li>Après préparation (extrait) : 1233 employés restants.</li>
+                  <li>Dummy : accuracy ≈ 84% mais recall sur « départ » ≈ 0.</li>
+                  <li>Régression logistique : recall(« départ ») ≈ 0.68 (seuil 0.50, extrait).</li>
+                  <li>Effet du seuil (extraits) : 0.20 → recall=0.91 / precision=0.22 ; 0.90 → precision=1.00 / recall=0.17.</li>
+                </ul>
+              </div>
 
               <hr />
               <div class="small">
