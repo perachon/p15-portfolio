@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapport — P8 Credit Scoring API</title>
+    <meta name="description" content="Rapport de conduite de projet AI Engineering — P8 (Credit Scoring API)" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      article{max-width:980px;margin:0 auto}
+      .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:18px 0}
+      .topbar a{text-decoration:none}
+      .doc h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+      .doc h2{margin:22px 0 10px;font-size:18px;letter-spacing:.2px}
+      .doc h3{margin:16px 0 8px;font-size:15px;letter-spacing:.2px}
+      .doc p{margin:10px 0}
+      .doc code{background:rgba(0,0,0,.18);border:1px solid var(--border);padding:1px 6px;border-radius:8px}
+      .doc .meta{color:var(--muted);font-size:13px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <a class="btn btn--ghost" href="../index.html">← Retour au portfolio</a>
+      </div>
+
+      <article class="card doc">
+        <h1>Rapport de conduite de projet AI Engineering — P8 (Credit Scoring API)</h1>
+
+        <h2>1. Contexte et analyse des besoins</h2>
+        <h3>1.1 Présentation (organisation et / ou contexte)</h3>
+        <ul>
+          <li>Contexte : système d’aide à la décision pour l’octroi de crédit via une API.</li>
+          <li>Type d’organisation (scénario OpenClassrooms) : société financière fictive <strong>"Prêt à Dépenser"</strong> ; département <strong>"Crédit Express"</strong> (traitement quasi temps réel).</li>
+          <li>Enjeux business : réduire le coût du risque tout en maintenant un taux d’acceptation cible.</li>
+          <li>Pourquoi industrialiser : un modèle en notebook n’a de valeur métier que s’il est fiable, traçable, monitoré et maintenable en production.</li>
+          <li>Niveau de maturité IA / MLOps : <strong>maturité intermédiaire</strong> — déploiement Docker + CI/tests + logs + monitoring ; pas encore de sécurité/alerting/retraining automatisé.</li>
+        </ul>
+
+        <h3>1.2 Besoin métier</h3>
+        <ul>
+          <li>Besoin : estimer <code>P(défaut)</code> et produire une décision <code>ACCEPTED/REFUSED</code> à partir d’un seuil <code>THRESHOLD=0.2</code>.</li>
+          <li>Parties prenantes (scénario OC) : Chloé Dubois (Lead Data Scientist), Michaël (manager), département Crédit Express + chargé d’études.</li>
+          <li>KPI business : minimiser le coût d’erreur en tenant compte d’un coût FN &gt;&gt; FP (mission OC : FN supposé 10× FP) + suivi taux d’acceptation / taux de défaut.</li>
+          <li>Conformité : non cadré juridiquement dans le POC (pas de DPIA, pas de politique formalisée d’accès/rétention). POC exposé publiquement et sans auth/rate-limit → points de vigilance à traiter en prod.</li>
+        </ul>
+
+        <p><strong>Axes de réalisation</strong></p>
+        <ul>
+          <li>Exposer le modèle via une API stable.</li>
+          <li>Automatiser les tests et le déploiement.</li>
+          <li>Mettre en place du monitoring.</li>
+          <li>Analyser et optimiser les performances.</li>
+        </ul>
+
+        <h2>2. Solution (POC)</h2>
+        <ul>
+          <li>API FastAPI : <code>GET /health</code>, <code>POST /predict</code> + validation Pydantic.</li>
+          <li>Modèle : chargé au démarrage (startup) et conservé en mémoire ; artefact joblib téléchargé depuis Hugging Face Hub (<code>perachon/credit-scoring-model</code>, <code>lightgbm_api_pipeline.pkl</code>) avec cache Hugging Face.</li>
+          <li>Déploiement : Docker ; Uvicorn écoute sur <code>7860</code> dans le conteneur ; déploiement sur Hugging Face Spaces.</li>
+          <li>CI/CD : GitHub Actions (pytest → build Docker → push HF Space).</li>
+          <li>Logs : JSONL request-level + événements <code>prediction</code> / <code>validation_error</code> (ex. <code>logs/api_requests.jsonl</code>).</li>
+        </ul>
+
+        <h3>2.2 Évaluation de l’adéquation aux besoins</h3>
+        <ul>
+          <li>Robustesse : validation Pydantic + tests automatisés.</li>
+          <li>Sécurité : pas d’auth/rate-limit (écart par rapport à une prod).</li>
+          <li>Coût : estimation non réalisée (POC). Drivers principaux : compute CPU, cold start/téléchargement modèle, stockage/rotation des logs, hébergement (Spaces). Chiffrage (€/mois).</li>
+        </ul>
+
+        <p><strong>Écarts / limites (POC)</strong></p>
+        <ul>
+          <li>Gouvernance data : non formalisée dans le POC (pas de data contract, pas de contrôles qualité systématiques, pas d’analyse fairness documentée). Droits/licence exacts de la source du dataset.</li>
+          <li>Observabilité : monitoring présent (latence + drift), mais pas de dashboard/alerting.</li>
+        </ul>
+
+        <p><strong>Logging vs monitoring</strong> : le logging stocke les événements ; le monitoring analyse ces événements pour détecter des anomalies.</p>
+
+        <h2>5. Contrôle et suivi (extraits)</h2>
+        <ul>
+          <li>Latence /predict (42 requêtes) : mean 262.70 ms ; median 0.92 ms ; min 0.45 ms ; max 2599.65 ms.</li>
+          <li>Note latence : 42 lignes /predict dans les logs, 40 <code>request_id</code> uniques (doublons présents).</li>
+          <li>Drift (Evidently, K‑S) : drift détecté sur <code>probability_default</code> — p-value ≈ 0.015873 (&lt; 0.05), <code>dataset_drift=true</code> (cf. <code>drift_report.json</code>).</li>
+          <li>Interprétation : signal à investiguer (échantillon, drift sur scores uniquement, impact sur métriques) qui déclenche un plan d’action.</li>
+          <li>Plan d’action : analyser les features contributrices, suivre les KPI techniques, éventuel retraining/recalibration → revalidation → redéploiement via CI/CD.</li>
+        </ul>
+
+        <h3>5.2 Outils et process de suivi</h3>
+        <ul>
+          <li>Tests : exécution en CI.</li>
+          <li>Monitoring : scripts latence/drift + rapports Evidently.</li>
+          <li>Analyse performance : identification du goulot via <code>cProfile</code>.</li>
+          <li>Process : non formalisé dans le POC (pas de cadence revue drift définie ; pas de runbook).</li>
+        </ul>
+
+        <h2>Risques & mitigation (POC)</h2>
+        <ul>
+          <li>Légal/réglementaire : DPIA RGPD non réalisé (hors périmètre POC).</li>
+          <li>Sécurité : auth/rate-limit non implémentés (POC).</li>
+          <li>Biais/fairness : non documenté dans le POC ; vigilance sur variables sensibles potentielles.</li>
+        </ul>
+
+        <h2>Liens</h2>
+        <ul>
+          <li>Démo : <a href="https://perachon-credit-scoring-api-v2.hf.space/docs" target="_blank" rel="noreferrer">https://perachon-credit-scoring-api-v2.hf.space/docs</a></li>
+          <li>Repo (Spaces) : <a href="https://huggingface.co/spaces/perachon/credit-scoring-api-v2/tree/main" target="_blank" rel="noreferrer">https://huggingface.co/spaces/perachon/credit-scoring-api-v2/tree/main</a></li>
+        </ul>
+      </article>
+
+      <footer class="small muted" style="margin-top:18px">P15 — Portfolio OpenClassrooms</footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapport — P7 Puls-Events RAG</title>
+    <meta name="description" content="Rapport de conduite de projet AI Engineering — P7 (Puls-Events RAG OpenAgenda)" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      article{max-width:980px;margin:0 auto}
+      .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:18px 0}
+      .topbar a{text-decoration:none}
+      .doc h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+      .doc h2{margin:22px 0 10px;font-size:18px;letter-spacing:.2px}
+      .doc h3{margin:16px 0 8px;font-size:15px;letter-spacing:.2px}
+      .doc p{margin:10px 0}
+      .doc code{background:rgba(0,0,0,.18);border:1px solid var(--border);padding:1px 6px;border-radius:8px}
+      .doc .meta{color:var(--muted);font-size:13px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <a class="btn btn--ghost" href="../index.html">← Retour au portfolio</a>
+      </div>
+
+      <article class="card doc">
+        <h1>Rapport de conduite de projet AI Engineering — P7 (Puls-Events RAG OpenAgenda)</h1>
+
+        <h2>1. Contexte et analyse des besoins</h2>
+        <h3>1.1 Présentation (organisation et / ou contexte)</h3>
+        <ul>
+          <li>Contexte : assistant conversationnel (RAG) pour répondre à des questions sur des événements culturels (récents &lt; 1 an et à venir) sur un périmètre géographique (Paris‑Saclay).</li>
+          <li>Type d’organisation (scénario OC) : mission freelance pour <strong>Puls-Events</strong>, entreprise tech qui développe une plateforme de recommandations culturelles.</li>
+          <li>Enjeux : améliorer la découverte d’événements pertinents, réduire le temps de recherche, et démontrer la faisabilité d’un chatbot basé sur OpenAgenda.</li>
+          <li>Niveau de maturité IA / MLOps : <strong>POC technique</strong> — pipeline data + index FAISS + API + Docker ; pas de déploiement “prod”/SLO/alerting.</li>
+        </ul>
+
+        <h3>1.2 Besoin métier</h3>
+        <ul>
+          <li>Besoin : répondre en langage naturel et recommander un top événements avec date/lieu/ville + lien/source.</li>
+          <li>Parties prenantes (scénario OC) : <strong>Jérémy</strong> (responsable technique) + équipes <strong>Produit</strong> et <strong>Marketing</strong> (cibles de la démo).</li>
+          <li>Qualité : éviter l’hallucination ; réponses traçables/sourcées via les documents récupérés.</li>
+          <li>Fraîcheur : événements récents (&lt; 1 an) et à venir → reconstruction de l’index si les données évoluent.</li>
+          <li>Attendus (mission) : RAG LangChain + Mistral + FAISS + scripts de (re)construction d’index + API REST + jeu de test annoté + tests unitaires + rapport technique.</li>
+        </ul>
+
+        <h2>2. Solution (POC)</h2>
+        <ul>
+          <li>Données : OpenAgenda (agenda <code>universite-paris-saclay</code>).</li>
+          <li>Volumétrie : ~3800 événements bruts ; dataset indexé ~661 (<code>data/processed/events_index_ready.jsonl</code>).</li>
+          <li>Pipeline : ingestion → nettoyage → indexation FAISS persistée (<code>data/index/faiss_events/</code>).</li>
+          <li>Architecture : séparation <strong>offline</strong> (collecte/nettoyage/chunking/embeddings/index) vs <strong>online</strong> (retrieval FAISS → génération LLM à partir des documents).</li>
+          <li>RAG : LangChain + LLM Mistral (<code>mistral-small-latest</code>).</li>
+          <li>Embeddings : <code>sentence-transformers/all-MiniLM-L6-v2</code> (local).</li>
+          <li>Chunking : 800 caractères ; overlap 120.</li>
+          <li>API : FastAPI (<code>/ask</code>, <code>/rebuild</code>).</li>
+          <li>Docker : démo locale ; exécution facilitée via Docker Compose (POC).</li>
+        </ul>
+
+        <h2>Contraintes & limites (POC)</h2>
+        <ul>
+          <li>Dépendance à un LLM externe : connexion Internet + service tiers (Mistral) ; coût par requête à estimer.</li>
+          <li>Qualité liée à la couverture/qualité des données indexées.</li>
+          <li>Temps de réponse variable selon la requête.</li>
+          <li>Périmètre géographique volontairement restreint pour garder des recommandations cohérentes.</li>
+          <li>Sécurité : secrets via variables d’environnement ; auth API non implémentée (POC).</li>
+        </ul>
+
+        <h2>Évaluation (extraits)</h2>
+        <ul>
+          <li>Gold set (10 questions) : 5 correct, 5 partial, 0 incorrect.</li>
+          <li>Moyennes : precision=0.6183 ; recall=1.0 ; f1=0.69.</li>
+        </ul>
+
+        <h2>Liens</h2>
+        <ul>
+          <li>Repo : <a href="https://github.com/perachon/p7-puls-events-rag" target="_blank" rel="noreferrer">https://github.com/perachon/p7-puls-events-rag</a></li>
+        </ul>
+      </article>
+
+      <footer class="small muted" style="margin-top:18px">P15 — Portfolio OpenClassrooms</footer>
+    </div>
+  </body>
+</html>

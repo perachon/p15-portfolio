@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio — AI Engineer</title>
+    <meta name="description" content="Portfolio (P15 OpenClassrooms) : projets, compétences et contact." />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="brand">
+          <div class="brand__left">
+            <div class="logo" aria-hidden="true">AI</div>
+            <div>
+              <h1>Portfolio — AI Engineer</h1>
+              <p class="mb-0">
+                Projets IA orientés production : MLOps, RAG, déploiement et observabilité.
+              </p>
+            </div>
+          </div>
+          <div class="small muted">
+            Dernière mise à jour : 14 avril 2026
+          </div>
+        </div>
+        <nav>
+          <a href="#profil">Profil</a>
+          <a href="#projets">Projets</a>
+          <a href="#competences">Compétences</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="hero">
+          <div class="card">
+            <h2 class="hero__title">AI Engineer orienté production : je déploie des modèles via API, j’industrialise (Docker/CI), et je mets en place l’observabilité (logs/monitoring) pour garantir qualité, coût et latence.</h2>
+            <p class="hero__subtitle">
+              J’aime partir d’un POC et le transformer en service exploitable : pipeline clair, endpoints stables, tests, et une démarche guidée par les métriques.
+              Dans ce portfolio, un projet MLOps “crédit scoring” (déploiement + monitoring + optimisation) et un projet RAG (retrieval FAISS + réponses sourcées) démontrables.
+            </p>
+            <div class="actions">
+              <a class="btn" href="#projets">Voir les projets</a>
+              <a class="btn btn--ghost" href="#contact">Contact</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Liens rapides</h3>
+            <ul>
+              <li>GitHub : <a href="https://github.com/perachon" target="_blank" rel="noreferrer">perachon</a></li>
+              <li>LinkedIn : <a href="https://www.linkedin.com/in/yohan-p%C3%A9rachon-b7b6a2107/" target="_blank" rel="noreferrer">yohan-pérachon</a></li>
+              <li>CV : <a href="./CV-YPN-DEV.pdf" target="_blank" rel="noreferrer">CV-YPN-DEV.pdf</a></li>
+            </ul>
+            <hr />
+            <div class="small muted">
+              Stack principale : Python, FastAPI, Docker, GitHub Actions, MLflow, Evidently, FAISS, LangChain.
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section id="profil">
+          <h2>Profil</h2>
+          <div class="card">
+            <div class="kv">
+              <div>Rôle visé</div>
+              <div>AI Engineer / MLOps</div>
+
+              <div>Résumé</div>
+              <div>
+                Je conçois des solutions IA orientées production : exposition via API, packaging Docker, CI/tests, logs structurés et monitoring pour piloter la qualité dans le temps.
+                J’aime identifier les goulots (latence/cold start), instrumenter proprement, et itérer jusqu’à obtenir un système fiable et compréhensible.
+                Objectif : contribuer à des projets où l’IA doit tenir des contraintes concrètes (fiabilité, coût, latence, traçabilité).
+              </div>
+
+              <div>Stack</div>
+              <div>Python, FastAPI, Pydantic, Docker, GitHub Actions, MLflow, Evidently, FAISS, LangChain.</div>
+            </div>
+            <div class="badges" aria-label="mots-clés">
+              <span class="badge">Industrialisation ML</span>
+              <span class="badge">Observabilité</span>
+              <span class="badge">Autonomie</span>
+              <span class="badge">Rigueur produit</span>
+              <span class="badge">RAG</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="projets">
+          <h2>Projets</h2>
+          <div class="grid">
+            <div class="card col-6">
+              <h3>Credit Scoring API</h3>
+              <p class="small mt-0">
+                Projet de déploiement, monitoring et optimisation d’un modèle de scoring crédit réalisé dans un contexte MLOps — Avec API FastAPI : prédiction & décision `ACCEPTED/REFUSED` à partir d'un seuil métier.
+              </p>
+
+              <div class="badges" aria-label="stack p8">
+                <span class="badge">FastAPI</span>
+                <span class="badge">Docker</span>
+                <span class="badge">CI/CD</span>
+                <span class="badge">Git</span>
+                <span class="badge">GitHub Actions</span>
+                <span class="badge">Hugging Face (Hub/Spaces)</span>
+                <span class="badge">LightGBM</span>
+                <span class="badge">Pydantic</span>
+                <span class="badge">Pytest</span>
+                <span class="badge">Logs JSON</span>
+                <span class="badge">Evidently (drift)</span>
+                <span class="badge">MLflow (runs)</span>
+                <span class="badge">Profiling (cProfile)</span>
+              </div>
+
+              <hr />
+
+              <ul>
+                <li>Endpoints : `GET /health`, `POST /predict`.</li>
+                <li>Modèle servi : pipeline LightGBM sérialisé (joblib) - téléchargé depuis Hugging Face Hub.</li>
+                <li>Déploiement démo : Hugging Face Spaces (Docker) - service accessible publiquement.</li>
+                <li>Cycle MLOps couvert : API stable → tests → CI/CD → logs → monitoring → optimisation des performances.</li>
+              </ul>
+
+              <hr />
+              <div class="small">
+                Ce que le projet démontre (côté prod) :
+                <ul>
+                  <li>CI/CD : à chaque commit → exécution des tests → build image Docker → déploiement.</li>
+                  <li>Tests : `/predict`, validation Pydantic, erreurs 422 (input) vs 500 (système), cohérence des réponses.</li>
+                  <li>Logging structuré JSONL : request-level + événements `prediction` / `validation_error` (fichier `logs/api_requests.jsonl`).</li>
+                  <li>Détection d’anomalies : analyse statistique des latences + test KS sur distributions.</li>
+                  <li>Optimisation perfs : profilage (`cProfile`) pour identifier un goulot côté chargement/initialisation, puis optimisation du chemin de chargement.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Chiffres (extraits du POC) :
+                <ul>
+                  <li>Métriques ML : AUC ~0.77 selon le comparatif multi-modèles (CV).</li>
+                  <li>Latence /predict (42 requêtes) : mean 262.70 ms ; median 0.92 ms ; max 2599.65 ms.</li>
+                  <li>Note latence : 42 lignes /predict dans les logs, 40 `request_id` uniques (doublons présents).</li>
+                  <li>
+                    Drift (Evidently, K‑S) : signal de dérive sur `probability_default` — p-value = 0.015873… (&lt; 0.05), `dataset_drift = true`.
+                    <br>Posture prod : indicateur à investiguer (échantillon limité, drift sur scores uniquement) → analyse cause + suivi perf + éventuel retraining/recalibration.
+                  </li>
+                </ul>
+              </div>
+              <hr />
+              <div class="small">
+                Liens :
+                <ul>
+                  <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P8_credit_scoring.html">Ouvrir</a></li>
+                  <li>Démo : <a href="https://perachon-credit-scoring-api-v2.hf.space/docs" target="_blank" rel="noreferrer">Swagger /docs</a></li>
+                  <li>Repo (Spaces) : <a href="https://huggingface.co/spaces/perachon/credit-scoring-api-v2/tree/main" target="_blank" rel="noreferrer">Hugging Face</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card col-6">
+              <h3>Puls-Events RAG</h3>
+              <p class="small mt-0">
+                Système Retrieval-Augmented Generation (RAG) fonctionnel basé sur LangChain et le modèle Mistral, soutenu par une base vectorielle Faiss — OpenAgenda : ingestion → index FAISS → API FastAPI → garde-fous anti-hallucination + évaluation.
+              </p>
+
+              <div class="badges" aria-label="stack p7">
+                <span class="badge">FastAPI</span>
+                <span class="badge">Docker</span>
+                <span class="badge">Docker Compose</span>
+                <span class="badge">FAISS</span>
+                <span class="badge">LangChain</span>
+                <span class="badge">sentence-transformers</span>
+                <span class="badge">Mistral API</span>
+              </div>
+
+              <ul>
+                <li>Contexte (scénario OC) : mission freelance pour Puls-Events — chatbot événements (POC).</li>
+                <li>Données : OpenAgenda (périmètre Paris-Saclay) (POC).</li>
+                <li>Index : FAISS persistée ; embeddings `all-MiniLM-L6-v2` (local) ; chunking 800, overlap 120.</li>
+                <li>API : `POST /ask` (question → réponse sourcée) ; `POST /rebuild` (reconstruction index).</li>
+                <li>Qualité : réponses sourcées + évaluation reproductible (gold set).</li>
+              </ul>
+
+              <hr />
+              <div class="small">
+                Ce que le projet démontre (POC) :
+                <ul>
+                  <li>Architecture RAG de bout en bout : pipeline offline (collecte/nettoyage/chunking/index) + exécution online (retrieval FAISS → génération LLM).</li>
+                  <li>Traçabilité : réponse construite à partir des documents récupérés (sources), pour limiter l’hallucination.</li>
+                  <li>Exposition : API FastAPI testable via Swagger ; exécution locale via Docker Compose.</li>
+                  <li>Limites assumées : dépendance à un LLM externe (Mistral), latence variable, périmètre géographique restreint.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Chiffres (extraits du POC) :
+                <ul>
+                  <li>Volumétrie : ~3800 événements bruts ; ~661 indexés.</li>
+                  <li>Gold set (10 Q) : 5 correct, 5 partial, 0 incorrect ; precision=0.6183 ; recall=1.0 ; f1=0.69.</li>
+                </ul>
+              </div>
+              <hr />
+              <div class="small">
+                Liens :
+                <ul>
+                  <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P7_puls_events_rag.html">Ouvrir</a></li>
+                  <li>Repo : <a href="https://github.com/perachon/p7-puls-events-rag" target="_blank" rel="noreferrer">GitHub</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <section id="competences">
+          <h2>Compétences & réflexivité</h2>
+          <div class="card">
+            <p class="mt-0">
+              Sur ces projets, je me suis concentré sur la transformation d’un POC en un système exploitable : API stables, packaging Docker,
+              tests et automatisation, puis observabilité (logs/monitoring) pour piloter qualité, latence et risques (ex. dérive).
+            </p>
+            <ul>
+              <li>Compétences techniques : FastAPI/Pydantic, Docker, CI/tests, logging structuré, monitoring (latence/drift), MLflow, RAG (FAISS, embeddings, chunking, réponses sourcées).</li>
+              <li>Soft skills : autonomie (cadrage + documentation), communication (docs/rapport), rigueur (mesures + limites explicites) et itération guidée par les métriques.</li>
+              <li>Rétrospective : renforcer la sécurité (auth/rate-limit), l’alerting/observabilité “prod”, la gouvernance data, et étendre l’évaluation (gold set) pour industrialiser davantage.</li>
+            </ul>
+            <hr />
+            <div class="small">
+              Carte mentale : à ajouter (image/PDF).
+            </div>
+          </div>
+        </section>
+
+        <section id="contact">
+          <h2>Contact</h2>
+          <div class="card">
+            <ul>
+              <li>Email : <a href="mailto:perachon.yo01@gmail.com">perachon.yo01@gmail.com</a></li>
+              <li>Téléphone : <a href="tel:+33602320355">06 02 32 03 55</a></li>
+              <li>GitHub : <a href="https://github.com/perachon" target="_blank" rel="noreferrer">perachon</a></li>
+              <li>LinkedIn : <a href="https://www.linkedin.com/in/yohan-p%C3%A9rachon-b7b6a2107/" target="_blank" rel="noreferrer">Profil</a></li>
+              <li>CV : <a href="./CV-YPN-DEV.pdf" target="_blank" rel="noreferrer">CV-YPN-DEV.pdf</a></li>
+            </ul>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div>Portfolio construit dans le cadre de la fin de formation OpenClassrooms.</div>
+      </footer>
+    </div>
+  </body>
+</html>
