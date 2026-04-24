@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapport — P4 Attrition</title>
+    <meta name="description" content="Rapport de conduite de projet AI Engineering — P4 (Attrition RH / TechNova Partners)" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      article{max-width:980px;margin:0 auto}
+      .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:18px 0}
+      .topbar a{text-decoration:none}
+      .doc h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+      .doc h2{margin:22px 0 10px;font-size:18px;letter-spacing:.2px}
+      .doc h3{margin:16px 0 8px;font-size:15px;letter-spacing:.2px}
+      .doc p{margin:10px 0}
+      .doc code{background:rgba(0,0,0,.18);border:1px solid var(--border);padding:1px 6px;border-radius:8px}
+      .doc .meta{color:var(--muted);font-size:13px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <a class="btn btn--ghost" href="../index.html">← Retour au portfolio</a>
+      </div>
+
+      <article class="card doc">
+        <h1>Rapport de conduite de projet AI Engineering — P4 (Attrition RH / TechNova Partners)</h1>
+
+        <h2>1. Contexte et analyse des besoins</h2>
+        <h3>1.1 Contexte</h3>
+        <ul>
+          <li>Contexte (scénario) : mission de <strong>HR Analytics</strong> pour l’ESN <strong>TechNova Partners</strong> (turnover plus élevé que d’habitude).</li>
+          <li>Demande : identifier des <strong>causes potentielles</strong> de démission et proposer des <strong>leviers actionnables</strong>.</li>
+          <li>Approche : analyse exploratoire + modèle de <strong>classification supervisée</strong> pour scorer une probabilité de départ, puis analyse des facteurs clés.</li>
+        </ul>
+
+        <h3>1.2 Besoin métier</h3>
+        <ul>
+          <li>Objectiver les différences entre employés qui restent vs ceux qui partent.</li>
+          <li>Produire un score de probabilité de départ par employé pour aider à prioriser des actions RH.</li>
+        </ul>
+
+        <h2>2. Données (3 sources)</h2>
+        <ul>
+          <li>SI RH : informations sociodémographiques / poste / âge / salaire / ancienneté, etc.</li>
+          <li>Évaluations annuelles : notes d’évaluation + satisfaction.</li>
+          <li>Sondage annuel : bien‑être / participation / promotions, etc. + témoin de départ.</li>
+          <li>Objectif : regrouper les sources avec un <strong>recouvrement</strong> suffisant pour permettre les jointures entre employés.</li>
+        </ul>
+
+        <h2>3. Préparation et qualité des données</h2>
+        <ul>
+          <li>Nettoyage et préparation.</li>
+          <li>Suppression des colonnes non pertinentes (IDs, colonnes constantes).</li>
+          <li>Encodage catégoriel : One‑Hot Encoding.</li>
+          <li>Gestion de corrélations fortes.</li>
+          <li>Volumétrie (extraits) : 1470 employés ; 1233 restants ; 237 démissionnés (≈ 16%).</li>
+          <li>Découpage : train/test avec <strong>stratification</strong> pour conserver la proportion des classes.</li>
+        </ul>
+
+        <h2>4. Modélisation et choix du modèle</h2>
+        <h3>4.1 Baselines et essais</h3>
+        <ul>
+          <li>Dummy Classifier (baseline) : accuracy ≈ 84% mais incapacité à prédire les départs (classe minoritaire).</li>
+          <li>Régression logistique : recall ≈ 0.68 sur la classe « départ » ; compromis adapté au besoin.</li>
+          <li>Random Forest (brut) : surapprentissage (overfitting).</li>
+        </ul>
+
+        <h3>4.2 Validation et compromis métier</h3>
+        <ul>
+          <li>Validation croisée : mesurer performance moyenne et stabilité, détecter l’overfit, comparer les modèles.</li>
+          <li>Conclusion (extrait) : <strong>modèle retenu = régression logistique</strong>.</li>
+          <li>Justification métier (extrait) : mieux vaut détecter davantage de départs (recall) quitte à quelques fausses alertes.</li>
+        </ul>
+
+        <h3>4.3 Seuil de décision (extraits)</h3>
+        <ul>
+          <li>Seuil 0.20 : recall(1)=0.91 ; precision(1)=0.22.</li>
+          <li>Seuil 0.50 : recall(1)=0.68 ; precision(1)=0.38.</li>
+          <li>Seuil 0.90 : precision(1)=1.00 ; recall(1)=0.17.</li>
+          <li>Positionnement (extrait) : « mieux vaut alerter trop que rater des départs » → favoriser légèrement le recall.</li>
+        </ul>
+
+        <h2>5. Interprétation (extraits)</h2>
+        <h3>5.1 Importance des variables (logistique)</h3>
+        <ul>
+          <li>Facteurs aggravants (extrait) : surcharge de travail (heures sup, déplacements fréquents), postes exposés (consultant, commercial), célibat.</li>
+          <li>Facteurs protecteurs (extrait) : satisfaction dans le travail, implication dans des dispositifs financiers (PEE), postes à responsabilité (manager, direction).</li>
+          <li>Note (extrait) : le revenu mensuel a un coefficient proche de 0 une fois les autres variables prises en compte.</li>
+        </ul>
+
+        <h3>5.2 Analyse des erreurs (extraits)</h3>
+        <ul>
+          <li>Faux négatifs (départs ratés) : profils plus âgés, expérimentés, bien payés, installés.</li>
+          <li>Faux positifs (fausses alertes) : profils plus jeunes, en mobilité (déplacements, heures sup), qui restent finalement.</li>
+          <li>Conclusion (extrait) : le modèle repère surtout les signes visibles de surcharge, mais capte moins les causes liées à la carrière.</li>
+        </ul>
+
+        <h2>6. Livrables (attendus de mission)</h2>
+        <ul>
+          <li>Un fichier <code>pyproject.toml</code> (versions Python + dépendances).</li>
+          <li>Notebooks et/ou scripts : nettoyage, exploration et modélisation.</li>
+          <li>Un support de présentation (diapo).</li>
+        </ul>
+
+        <hr />
+        <div class="meta">
+          Sources : <code>projets/p4_attrition/p4_contexte_mission.md</code> et <code>projets/p4_attrition/p4_diapo.md</code>.
+        </div>
+      </article>
+
+      <footer class="small muted" style="margin-top:18px">P15 — Portfolio OpenClassrooms</footer>
+    </div>
+  </body>
+</html>

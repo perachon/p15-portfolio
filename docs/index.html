@@ -90,7 +90,7 @@
         <section id="projets">
           <h2>Projets</h2>
           <div class="grid">
-            <div class="card col-6">
+            <div class="card">
               <h3>Credit Scoring API</h3>
               <p class="small mt-0">
                 Projet de déploiement, monitoring et optimisation d’un modèle de scoring crédit réalisé dans un contexte MLOps — Avec API FastAPI : prédiction & décision `ACCEPTED/REFUSED` à partir d'un seuil métier.
@@ -206,6 +206,36 @@
                 <ul>
                   <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P7_puls_events_rag.html">Ouvrir</a></li>
                   <li>Repo : <a href="https://github.com/perachon/p7-puls-events-rag" target="_blank" rel="noreferrer">GitHub</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card col-6">
+              <h3>Attrition RH — TechNova Partners</h3>
+              <p class="small mt-0">
+                Projet de classification supervisée en contexte RH : explorer 3 sources de données (SIRH, évaluations annuelles, sondage), prédire une probabilité de départ et interpréter les facteurs clés.
+              </p>
+
+              <div class="badges" aria-label="stack p4">
+                <span class="badge">Classification supervisée</span>
+                <span class="badge">EDA</span>
+                <span class="badge">Régression logistique</span>
+                <span class="badge">Imbalance</span>
+                <span class="badge">Precision/Recall</span>
+              </div>
+
+              <ul>
+                <li>Volumétrie (extraits) : 1470 employés ; 237 démissionnés (~16%).</li>
+                <li>Baseline : Dummy Classifier accuracy ≈ 84% mais ne détecte pas la classe minoritaire.</li>
+                <li>Modèle retenu (extrait) : régression logistique ; recall(« départ ») ≈ 0.68.</li>
+                <li>Compromis métier : ajustement du seuil (precision/recall) pour « mieux alerter que rater ».</li>
+              </ul>
+
+              <hr />
+              <div class="small">
+                Liens :
+                <ul>
+                  <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P4_attrition.html">Ouvrir</a></li>
                 </ul>
               </div>
             </div>
