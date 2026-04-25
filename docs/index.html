@@ -438,6 +438,101 @@
             </div>
 
             <div class="card col-6">
+              <h3>Apprentissage par renforcement (RL) — Eagle‑1 (LunarLander‑v3)</h3>
+              <p class="small mt-0">
+                Entraînement d’un agent RL pour piloter un atterrisseur (LunarLander‑v3), avec critère de validation sur mean reward, choix d’algorithme (DQN → PPO) et livrables de démonstration (API/GUI/dashboard + vidéo).
+              </p>
+
+              <div class="badges" aria-label="stack p11">
+                <span class="badge">Reinforcement Learning</span>
+                <span class="badge">LunarLander‑v3</span>
+                <span class="badge">PPO</span>
+                <span class="badge">DQN</span>
+                <span class="badge">Reward</span>
+                <span class="badge">API</span>
+                <span class="badge">Swagger (/docs)</span>
+                <span class="badge">Dashboard</span>
+              </div>
+
+              <ul>
+                <li>Formulation : observation = 8 valeurs ; actions = 4 actions discrètes ; reward favorise atterrissage stable et pénalise crash/fuel.</li>
+                <li>Validation : mean_reward sur 100 épisodes, objectif &gt; 200 stable.</li>
+                <li>Choix final : PPO (meilleur run avec gamma=0.999), après essais DQN.</li>
+              </ul>
+
+              <hr />
+              <div class="small">
+                Ce que le projet démontre :
+                <ul>
+                  <li>Rigueur d’évaluation RL : baseline, tuning incrémental, et métrique agrégée sur 100 épisodes.</li>
+                  <li>Capacité à arbitrer un algorithme selon stabilité/performance (DQN vs PPO).</li>
+                  <li>“Mise en usage” : API centrale + GUI client + dashboard basé logs, plutôt qu’un simple notebook.</li>
+                  <li>Traçabilité : logs CSV (training + runs de démo) et sauvegarde du best model.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Chiffres (extraits) :
+                <ul>
+                  <li>Résultat annoncé : ~267 ± 21 de mean reward (sur 100 épisodes) ; objectif &gt; 200 atteint.</li>
+                  <li>Vidéo démo : contrainte 20–30s ; réglage 30 fps + répétition de frames (ex. frame_repeat=3) pour ~25–30s.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Liens :
+                <ul>
+                  <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P11_entrainer_agent_rl.html">Ouvrir</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card col-6">
+              <h3>Extraction multimodale (ETL) — Fake news (CheckIt.AI)</h3>
+              <p class="small mt-0">
+                Conception d’un pipeline d’acquisition de données multimodales (texte + image) pour entraîner un détecteur de fake news : qualification de sources, extraction automatisée, transformation, schéma de données, orchestration Airflow et KPI de monitoring.
+              </p>
+
+              <div class="badges" aria-label="stack p12">
+                <span class="badge">ETL</span>
+                <span class="badge">Données multimodales</span>
+                <span class="badge">APIs / Scraping</span>
+                <span class="badge">RSS</span>
+                <span class="badge">JSON / CSV</span>
+                <span class="badge">Airflow (DAG)</span>
+                <span class="badge">Logging</span>
+                <span class="badge">KPI</span>
+              </div>
+
+              <ul>
+                <li>Étape 1 : identifier et qualifier ≥ 3 sources (format, langue, labels, méthode d’extraction).</li>
+                <li>Étapes 2–3 : scripts Python modulaires (logs + erreurs) puis transformation reproductible (nettoyage/normalisation/mapping/export).</li>
+                <li>Étape 4 : orchestration Airflow (DAG) ; preuves d’exécution ; tâches simples et séparées.</li>
+              </ul>
+
+              <hr />
+              <div class="small">
+                Ce que le projet démontre :
+                <ul>
+                  <li>Approche “data pipeline” : extraction → transformation → stockage, pensée pour être relançable et maintenable.</li>
+                  <li>Rigueur sur la qualité/usage : association texte‑image, champs secondaires utiles (URL, domaine), quotas API.</li>
+                  <li>Conformité/prudence : vérification des droits d’usage et légalité du scraping.</li>
+                  <li>Industrialisation : orchestration Airflow + définition de KPI (qualité, rapidité, coût) et plan de monitoring.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Liens :
+                <ul>
+                  <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P12_extrayez_donnes_multimodales_web.html">Ouvrir</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card col-6">
               <h3>Segmentation vestimentaire (PoC) — ModeTrends</h3>
               <p class="small mt-0">
                 Évaluation d’un modèle de segmentation pré‑entraîné (SegFormer) pour isoler des pièces vestimentaires dans des images, avec validation (IoU) et estimation de coût d’exécution (local vs Inference API).

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapport — P12 Données multimodales (web)</title>
+    <meta name="description" content="Rapport de conduite de projet AI Engineering — P12 (extraction multimodale / ETL / Airflow)" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      article{max-width:980px;margin:0 auto}
+      .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:18px 0}
+      .topbar a{text-decoration:none}
+      .doc h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+      .doc h2{margin:22px 0 10px;font-size:18px;letter-spacing:.2px}
+      .doc h3{margin:16px 0 8px;font-size:15px;letter-spacing:.2px}
+      .doc p{margin:10px 0}
+      .doc code{background:rgba(0,0,0,.18);border:1px solid var(--border);padding:1px 6px;border-radius:8px}
+      .doc .meta{color:var(--muted);font-size:13px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <a class="btn btn--ghost" href="../index.html">← Retour au portfolio</a>
+      </div>
+
+      <article class="card doc">
+        <h1>Rapport de conduite de projet AI Engineering — P12 (Extrayez des données multimodales de sites web / pipeline fake news)</h1>
+
+        <h2>1. Contexte et objectif</h2>
+        <ul>
+          <li>Organisation (scénario) : <strong>CheckIt.AI</strong>, start-up de détection automatique de désinformation.</li>
+          <li>Besoin : pipeline d’acquisition de données <strong>multimodales (texte + image)</strong> pour entraîner/enrichir un détecteur de fake news.</li>
+          <li>Objectif : automatiser extraction → transformation → stockage avec maintenabilité, reproductibilité et planification.</li>
+        </ul>
+
+        <h2>2. Stratégie d’extraction (extraits)</h2>
+        <ul>
+          <li>Identifier au moins <strong>3 sources</strong> multimodales pertinentes (API, sites web, datasets, flux RSS…).</li>
+          <li>Caractériser chaque source : type de données, format (CSV/JSON/API), langue, qualité des labels (vrai/faux), méthode d’extraction (API REST, Scrapy, Selenium…).</li>
+          <li>Points d’attention : droits d’usage, légalité du scraping, quotas/clefs d’API, association texte‑image, distinction opinions vs désinformation.</li>
+        </ul>
+
+        <h2>3. Scripts d’extraction automatisée (extraits)</h2>
+        <ul>
+          <li>Scripts Python modulaires, exécutables sans intervention manuelle.</li>
+          <li>Sauvegarde dans une structure cohérente (ex. JSON/CSV ; formats de sortie évoqués : parquet possible).</li>
+          <li>Bonnes pratiques : fonctions (connexion/parsing/nettoyage/sauvegarde), logs, gestion d’erreurs, paramètres configurables.</li>
+        </ul>
+
+        <h2>4. Transformation et schéma de données (extraits)</h2>
+        <ul>
+          <li>Pipeline reproductible et journalisé : lecture → traitement → export.</li>
+          <li>Transformations : nettoyage, normalisation, mapping, génération de colonnes.</li>
+          <li>Schéma conceptuel (PDF/Mermaid) : champs, types, rôle dans l’usage IA (ex. titre, contenu, URL image, métadonnées).</li>
+        </ul>
+
+        <h2>5. Orchestration ETL avec Apache Airflow (extraits)</h2>
+        <ul>
+          <li>DAG Airflow orchestrant extraction → transformation → chargement.</li>
+          <li>Tâches distinctes, exécution locale, preuves d’exécution (logs/captures UI).</li>
+          <li>Recommandation : utiliser des <code>PythonOperator</code> simples et réutiliser les fonctions du pipeline.</li>
+        </ul>
+
+        <h2>6. Évaluation et monitoring (extraits)</h2>
+        <ul>
+          <li>KPI : qualité des données, rapidité, coût.</li>
+          <li>Tableau de bord + plan de monitoring pour la production.</li>
+        </ul>
+
+        <hr />
+        <div class="meta">
+          Source : <code>projets/p12_extrayez_donnes_multimodales_web/p12_contexte_mission.md</code>.
+        </div>
+      </article>
+
+      <footer class="small muted" style="margin-top:18px">P15 — Portfolio OpenClassrooms</footer>
+    </div>
+  </body>
+</html>
