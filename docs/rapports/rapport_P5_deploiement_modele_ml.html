@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapport — P5 Déploiement modèle ML</title>
+    <meta name="description" content="Rapport de conduite de projet AI Engineering — P5 (Déploiement modèle ML / FastAPI / CI/CD)" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      article{max-width:980px;margin:0 auto}
+      .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:18px 0}
+      .topbar a{text-decoration:none}
+      .doc h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+      .doc h2{margin:22px 0 10px;font-size:18px;letter-spacing:.2px}
+      .doc h3{margin:16px 0 8px;font-size:15px;letter-spacing:.2px}
+      .doc p{margin:10px 0}
+      .doc code{background:rgba(0,0,0,.18);border:1px solid var(--border);padding:1px 6px;border-radius:8px}
+      .doc .meta{color:var(--muted);font-size:13px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <a class="btn btn--ghost" href="../index.html">← Retour au portfolio</a>
+      </div>
+
+      <article class="card doc">
+        <h1>Rapport de conduite de projet AI Engineering — P5 (Déploiement d’un modèle ML / Futurisys)</h1>
+
+        <h2>1. Contexte et analyse des besoins</h2>
+        <ul>
+          <li>Contexte (scénario) : mission freelance pour <strong>Futurisys</strong> (demande du directeur technique Aurélien) afin de rendre un modèle ML opérationnel et accessible via une API.</li>
+          <li>Objectif : solution de déploiement prête pour un usage “type production” (POC) incluant versioning, tests, CI/CD et traçabilité.</li>
+        </ul>
+
+        <h2>2. Périmètre et livrables (extraits)</h2>
+        <ul>
+          <li>Dépôt Git structuré : code, <code>requirements.txt</code>, historique de commits, branches, tags/releases.</li>
+          <li>API FastAPI : endpoints documentés (Swagger/OpenAPI).</li>
+          <li>Tests : suite Pytest + rapport de couverture (pytest-cov).</li>
+          <li>Base PostgreSQL : tables + script de création (SQL/Python) + exemples d’entrées.</li>
+          <li>Pipeline CI/CD : automatisation tests & déploiement + gestion des secrets.</li>
+        </ul>
+
+        <h2>3. Solution (POC) et architecture</h2>
+        <h3>3.1 Stack (extrait)</h3>
+        <ul>
+          <li>Python 3.9</li>
+          <li>API : FastAPI</li>
+          <li>Validation : Pydantic (validation stricte)</li>
+          <li>DB : PostgreSQL + SQLAlchemy (avec fallback SQLite selon environnement)</li>
+          <li>CI/CD : GitHub Actions</li>
+          <li>Déploiement : Hugging Face Spaces (SDK Docker)</li>
+          <li>Tests : Pytest + Coverage (~85% annoncé)</li>
+        </ul>
+
+        <h3>3.2 Endpoints et documentation (extraits)</h3>
+        <ul>
+          <li><code>/docs</code> : Swagger UI</li>
+          <li><code>GET /health</code> : check API + DB</li>
+          <li><code>POST /predict</code> : endpoint simple (test CI/CD)</li>
+          <li><code>POST /p4/predict</code> : endpoint modèle d’attrition (artefacts issus du projet 4)</li>
+        </ul>
+
+        <h3>3.3 Modèle et artefacts (extraits)</h3>
+        <ul>
+          <li>Artefacts réutilisés : pipeline <code>.joblib</code> + schéma d’entrée (<code>input_schema.json</code> avec ordre des features).</li>
+          <li>Objectif : séparation code / modèle et cohérence entre requêtes et modèle servi.</li>
+        </ul>
+
+        <h3>3.4 Traçabilité et base de données (extraits)</h3>
+        <ul>
+          <li>Tables : <code>employees</code> (dataset RH) et <code>prediction_logs</code> (traçabilité des requêtes et prédictions).</li>
+          <li>Objectif : reproductibilité et auditabilité des prédictions.</li>
+        </ul>
+
+        <h2>4. CI/CD, versioning et qualité</h2>
+        <h3>4.1 Workflow Git (extraits)</h3>
+        <ul>
+          <li>Trunk-based development : <code>main</code> + branches courtes <code>feat/...</code></li>
+          <li>Commits atomiques</li>
+          <li>PR avec CI obligatoire</li>
+          <li>Tags/Releases pour marquer les versions (exemples : <code>v0.3.0</code>, <code>v0.4.0</code>, <code>v0.5.0</code>)</li>
+        </ul>
+
+        <h3>4.2 CI/CD (extraits)</h3>
+        <ul>
+          <li>Installe les dépendances → exécute Pytest → calcule la couverture.</li>
+          <li>Si la CI est verte : déploiement sur Hugging Face.</li>
+          <li>Gestion des secrets : <code>HF_TOKEN</code> en GitHub Secrets.</li>
+        </ul>
+
+        <h2>5. Tests & couverture (extraits)</h2>
+        <ul>
+          <li>Unitaires : validation Pydantic (champs manquants/mauvais type → 422), tests du loader d’artefacts (fichiers manquants, clé <code>feature_order</code> absente…).</li>
+          <li>Fonctionnels : tests endpoints (200 / 400 / 422 / 503) avec mocks ciblés.</li>
+          <li>Intégration : API ↔ DB (un appel <code>/p4/predict</code> → +1 ligne dans <code>prediction_logs</code>).</li>
+          <li>Couverture : ~85% (extrait).</li>
+        </ul>
+
+        <h2>6. Limites & next steps (extraits)</h2>
+        <ul>
+          <li>Ajouter des tests de performance (latence max) et des tests de non-régression du modèle.</li>
+          <li>Évolutions possibles : endpoint <code>/logs/last</code>, export des logs vers dashboard, migration DB managée (ex. Supabase).</li>
+        </ul>
+
+        <h2>7. Liens</h2>
+        <ul>
+          <li>Démo (Hugging Face Spaces) : <a href="https://huggingface.co/spaces/perachon/p5-ml-deploy-poc-dev" target="_blank" rel="noreferrer">https://huggingface.co/spaces/perachon/p5-ml-deploy-poc-dev</a></li>
+        </ul>
+
+        <hr />
+        <div class="meta">
+          Sources : <code>projets/p5_deploiement_modele_ml/p5_contexte_mission.md</code> et <code>projets/p5_deploiement_modele_ml/p5_diapo.md</code>.
+        </div>
+      </article>
+
+      <footer class="small muted" style="margin-top:18px">P15 — Portfolio OpenClassrooms</footer>
+    </div>
+  </body>
+</html>

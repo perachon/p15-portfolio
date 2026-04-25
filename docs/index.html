@@ -267,6 +267,63 @@
                 </ul>
               </div>
             </div>
+
+            <div class="card col-6">
+              <h3>Déploiement d’un modèle ML (POC) — Futurisys</h3>
+              <p class="small mt-0">
+                Déploiement d’un modèle ML via une API FastAPI avec CI/CD, tests automatisés, et traçabilité des prédictions en base (PostgreSQL) — démo déployée sur Hugging Face Spaces.
+              </p>
+
+              <div class="badges" aria-label="stack p5">
+                <span class="badge">FastAPI</span>
+                <span class="badge">Pydantic</span>
+                <span class="badge">Pytest</span>
+                <span class="badge">Coverage</span>
+                <span class="badge">GitHub Actions</span>
+                <span class="badge">Docker</span>
+                <span class="badge">Hugging Face Spaces</span>
+                <span class="badge">PostgreSQL</span>
+                <span class="badge">SQLAlchemy</span>
+              </div>
+
+              <ul>
+                <li>Endpoints (extraits) : `GET /health`, `POST /predict`, `POST /p4/predict`.</li>
+                <li>Validation : schémas Pydantic + types stricts ; erreurs 422 automatiques si input invalide.</li>
+                <li>Traçabilité : chaque prédiction est loggée en base (table `prediction_logs`).</li>
+                <li>Qualité : suite de tests (unitaires/fonctionnels/intégration) + exécution automatique en CI.</li>
+              </ul>
+
+              <hr />
+              <div class="small">
+                Ce que le projet démontre (POC) :
+                <ul>
+                  <li>Industrialisation : transformer un modèle en service API documenté (`/docs`) avec endpoints stables.</li>
+                  <li>Fiabilité : stratégie de tests multi-niveaux (validation, endpoints, intégration API↔DB) et couverture suivie.</li>
+                  <li>CI/CD : pipeline qui installe, teste, mesure la couverture et déploie si la CI est verte.</li>
+                  <li>Sécurité des secrets : déploiement Hugging Face via `HF_TOKEN` en GitHub Secrets (pas en clair dans le repo).</li>
+                  <li>Traçabilité & audit : persistance des requêtes/réponses et métadonnées de prédiction en base.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Chiffres (extraits) :
+                <ul>
+                  <li>Couverture de tests : ~85% (extrait).</li>
+                  <li>DB : exemple mentionné de 23 lignes de logs dans `prediction_logs` (extrait).</li>
+                  <li>Tags/versions (exemples donnés) : `v0.3.0` (Dummy Model), `v0.4.0` (PostgreSQL), `v0.5.0` (Tests complets).</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Liens :
+                <ul>
+                  <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P5_deploiement_modele_ml.html">Ouvrir</a></li>
+                  <li>Démo (HF Spaces) : <a href="https://huggingface.co/spaces/perachon/p5-ml-deploy-poc-dev" target="_blank" rel="noreferrer">Espace Hugging Face</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
 
         </section>
