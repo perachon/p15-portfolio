@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapport — P3 Consommations bâtiments</title>
+    <meta name="description" content="Rapport de conduite de projet AI Engineering — P3 (Prédiction consommation énergie / émissions CO2)" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      article{max-width:980px;margin:0 auto}
+      .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:18px 0}
+      .topbar a{text-decoration:none}
+      .doc h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+      .doc h2{margin:22px 0 10px;font-size:18px;letter-spacing:.2px}
+      .doc h3{margin:16px 0 8px;font-size:15px;letter-spacing:.2px}
+      .doc p{margin:10px 0}
+      .doc code{background:rgba(0,0,0,.18);border:1px solid var(--border);padding:1px 6px;border-radius:8px}
+      .doc .meta{color:var(--muted);font-size:13px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <a class="btn btn--ghost" href="../index.html">← Retour au portfolio</a>
+      </div>
+
+      <article class="card doc">
+        <h1>Rapport de conduite de projet AI Engineering — P3 (Anticipez les besoins en consommations de bâtiments / Seattle)</h1>
+
+        <h2>1. Contexte et objectif</h2>
+        <ul>
+          <li>Contexte : mission pour la ville de <strong>Seattle</strong> (objectif neutralité carbone 2050).</li>
+          <li>Problème : les relevés consommation/émissions sont coûteux ; une campagne de mesures a été réalisée en 2016 sur des bâtiments non résidentiels.</li>
+          <li>Objectif : prédire la <strong>consommation totale d’énergie</strong> et les <strong>émissions de CO2</strong> de bâtiments non mesurés à partir de variables structurelles (taille, usage, année de construction, localisation…).</li>
+        </ul>
+
+        <h2>2. Démarche (guidée)</h2>
+
+        <h3>2.1 Analyse exploratoire</h3>
+        <ul>
+          <li>Comprendre le contenu des colonnes, identifier des bâtiments aberrants et des valeurs incohérentes.</li>
+          <li>Conserver une trace des volumes avant/après filtrage.</li>
+          <li>Éviter de supprimer massivement les lignes avec valeurs manquantes.</li>
+        </ul>
+
+        <h3>2.2 Feature engineering</h3>
+        <ul>
+          <li>Créer des variables pertinentes (localisation, temporalité, structure bâtiment…).</li>
+          <li>Encodage catégoriel : OneHotEncoder vs LabelEncoder selon le cas.</li>
+          <li>Point clé : éviter le <strong>data leakage</strong> (ne pas utiliser des features dépendantes de la target).</li>
+        </ul>
+
+        <h3>2.3 Préparation pour la modélisation</h3>
+        <ul>
+          <li>Scaling/normalisation selon les algorithmes.</li>
+          <li>Gestion des outliers (IQR/z-score ou quantiles si besoin).</li>
+          <li>Choix d’une target (parmi les colonnes candidates) pour le reste du projet.</li>
+        </ul>
+
+        <h3>2.4 Comparaison de modèles</h3>
+        <ul>
+          <li>Séparation train/test, validation croisée.</li>
+          <li>Évaluation via métriques de régression (exemples cités : R2, MAE).</li>
+          <li>Fixer un <code>random_state</code> pour la reproductibilité.</li>
+        </ul>
+
+        <h3>2.5 Optimisation et interprétation</h3>
+        <ul>
+          <li>Optimisation via GridSearchCV (grille raisonnable).</li>
+          <li>Interprétation : feature importance (après optimisation).</li>
+        </ul>
+
+        <h2>3. Livrables attendus (extraits)</h2>
+        <ul>
+          <li>Notebook template complété : EDA → feature engineering → préparation → comparaison modèles → optimisation/interprétation.</li>
+          <li>Synthèse : insights EDA + modèles testés + facteurs principaux impactant le modèle retenu.</li>
+        </ul>
+
+        <hr />
+        <div class="meta">
+          Source : <code>projets/p3_anticipez_besoins_consommations/p3_contexte_mission.md</code>.
+        </div>
+      </article>
+
+      <footer class="small muted" style="margin-top:18px">P15 — Portfolio OpenClassrooms</footer>
+    </div>
+  </body>
+</html>

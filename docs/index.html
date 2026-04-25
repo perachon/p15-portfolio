@@ -380,6 +380,108 @@
                 </ul>
               </div>
             </div>
+
+            <div class="card col-6">
+              <h3>Segmentation vestimentaire (PoC) — ModeTrends</h3>
+              <p class="small mt-0">
+                Évaluation d’un modèle de segmentation pré‑entraîné (SegFormer) pour isoler des pièces vestimentaires dans des images, avec validation (IoU) et estimation de coût d’exécution (local vs Inference API).
+              </p>
+
+              <div class="badges" aria-label="stack p2">
+                <span class="badge">Computer Vision</span>
+                <span class="badge">Segmentation</span>
+                <span class="badge">SegFormer</span>
+                <span class="badge">Transformers</span>
+                <span class="badge">Hugging Face</span>
+                <span class="badge">IoU</span>
+                <span class="badge">API tokens</span>
+              </div>
+
+              <ul>
+                <li>Métrique : IoU (Intersection over Union) pour comparer masques prédits vs ground truth.</li>
+                <li>Deux modes : traitement local via `transformers` vs exécution distante via Hugging Face Inference API.</li>
+                <li>Focus “prod” : gestion des tokens, optimisation pré-traitement, gestion d’erreurs et formats.</li>
+              </ul>
+
+              <hr />
+              <div class="small">
+                Ce que le projet démontre (POC) :
+                <ul>
+                  <li>Capacité à évaluer un modèle pré‑entraîné sur un jeu de tests annoté (masques) avec une métrique adaptée (IoU).</li>
+                  <li>Pré-traitement image robuste : redimensionnement + padding pour éviter la déformation.</li>
+                  <li>Qualité d’intégration : alignement naming image/masque et gestion des formats (`.png`, `.jpg`…).</li>
+                  <li>Arbitrage coût/infra : comparaison local (0€ hors machine) vs API Hugging Face (coût à l’usage).</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Chiffres (extraits) :
+                <ul>
+                  <li>Qualité : IoU global ≈ 74%.</li>
+                  <li>Inference API : ~1s/image ; estimation donnée ≈ 800$ (≈ 140h de calcul) dans l’exemple.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Liens :
+                <ul>
+                  <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P2_requetez_services_ia.html">Ouvrir</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card col-6">
+              <h3>Prédiction conso énergie & CO2 (régression) — Seattle</h3>
+              <p class="small mt-0">
+                Modélisation supervisée guidée : analyse exploratoire, feature engineering, comparaison de modèles de régression et interprétation pour prédire consommation d’énergie et émissions CO2 de bâtiments non résidentiels.
+              </p>
+
+              <div class="badges" aria-label="stack p3">
+                <span class="badge">EDA</span>
+                <span class="badge">Feature engineering</span>
+                <span class="badge">Régression</span>
+                <span class="badge">scikit-learn</span>
+                <span class="badge">Cross-validation</span>
+                <span class="badge">R2 / MAE</span>
+                <span class="badge">Data leakage</span>
+              </div>
+
+              <ul>
+                <li>Cibles : consommation totale d’énergie et émissions CO2 (bâtiments non résidentiels).</li>
+                <li>Données : relevés 2016 + variables structurelles (taille, usage, année de construction, localisation…).</li>
+                <li>Démarche : EDA → préparation → features → modèles → optimisation (GridSearchCV) → interprétation.</li>
+              </ul>
+
+              <hr />
+              <div class="small">
+                Ce que le projet démontre :
+                <ul>
+                  <li>Démarche ML complète et structurée : de l’EDA à l’optimisation et l’interprétation.</li>
+                  <li>Rigueur data : gestion des valeurs manquantes/outliers sans “casser” le dataset.</li>
+                  <li>Prévention des erreurs classiques : attention au data leakage et à l’encodage des catégorielles.</li>
+                  <li>Évaluation : comparaison de modèles via validation croisée et métriques de régression (R2/MAE).</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Chiffres (extraits) :
+                <ul>
+                  <li>Campagne de mesures : 2016 (relevés ville de Seattle).</li>
+                  <li>Contrainte : relevés coûteux → motivation de la prédiction.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Liens :
+                <ul>
+                  <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P3_anticipez_besoins_consommations.html">Ouvrir</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
 
         </section>
