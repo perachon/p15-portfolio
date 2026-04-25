@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapport — P9 Cadrage projet IA</title>
+    <meta name="description" content="Rapport de conduite de projet AI Engineering — P9 (Cadrage projet IA / recommandation par image)" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      article{max-width:980px;margin:0 auto}
+      .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:18px 0}
+      .topbar a{text-decoration:none}
+      .doc h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+      .doc h2{margin:22px 0 10px;font-size:18px;letter-spacing:.2px}
+      .doc h3{margin:16px 0 8px;font-size:15px;letter-spacing:.2px}
+      .doc p{margin:10px 0}
+      .doc code{background:rgba(0,0,0,.18);border:1px solid var(--border);padding:1px 6px;border-radius:8px}
+      .doc .meta{color:var(--muted);font-size:13px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <a class="btn btn--ghost" href="../index.html">← Retour au portfolio</a>
+      </div>
+
+      <article class="card doc">
+        <h1>Rapport de conduite de projet AI Engineering — P9 (Cadrage d’un projet IA / Fashion‑Insta)</h1>
+
+        <h2>1. Contexte et besoin</h2>
+        <ul>
+          <li>Entreprise (scénario) : <strong>Fashion‑Insta</strong> (magasins + e-commerce), marché concurrentiel, enjeu d’expérience client digitale.</li>
+          <li>Problème : difficulté pour les clients à retrouver des articles similaires à un style via des mots-clés/filtres.</li>
+          <li>Opportunité : utiliser la <strong>photo</strong> comme point d’entrée pour recommander des articles similaires.</li>
+        </ul>
+
+        <h2>2. Objectif du PoC IA</h2>
+        <ul>
+          <li>Faisabilité : vérifier que l’IA peut comprendre un style à partir d’une photo et proposer des recommandations pertinentes.</li>
+          <li>Valeur métier : valider l’intérêt de l’IA avant d’investir dans un MVP/produit complet.</li>
+          <li>Périmètre limité : PoC (pas un produit final).</li>
+          <li>Fonction centrale : entrée = photo utilisateur ; sortie = <strong>top N</strong> d’articles visuellement similaires ; analyse purement visuelle (pas de personnalisation dans le PoC).</li>
+        </ul>
+
+        <h2>3. Approche technique (PoC)</h2>
+        <ul>
+          <li>Modèle vision pré-entraîné (Vision Transformer / CNN).</li>
+          <li>Extraction d’<strong>embeddings</strong> (empreintes visuelles).</li>
+          <li>Recherche de similarité dans le catalogue (ex. distance cosinus) pour retourner les produits les plus proches.</li>
+        </ul>
+
+        <h3>Approche alternative (mentionnée)</h3>
+        <ul>
+          <li>Multimodal image + texte (type CLIP / LLM multimodal) : plus riche sémantiquement, mais plus coûteux et plus complexe ; option selon résultats.</li>
+        </ul>
+
+        <h2>4. Données et outils</h2>
+        <ul>
+          <li>Données : images produits du catalogue ; datasets publics de mode en complément si besoin.</li>
+          <li>Cloud : Microsoft Azure (partenaire cloud).</li>
+          <li>PoC : pas de données personnelles clients (extrait).</li>
+        </ul>
+
+        <h2>5. Critères de succès (Go / No Go)</h2>
+        <ul>
+          <li>Métier : recommandations jugées pertinentes par les équipes métier.</li>
+          <li>Technique : Recall@K / Precision@K (top 5) ; temps d’inférence &lt; 500 ms.</li>
+          <li>Décision : Go/No Go sur validation croisée des critères techniques et métier.</li>
+        </ul>
+
+        <h2>6. Déroulé, staffing et timeline</h2>
+        <ul>
+          <li>Déroulé PoC : cadrage & préparation des données → tests de modèles → évaluation métier → synthèse & recommandations.</li>
+          <li>Durée PoC (extrait) : 4 à 8 semaines.</li>
+          <li>Profils (extraits) : 1 Data Scientist ; 1 AI Engineer / Data Engineer ; 1 référent métier mode.</li>
+          <li>Timeline globale (extraits) : trajectoire progressive ~6 mois (cadrage → PoC → MVP → Run/pilote) avec Copil/Coproj.</li>
+        </ul>
+
+        <h2>7. System design (vue d’ensemble)</h2>
+        <ul>
+          <li>Ingestion : photo envoyée via API sécurisée, stockage temporaire.</li>
+          <li>Inférence : modèle vision → embedding.</li>
+          <li>Recherche vectorielle : comparaison embedding vs catalogue indexé (embeddings pré-calculés) + top N.</li>
+          <li>Règles métier : filtrage avant retour client.</li>
+          <li>Scalabilité : services managés Azure ; point critique = service d’inférence (latence & coût compute).</li>
+        </ul>
+
+        <h2>8. Coûts, ROI (extraits)</h2>
+        <ul>
+          <li>Coûts RH : ~116 500 €.</li>
+          <li>Coûts techniques one-shot : ~10 000 €.</li>
+          <li>Coûts récurrents Run : ~20 000 € / an.</li>
+          <li>Coût total première année : ~146 500 €.</li>
+          <li>ROI (hypothèses marketing, extrait) : gains annuels ~468 000 € ; rentabilité dès la première année.</li>
+        </ul>
+
+        <h2>9. RGPD : risques et mesures (extraits)</h2>
+        <h3>Risques</h3>
+        <ul>
+          <li>Images pouvant contenir des personnes ; ré-identification indirecte.</li>
+          <li>Réutilisation non maîtrisée ; conservation excessive ; exposition via APIs externes.</li>
+          <li>Données personnelles indirectes (nom/email/identifiant de compte).</li>
+        </ul>
+
+        <h3>Mesures</h3>
+        <ul>
+          <li>Gouvernance : consentement explicite ; finalité recommandation ; pas d’entraînement de modèles tiers/LLMs sur images utilisateurs.</li>
+          <li>Technique : stockage séparé, suppression automatique, chiffrement au repos/en transit, logs anonymisés.</li>
+          <li>Minimisation : privilégier embeddings ; suppression de l’image brute après traitement.</li>
+          <li>Fournisseurs : pas d’envoi d’images à des APIs publiques ; modèles hébergés sur Azure.</li>
+          <li>DPIA : envisagée avant déploiement à grande échelle (phase MVP).</li>
+        </ul>
+
+        <hr />
+        <div class="meta">
+          Sources : <code>projets/p9_cadrage_projet_ia/p9_contexte_mission.md</code>, <code>projets/p9_cadrage_projet_ia/p9_diapo.md</code>, <code>projets/p9_cadrage_projet_ia/p9_questions.md</code>.
+        </div>
+      </article>
+
+      <footer class="small muted" style="margin-top:18px">P15 — Portfolio OpenClassrooms</footer>
+    </div>
+  </body>
+</html>

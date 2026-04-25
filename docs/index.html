@@ -324,6 +324,62 @@
                 </ul>
               </div>
             </div>
+
+            <div class="card col-6">
+              <h3>Cadrage d’un projet IA (PoC) — Fashion‑Insta</h3>
+              <p class="small mt-0">
+                Cadrage complet d’un projet IA de recommandation vestimentaire par photo : définition du périmètre PoC, critères de succès (métier + technique), system design cible, dimensionnement (timeline/coûts/ROI) et volet RGPD/risques.
+              </p>
+
+              <div class="badges" aria-label="stack p9">
+                <span class="badge">Vision (ViT / CNN)</span>
+                <span class="badge">Embeddings</span>
+                <span class="badge">Similarité (cosinus)</span>
+                <span class="badge">Recall@K / Precision@K</span>
+                <span class="badge">System design</span>
+                <span class="badge">Azure (cible)</span>
+                <span class="badge">ROI</span>
+                <span class="badge">RGPD</span>
+              </div>
+
+              <ul>
+                <li>PoC : entrée photo → sortie top N d’articles visuellement similaires (pas de personnalisation dans le PoC).</li>
+                <li>Approche : modèle vision pré-entraîné → embeddings → recherche de similarité dans le catalogue.</li>
+                <li>Critères : Recall@K/Precision@K + temps d’inférence &lt; 500 ms + validation métier (pertinence).</li>
+                <li>Plan : staffing PoC (DS + AI/DE + référent métier), timeline globale (PoC → MVP → Run) et chiffrage coûts/ROI.</li>
+              </ul>
+
+              <hr />
+              <div class="small">
+                Ce que le projet démontre (POC) :
+                <ul>
+                  <li>Cadrage “décideurs” : clarifier valeur IA vs filtres classiques, périmètre limité, et critères d’échec (Go/No Go).</li>
+                  <li>Choix technique justifié : pré-entraîné + embeddings + similarité pour minimiser risque/délai du PoC.</li>
+                  <li>Évaluation adaptée : métriques de ranking (Recall@K/Precision@K) + contrainte latence (&lt; 500 ms).</li>
+                  <li>Vision prod : system design cible sur Azure (ingestion, stockage temporaire, inférence, recherche vectorielle, monitoring).</li>
+                  <li>Gouvernance risques : analyse RGPD (minimisation, rétention, consentement) et mesures (pas d’API publique, suppression image, chiffrement, logs anonymisés).</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Chiffres (extraits) :
+                <ul>
+                  <li>PoC : 4 à 8 semaines ; profils : 1 Data Scientist, 1 AI/DE, 1 référent métier mode.</li>
+                  <li>Latence cible : temps d’inférence &lt; 500 ms (critère technique PoC).</li>
+                  <li>Coûts : ~116 500 € (RH) + ~10 000 € (one-shot) + ~20 000 €/an (run) → ~146 500 € 1ère année.</li>
+                  <li>ROI (hypothèses marketing) : gains annuels ~468 000 € ; rentabilité atteinte dès la première année (extrait).</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Liens :
+                <ul>
+                  <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P9_cadrage_projet_ia.html">Ouvrir</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
 
         </section>
