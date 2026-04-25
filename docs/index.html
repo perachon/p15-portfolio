@@ -382,6 +382,62 @@
             </div>
 
             <div class="card col-6">
+              <h3>Semi‑supervisé (Computer Vision) — BrainScanAI</h3>
+              <p class="small mt-0">
+                Démo technique de classification d’images IRM (tumeur vs normal) avec peu de labels : extraction d’embeddings, clustering, pseudo‑labels et comparaison supervisé vs semi‑supervisé, avec garde‑fous anti fuite de données.
+              </p>
+
+              <div class="badges" aria-label="stack p10">
+                <span class="badge">Computer Vision</span>
+                <span class="badge">Semi‑supervisé</span>
+                <span class="badge">Embeddings (ResNet50)</span>
+                <span class="badge">Clustering (KMeans/DBSCAN)</span>
+                <span class="badge">Pseudo‑labels</span>
+                <span class="badge">ARI</span>
+                <span class="badge">F1 macro</span>
+                <span class="badge">Data leakage</span>
+                <span class="badge">QC données</span>
+              </div>
+
+              <ul>
+                <li>Données : 1506 images ; 100 labellisées (50/50) ; 1406 non labellisées.</li>
+                <li>Prétraitement : gris → RGB, resize 224×224, normalisation ImageNet (compatibilité backbones pré‑entraînés).</li>
+                <li>Pipeline : embeddings → clustering → mapping cluster→classe (train only) → pseudo‑labels filtrés → entraînement + comparaison équitable (test strict).</li>
+              </ul>
+
+              <hr />
+              <div class="small">
+                Ce que le projet démontre :
+                <ul>
+                  <li>Structuration d’un pipeline semi‑supervisé avec séparation train/val/test et interdiction d’utiliser le test pour guider les choix.</li>
+                  <li>Feature extraction via modèle pré‑entraîné (embeddings) pour travailler sur des représentations plutôt que sur les pixels.</li>
+                  <li>Contrôle qualité (outliers/quasi‑doublons) et garde‑fous pour préserver le jeu labellisé.</li>
+                  <li>Comparaison méthodique : baseline supervisée vs semi‑supervisé + robustesse via multi‑seeds.</li>
+                  <li>Projection “passage à l’échelle” : pipeline batch relançable + traçabilité (artefacts) + monitoring simple.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Chiffres (extraits) :
+                <ul>
+                  <li>Embeddings : 2048 dimensions/image ; matrice 1506×2048.</li>
+                  <li>Pseudo‑labels : ~1406 générés puis filtrage (≈ un quart conservé, autour de 350 images).</li>
+                  <li>Test final (extraits) : supervisé ~95% accuracy / F1 macro ~0.95 ; semi‑supervisé ~90% / ~0.90, avec stabilité accrue (variance plus faible) en multi‑seeds.</li>
+                  <li>Budgets mentionnés : 300 € (dataset) ; 5 000 € pour 4 M d’images à labelliser.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Liens :
+                <ul>
+                  <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P10_labellisez_semi_supervisees_traitement_images.html">Ouvrir</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card col-6">
               <h3>Segmentation vestimentaire (PoC) — ModeTrends</h3>
               <p class="small mt-0">
                 Évaluation d’un modèle de segmentation pré‑entraîné (SegFormer) pour isoler des pièces vestimentaires dans des images, avec validation (IoU) et estimation de coût d’exécution (local vs Inference API).
