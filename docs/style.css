@@ -101,6 +101,14 @@ footer{margin-top:28px;color:var(--muted);font-size:13px}
 .small{font-size:13px;color:var(--muted)}
 .notice{border-left:3px solid rgba(147,197,253,.6);padding-left:12px;color:var(--muted)}
 
+.skills{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media (min-width:820px){.skills{grid-template-columns:1fr 1fr}}
+.skill{display:grid;grid-template-columns:160px 1fr;gap:10px;align-items:center}
+.skill__name{color:var(--text);font-size:13px}
+.meter{height:10px;border-radius:999px;border:1px solid var(--border);background:rgba(0,0,0,.10);overflow:hidden}
+.meter__fill{height:100%;background:rgba(147,197,253,.35)}
+.skill__level{color:var(--muted);font-size:12px;margin-top:4px}
+
 h3{margin:0 0 8px;font-size:16px;letter-spacing:.2px}
 .muted{color:var(--muted)}
 .mb-0{margin-bottom:0}
