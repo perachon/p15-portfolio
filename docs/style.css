@@ -9,6 +9,8 @@
   --ring:rgba(147,197,253,.35);
   --shadow: 0 18px 50px rgba(0,0,0,.35);
   --shadow-soft: 0 10px 30px rgba(0,0,0,.28);
+  --accent-a: rgba(147,197,253,.55);
+  --accent-b: rgba(34,197,94,.35);
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -22,6 +24,24 @@ body{
   color:var(--text);
   line-height:1.55;
   text-rendering:optimizeLegibility;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 520px at 18% 12%, rgba(147,197,253,.10), transparent 60%),
+    radial-gradient(720px 440px at 86% 30%, rgba(34,197,94,.08), transparent 62%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(229,231,235,.028) 0,
+      rgba(229,231,235,.028) 1px,
+      transparent 1px,
+      transparent 64px
+    );
+  opacity:.85;
+  mix-blend-mode:soft-light;
 }
 .container{max-width:1100px;margin:0 auto;padding:28px 18px 70px}
 header{padding:18px 0 18px;border-bottom:1px solid var(--border)}
@@ -66,7 +86,7 @@ nav{
   padding:8px;
   border-radius:999px;
   border:1px solid var(--border);
-  background: rgba(17,24,39,.55);
+  background: rgba(17,24,39,.62);
   backdrop-filter: blur(10px);
 }
 nav a{
@@ -75,12 +95,16 @@ nav a{
   padding:7px 11px;
   border:1px solid var(--border);
   border-radius:999px;
-  background: rgba(0,0,0,.10);
-  transition: border-color .15s ease, transform .15s ease, background-color .15s ease;
+  background: rgba(0,0,0,.08);
+  transition: border-color .15s ease, transform .15s ease, background-color .15s ease, box-shadow .15s ease;
 }
-nav a:hover{border-color:var(--border-strong);background:rgba(0,0,0,.20);transform:translateY(-1px)}
+nav a:hover{border-color:var(--border-strong);background:rgba(147,197,253,.08);transform:translateY(-1px);box-shadow: 0 0 0 3px rgba(147,197,253,.08)}
 nav a:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
 section{scroll-margin-top:84px}
+@media (max-width:520px){
+  nav{top:8px;padding:6px;border-radius:18px}
+  section{scroll-margin-top:94px}
+}
 
 .hero{margin-top:18px;display:grid;grid-template-columns:1fr;gap:14px}
 @media (min-width:820px){.hero{grid-template-columns:1.25fr .75fr;align-items:stretch}}
@@ -119,7 +143,7 @@ section h2::after{
   content:"";
   height:1px;
   flex:1;
-  background: linear-gradient(90deg, rgba(229,231,235,.20), transparent);
+  background: linear-gradient(90deg, rgba(147,197,253,.28), rgba(34,197,94,.12), transparent);
 }
 .card{
   background: linear-gradient(180deg, rgba(17,24,39,.92), rgba(17,24,39,.72));
@@ -127,19 +151,27 @@ section h2::after{
   border-radius:14px;
   padding:16px;
   box-shadow: 0 0 0 rgba(0,0,0,0);
-  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
   position:relative;
   overflow:hidden;
+  will-change: transform;
 }
 .card::before{
   content:"";
   position:absolute;
-  inset:-2px;
-  background: radial-gradient(420px 140px at 15% 0%, rgba(147,197,253,.12), transparent 65%);
-  opacity:.7;
+  left:0;
+  right:0;
+  top:0;
+  height:2px;
+  background: linear-gradient(90deg, var(--accent-a), var(--accent-b), transparent);
+  opacity:.45;
   pointer-events:none;
 }
-.card:hover{transform:translateY(-2px);border-color:var(--border-strong);box-shadow: var(--shadow)}
+.card:hover{
+  transform:translateY(-2px);
+  border-color:var(--border-strong);
+  box-shadow: var(--shadow-soft), 0 0 0 1px rgba(147,197,253,.12);
+}
 .card:focus-within{border-color:var(--border-strong);box-shadow: 0 0 0 4px rgba(147,197,253,.12)}
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
 .col-12{grid-column:span 12}
@@ -152,8 +184,11 @@ section h2::after{
   .kv div:first-child{margin-top:10px}
 }
 a{color:var(--link);text-decoration-thickness: from-font; text-underline-offset: 3px}
+a:hover{text-decoration-thickness: 2px}
+*::selection{background:rgba(147,197,253,.22);color:var(--text)}
 ul{margin:10px 0 0;padding-left:18px}
 li{margin:6px 0}
+li::marker{color:rgba(147,197,253,.55)}
 .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .badge{
   font-size:12px;
@@ -161,15 +196,21 @@ li{margin:6px 0}
   border:1px solid var(--border);
   padding:4px 8px;
   border-radius:999px;
-  background:rgba(0,0,0,.12);
+  background:rgba(0,0,0,.10);
   backdrop-filter: blur(8px);
   transition: transform .15s ease, border-color .15s ease, background-color .15s ease;
 }
-.badge:hover{transform:translateY(-1px);border-color:var(--border-strong);background:rgba(0,0,0,.18)}
+.badge:hover{transform:translateY(-1px);border-color:rgba(147,197,253,.28);background:rgba(147,197,253,.06)}
 hr{border:0;border-top:1px solid var(--border);margin:18px 0}
 footer{margin-top:28px;color:var(--muted);font-size:13px}
 .small{font-size:13px;color:var(--muted)}
 .notice{border-left:3px solid rgba(147,197,253,.6);padding-left:12px;color:var(--muted)}
+
+/* Crisp focus for keyboard navigation */
+:where(a, button, input, textarea, select, summary):focus-visible{
+  outline:2px solid var(--ring);
+  outline-offset:2px;
+}
 
 .skills{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
 @media (min-width:820px){.skills{grid-template-columns:1fr 1fr}}
@@ -214,3 +255,58 @@ h3{margin:0 0 8px;font-size:16px;letter-spacing:.2px}
   .logo::after,.meter::after,.meter__fill{animation:none}
   .meter__fill{transform:none}
 }
+
+/* Reports (docs/rapports/*.html)
+   The report pages include their own <style> blocks; these selectors are intentionally
+   more specific so they apply consistently without editing each report file. */
+.container .topbar{
+  position:sticky;
+  top:12px;
+  z-index:25;
+  margin:14px 0 18px;
+  padding:8px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background: rgba(17,24,39,.62);
+  backdrop-filter: blur(10px);
+}
+.container .topbar::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:2px;
+  border-radius:16px 16px 0 0;
+  background: linear-gradient(90deg, var(--accent-a), var(--accent-b), transparent);
+  opacity:.45;
+  pointer-events:none;
+}
+.container .topbar .btn{box-shadow:none}
+
+.card.doc{
+  padding:18px;
+}
+.card.doc h1{
+  font-size:28px;
+  line-height:1.25;
+  letter-spacing:.2px;
+  margin:0 0 10px;
+}
+.card.doc h2{
+  font-size:18px;
+  margin:22px 0 10px;
+}
+.card.doc h3{
+  font-size:15px;
+  margin:16px 0 8px;
+}
+.card.doc p{margin:10px 0;color:var(--text)}
+.card.doc .meta{color:var(--muted)}
+.card.doc code{
+  background:rgba(0,0,0,.18);
+  border:1px solid var(--border);
+  padding:1px 6px;
+  border-radius:8px;
+}
+.card.doc a.btn{white-space:nowrap}

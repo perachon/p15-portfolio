@@ -79,5 +79,5 @@ _Date : 03 mai 2026_
 ## Liens
 
 - Portfolio : `docs/index.html`
-- Rapport P15 (projet perso) : `docs/rapports/rapport_P15_projet_perso_credit_scoring.html`
-- Rapport P8 : `docs/rapports/rapport_P8_credit_scoring.html`
+- Rapport (projet personnel) : `docs/rapports/rapport_P15_projet_perso_credit_scoring.html`
+- Rapport (Credit Scoring) : `docs/rapports/rapport_P8_credit_scoring.html`
