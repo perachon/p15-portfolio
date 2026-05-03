@@ -1,24 +1,24 @@
-# Rapport — P15 (projet personnel à dominante technique)
+# Rapport — Projet personnel à dominante technique (Credit Scoring API)
 
-**Projet mis en avant : P8 — Credit Scoring API**
+**Projet mis en avant : Credit Scoring API**
 
 _Date : 03 mai 2026_
 
-> Objectif : fournir un document court, directement aligné avec les **5 compétences évaluées** au P15, en s’appuyant sur le projet P8 comme projet personnel à dominante technique.
+> Objectif : fournir un document court, directement aligné avec les **5 compétences évaluées** attendues, en s’appuyant sur le projet Credit Scoring API comme projet personnel à dominante technique.
 >
-> Règle : **ne pas inventer**. Si une information n’est pas disponible dans les livrables existants, la laisser `TBD`.
+> Règle : **ne pas inventer**. Si une information n’est pas disponible dans les livrables existants, indiquer explicitement qu’elle n’est pas couverte / non documentée dans le POC.
 
-## 1) Contexte P15 et choix du projet
+## 1) Contexte et choix du projet
 
-Le P15 demande de réaliser un **projet personnel à dominante technique** autour de problématiques d’IA en production (MLOps, versioning, monitoring des dérives, etc.), puis de le valoriser dans un **portfolio**.
+Ce projet consiste à réaliser un **projet personnel à dominante technique** autour de problématiques d’IA en production (MLOps, versioning, monitoring des dérives, etc.), puis de le valoriser dans un **portfolio**.
 
-Pourquoi **P8 (Credit Scoring API)** :
+Pourquoi **Credit Scoring API** :
 
 - Dominante technique “IA en production” : **API**, **Docker**, **CI/CD**, **tests**, **logs structurés**, **monitoring** (latence + drift).
 - Projet facilement “défendable” en soutenance : démonstration claire (`/health`, `/predict`) + preuves (logs, scripts de monitoring, analyses).
 - Bon support pour parler de compromis et risques : sécurité (auth/rate-limit), gouvernance data (provenance / fairness), observabilité (alerting), drift et stratégie de retraining.
 
-## 2) Résumé de la solution (P8)
+## 2) Résumé de la solution
 
 - Service : **FastAPI** avec `GET /health` et `POST /predict`.
 - Modèle : pipeline **LightGBM** sérialisé (joblib), récupéré depuis **Hugging Face Hub**, chargé au démarrage.
@@ -26,11 +26,11 @@ Pourquoi **P8 (Credit Scoring API)** :
 - Qualité : tests **Pytest** exécutés en CI ; validation d’entrée via **Pydantic**.
 - Observabilité (POC) : logs JSONL des requêtes + analyses de **latence** et **drift** (Evidently).
 
-Référence : le rapport détaillé du P8 est dans `docs/rapports/rapport_P8_credit_scoring.html`.
+Référence : le rapport détaillé du projet est dans `docs/rapports/rapport_P8_credit_scoring.html`.
 
 ---
 
-## 3) Compétences évaluées (P15) — preuves et positionnement
+## 3) Compétences évaluées — preuves et positionnement
 
 ### 3.1 Collecter les besoins métiers et analyser le contexte de l’organisation
 
@@ -63,7 +63,7 @@ Référence : le rapport détaillé du P8 est dans `docs/rapports/rapport_P8_cre
 
 **Points à améliorer (posture prod)**
 
-- Chiffrage coût (hébergement, trafic, stockage/rotation logs) : `TBD`.
+- Chiffrage coût (hébergement, trafic, stockage/rotation logs) : non chiffré dans les livrables du POC.
 - Gouvernance data : provenance/licences, data quality, fairness (non documenté dans le POC).
 
 ### 3.3 Identifier une solution technique afin de répondre aux besoins
@@ -113,14 +113,14 @@ Référence : le rapport détaillé du P8 est dans `docs/rapports/rapport_P8_cre
 
 **Points à améliorer**
 
-- Coûts : chiffrage et suivi (€/mois) selon trafic attendu : `TBD`.
-- Délais : planification plus explicite (jalons, risques, buffer) : `TBD`.
+- Coûts : chiffrage et suivi (€/mois) selon trafic attendu : non chiffré dans les livrables du POC.
+- Délais : planification explicite (jalons, risques, buffer) : non détaillée dans les livrables du POC.
 
 ---
 
 ## 4) Conclusion
 
-Le P8 est un bon “projet personnel à dominante technique” car il démontre un chemin complet vers la production : exposition via API, packaging, automatisation, observabilité, et une approche rigoureuse des risques (drift, sécurité, gouvernance data).
+Ce projet est un bon “projet personnel à dominante technique” car il démontre un chemin complet vers la production : exposition via API, packaging, automatisation, observabilité, et une approche rigoureuse des risques (drift, sécurité, gouvernance data).
 
 ---
 

@@ -1,18 +1,18 @@
-# Carte mentale — P15 (portfolio AI Engineer)
+# Carte mentale — Portfolio AI Engineer
 
 _Date : 03 mai 2026_
 
-> Objectif : formaliser une **carte mentale / carte conceptuelle** (Étape 2 du P15) qui regroupe :
+> Objectif : formaliser une **carte mentale / carte conceptuelle** (préparation portfolio) qui regroupe :
 > - compétences (techniques + “delivery”),
 > - réflexivité (axes d’amélioration),
 > - soft skills,
-> - et mise en valeur du projet personnel (P8).
+> - et mise en valeur du projet personnel.
 >
 > Format : ici, une représentation textuelle structurée (hiérarchique), lisible et versionnée.
 
-## Centre — Portfolio AI Engineer (P15)
+## Centre — Portfolio AI Engineer
 
-### A) Projet personnel (dominante technique) — P8 Credit Scoring API
+### A) Projet personnel (dominante technique) — Credit Scoring API
 
 - Problème
   - Exposer un modèle de scoring crédit via une API exploitable

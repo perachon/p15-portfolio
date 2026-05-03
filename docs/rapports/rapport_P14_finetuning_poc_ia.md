@@ -66,8 +66,8 @@ Points de vigilance cités : ne pas mélanger entraînement et évaluation, cons
 
 Mesures de latence (extraits vocabulaire) :
 
-- Local réel : **P50 ~13,5 s** (vrai modèle local).
-- Cloud stub : **P50 ~0,23 s** (backend léger).
+- Local réel : **p50 ~13,5 s** (vrai modèle local).
+- Cloud stub : **p50 ~0,23 s** (backend léger).
 
 ## 7. Livrables attendus (extraits)
 

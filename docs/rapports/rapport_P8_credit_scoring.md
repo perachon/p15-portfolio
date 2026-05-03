@@ -1,10 +1,10 @@
-# Rapport de conduite de projet AI Engineering — P8 (Credit Scoring API)
+# Rapport de conduite de projet AI Engineering — Credit Scoring API
 
 _Date : 22 avril 2026_
 
 > Ce document est un **brouillon pré-rempli** basé sur le template OpenClassrooms.
 >
-> Règle : **ne pas inventer**. Si une info manque, laisser `TBD`.
+> Règle : **ne pas inventer**. Si une info manque, indiquer explicitement qu’elle n’est pas couverte / non documentée dans le POC.
 
 ## 1. Contexte et analyse des besoins
 
@@ -77,13 +77,13 @@ Critères d’analyse (et état dans le POC) :
 - Performance ML : comparatif multi-modèles avec métriques CV (AUC/Recall/F1) disponible (artefact MLflow) ; AUC autour de ~0.77 selon modèles.
 - Robustesse API : validation Pydantic + tests automatisés (`pytest`).
 - Sécurité : manque d’auth/rate-limit (écart).
-- Coût : **estimation non réalisée (POC)**. Drivers principaux : compute CPU (API + inférence), cold start/téléchargement du modèle depuis le Hub, stockage/rotation des logs, hébergement (Hugging Face Spaces). Chiffrage (€/mois) : `TBD` (dépend du plan et du trafic).
+- Coût : **estimation non réalisée (POC)**. Drivers principaux : compute CPU (API + inférence), cold start/téléchargement du modèle depuis le Hub, stockage/rotation des logs, hébergement (Hugging Face Spaces). Chiffrage (€/mois) : non chiffré dans les livrables du POC.
 - Maintenance : CI/CD présent ; version applicative `v1` ; dépendances séparées API/dev.
 - Monitoring : latence + drift présents ; plan d’action (drift) explicité en 5.1 (analyse cause → suivi KPI → éventuel retraining/recalibration → revalidation → redéploiement CI/CD).
 
 Écarts / limites à documenter :
 - Justification business du seuil 0.2 (coût FP/FN) : dans la mission OpenClassrooms, on peut **supposer** qu’un faux négatif (mauvais client prédit bon) coûte **10×** un faux positif (bon client refusé). Le seuil doit donc être **optimisé** sur un score métier (coût d’erreur) plutôt que fixé à 0.5.
-- Gouvernance data : **non formalisée dans le POC** (pas de data contract, pas de contrôles qualité systématiques, pas d’analyse fairness documentée). Schéma d’entrée défini via Pydantic ; vigilance sur les variables sensibles potentielles (ex. genre) et les biais. Droits/licence exacts de la source du dataset : `TBD` si non documenté.
+- Gouvernance data : **non formalisée dans le POC** (pas de data contract, pas de contrôles qualité systématiques, pas d’analyse fairness documentée). Schéma d’entrée défini via Pydantic ; vigilance sur les variables sensibles potentielles (ex. genre) et les biais. Droits/licence exacts de la source du dataset : non documentés dans les livrables du POC.
 - Observabilité (dashboard, alerting) : partiel.
 
 ## 3. Identification d’une solution technique cible

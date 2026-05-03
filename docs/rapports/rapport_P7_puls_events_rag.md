@@ -4,7 +4,7 @@ _Date : 24 avril 2026_
 
 > Ce document est un **brouillon pré-rempli** basé sur le template OpenClassrooms.
 >
-> Règle : **ne pas inventer**. Si une info manque, laisser `TBD`.
+> Règle : **ne pas inventer**. Si une info manque, indiquer explicitement qu’elle n’est pas couverte / non documentée dans le POC.
 
 ## 1. Contexte et analyse des besoins
 
