@@ -16,12 +16,12 @@
             <div>
               <h1>Portfolio — AI Engineer</h1>
               <p class="mb-0">
-                Projets IA orientés production : MLOps, RAG, déploiement et observabilité.
+                Projets IA orientés production : MLOps, RAG, agents/LLM, déploiement et observabilité.
               </p>
             </div>
           </div>
           <div class="small muted">
-            Dernière mise à jour : 14 avril 2026
+            Dernière mise à jour : 3 mai 2026
           </div>
         </div>
         <nav>
@@ -36,7 +36,7 @@
             <h2 class="hero__title">AI Engineer orienté production : je déploie des modèles via API, j’industrialise (Docker/CI), et je mets en place l’observabilité (logs/monitoring) pour garantir qualité, coût et latence.</h2>
             <p class="hero__subtitle">
               J’aime partir d’un POC et le transformer en service exploitable : pipeline clair, endpoints stables, tests, et une démarche guidée par les métriques.
-              Dans ce portfolio, un projet MLOps “crédit scoring” (déploiement + monitoring + optimisation) et un projet RAG (retrieval FAISS + réponses sourcées) démontrables.
+              Ce portfolio couvre du MLOps (API + CI/CD + monitoring), du RAG (FAISS, réponses sourcées), des pipelines data (ETL + orchestration), du RL démontrable (API/GUI/dashboard) et du LLM engineering (SFT/LoRA/DPO, garde-fous, traçabilité).
             </p>
             <div class="actions">
               <a class="btn" href="#projets">Voir les projets</a>
@@ -53,7 +53,7 @@
             </ul>
             <hr />
             <div class="small muted">
-              Stack principale : Python, FastAPI, Docker, GitHub Actions, MLflow, Evidently, FAISS, LangChain.
+              Stack principale : Python, FastAPI, Docker, GitHub Actions, MLflow, Evidently, FAISS, LangChain/LangGraph, Transformers/PEFT, SQL (PostgreSQL/SQLite), Airflow, vLLM.
             </div>
           </div>
         </div>
@@ -65,24 +65,26 @@
           <div class="card">
             <div class="kv">
               <div>Rôle visé</div>
-              <div>AI Engineer / MLOps</div>
+              <div>AI Engineer / MLOps / LLM</div>
 
               <div>Résumé</div>
               <div>
                 Je conçois des solutions IA orientées production : exposition via API, packaging Docker, CI/tests, logs structurés et monitoring pour piloter la qualité dans le temps.
-                J’aime identifier les goulots (latence/cold start), instrumenter proprement, et itérer jusqu’à obtenir un système fiable et compréhensible.
-                Objectif : contribuer à des projets où l’IA doit tenir des contraintes concrètes (fiabilité, coût, latence, traçabilité).
+                J’aime identifier les goulots (latence/cold start), instrumenter proprement, et itérer jusqu’à obtenir un système fiable, traçable et compréhensible.
+                Objectif : contribuer à des projets où l’IA doit tenir des contraintes concrètes (fiabilité, coût, latence, sécurité, traçabilité).
               </div>
 
               <div>Stack</div>
-              <div>Python, FastAPI, Pydantic, Docker, GitHub Actions, MLflow, Evidently, FAISS, LangChain.</div>
+              <div>Python, FastAPI, Pydantic, Docker, GitHub Actions, MLflow, Evidently, FAISS, LangChain/LangGraph, Transformers/PEFT, Airflow, SQL (PostgreSQL/SQLite).</div>
             </div>
             <div class="badges" aria-label="mots-clés">
               <span class="badge">Industrialisation ML</span>
               <span class="badge">Observabilité</span>
+              <span class="badge">Qualité logicielle</span>
               <span class="badge">Autonomie</span>
               <span class="badge">Rigueur produit</span>
               <span class="badge">RAG</span>
+              <span class="badge">LLM engineering</span>
             </div>
           </div>
         </section>
@@ -102,7 +104,8 @@
                 <span class="badge">CI/CD</span>
                 <span class="badge">Git</span>
                 <span class="badge">GitHub Actions</span>
-                <span class="badge">Hugging Face (Hub/Spaces)</span>
+                <span class="badge">Hugging Face Hub</span>
+                <span class="badge">Hugging Face Spaces</span>
                 <span class="badge">LightGBM</span>
                 <span class="badge">Pydantic</span>
                 <span class="badge">Pytest</span>
@@ -160,7 +163,7 @@
             <div class="card col-6">
               <h3>Puls-Events RAG</h3>
               <p class="small mt-0">
-                Système Retrieval-Augmented Generation (RAG) fonctionnel basé sur LangChain et le modèle Mistral, soutenu par une base vectorielle Faiss — OpenAgenda : ingestion → index FAISS → API FastAPI → garde-fous anti-hallucination + évaluation.
+                Système Retrieval-Augmented Generation (RAG) fonctionnel basé sur LangChain et le modèle Mistral, soutenu par une base vectorielle FAISS — OpenAgenda : ingestion → index FAISS → API FastAPI → garde-fous anti-hallucination + évaluation.
               </p>
 
               <div class="badges" aria-label="stack p7">
@@ -326,9 +329,9 @@
             </div>
 
             <div class="card col-6">
-              <h3>Cadrage d’un projet IA (PoC) — Fashion‑Insta</h3>
+              <h3>Cadrage d’un projet IA (POC) — Fashion‑Insta</h3>
               <p class="small mt-0">
-                Cadrage complet d’un projet IA de recommandation vestimentaire par photo : définition du périmètre PoC, critères de succès (métier + technique), system design cible, dimensionnement (timeline/coûts/ROI) et volet RGPD/risques.
+                Cadrage complet d’un projet IA de recommandation vestimentaire par photo : définition du périmètre POC, critères de succès (métier + technique), system design cible, dimensionnement (timeline/coûts/ROI) et volet RGPD/risques.
               </p>
 
               <div class="badges" aria-label="stack p9">
@@ -343,10 +346,10 @@
               </div>
 
               <ul>
-                <li>PoC : entrée photo → sortie top N d’articles visuellement similaires (pas de personnalisation dans le PoC).</li>
+                <li>POC : entrée photo → sortie top N d’articles visuellement similaires (pas de personnalisation dans le POC).</li>
                 <li>Approche : modèle vision pré-entraîné → embeddings → recherche de similarité dans le catalogue.</li>
                 <li>Critères : Recall@K/Precision@K + temps d’inférence &lt; 500 ms + validation métier (pertinence).</li>
-                <li>Plan : staffing PoC (DS + AI/DE + référent métier), timeline globale (PoC → MVP → Run) et chiffrage coûts/ROI.</li>
+                <li>Plan : staffing POC (DS + AI/DE + référent métier), timeline globale (POC → MVP → Run) et chiffrage coûts/ROI.</li>
               </ul>
 
               <hr />
@@ -354,7 +357,7 @@
                 Ce que le projet démontre (POC) :
                 <ul>
                   <li>Cadrage “décideurs” : clarifier valeur IA vs filtres classiques, périmètre limité, et critères d’échec (Go/No Go).</li>
-                  <li>Choix technique justifié : pré-entraîné + embeddings + similarité pour minimiser risque/délai du PoC.</li>
+                  <li>Choix technique justifié : pré-entraîné + embeddings + similarité pour minimiser risque/délai du POC.</li>
                   <li>Évaluation adaptée : métriques de ranking (Recall@K/Precision@K) + contrainte latence (&lt; 500 ms).</li>
                   <li>Vision prod : system design cible sur Azure (ingestion, stockage temporaire, inférence, recherche vectorielle, monitoring).</li>
                   <li>Gouvernance risques : analyse RGPD (minimisation, rétention, consentement) et mesures (pas d’API publique, suppression image, chiffrement, logs anonymisés).</li>
@@ -365,8 +368,8 @@
               <div class="small">
                 Chiffres (extraits) :
                 <ul>
-                  <li>PoC : 4 à 8 semaines ; profils : 1 Data Scientist, 1 AI/DE, 1 référent métier mode.</li>
-                  <li>Latence cible : temps d’inférence &lt; 500 ms (critère technique PoC).</li>
+                  <li>POC : 4 à 8 semaines ; profils : 1 Data Scientist, 1 AI/DE, 1 référent métier mode.</li>
+                  <li>Latence cible : temps d’inférence &lt; 500 ms (critère technique POC).</li>
                   <li>Coûts : ~116 500 € (RH) + ~10 000 € (one-shot) + ~20 000 €/an (run) → ~146 500 € 1ère année.</li>
                   <li>ROI (hypothèses marketing) : gains annuels ~468 000 € ; rentabilité atteinte dès la première année (extrait).</li>
                 </ul>
@@ -638,7 +641,7 @@
             </div>
 
             <div class="card col-6">
-              <h3>Segmentation vestimentaire (PoC) — ModeTrends</h3>
+              <h3>Segmentation vestimentaire (POC) — ModeTrends</h3>
               <p class="small mt-0">
                 Évaluation d’un modèle de segmentation pré‑entraîné (SegFormer) pour isoler des pièces vestimentaires dans des images, avec validation (IoU) et estimation de coût d’exécution (local vs Inference API).
               </p>
@@ -747,16 +750,16 @@
           <div class="card">
             <p class="mt-0">
               Sur ces projets, je me suis concentré sur la transformation d’un POC en un système exploitable : API stables, packaging Docker,
-              tests et automatisation, puis observabilité (logs/monitoring) pour piloter qualité, latence et risques (ex. dérive).
+              tests et automatisation, puis observabilité (logs/monitoring) pour piloter qualité, latence et risques (ex. dérive), tout en gardant une traçabilité utile (audit) sur les domaines sensibles.
             </p>
             <ul>
-              <li>Compétences techniques : FastAPI/Pydantic, Docker, CI/tests, logging structuré, monitoring (latence/drift), MLflow, RAG (FAISS, embeddings, chunking, réponses sourcées).</li>
-              <li>Soft skills : autonomie (cadrage + documentation), communication (docs/rapport), rigueur (mesures + limites explicites) et itération guidée par les métriques.</li>
-              <li>Rétrospective : renforcer la sécurité (auth/rate-limit), l’alerting/observabilité “prod”, la gouvernance data, et étendre l’évaluation (gold set) pour industrialiser davantage.</li>
+              <li>Compétences techniques : API (FastAPI/Pydantic), packaging Docker, CI (GitHub Actions), tests (Pytest), persistance & audit (PostgreSQL/SQLite), logging structuré, monitoring (latence/drift), tracking expérimental (MLflow), data pipelines (ETL + orchestration), RAG (FAISS, embeddings, chunking, réponses sourcées), LLM engineering (SFT/LoRA/DPO, garde-fous), et bases RL (PPO/DQN).</li>
+              <li>Compétences “delivery” : cadrage POC (périmètre, critères de succès, Go/No-Go), documentation et communication claire, arbitrages (coût/latence/qualité), et démarche itérative guidée par métriques.</li>
+              <li>Rétrospective : renforcer la sécurité (auth/rate-limit, gestion des secrets), l’alerting/observabilité “prod”, la gouvernance data (provenance/licences, anonymisation, data quality), et étendre l’évaluation (gold set/cas métier) pour industrialiser davantage.</li>
             </ul>
             <hr />
             <div class="small">
-              Carte mentale : à ajouter (image/PDF).
+              Synthèse : projets organisés autour de 4 axes — production (CI/CD, Docker, API), qualité/observabilité (tests, logs, métriques), données (ETL/RAG), et LLM/agents (fine-tuning, outils, garde-fous).
             </div>
           </div>
         </section>
