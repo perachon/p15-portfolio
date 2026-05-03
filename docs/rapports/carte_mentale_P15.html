@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Carte mentale — P15</title>
+    <meta name="description" content="Carte mentale / carte conceptuelle du P15 (portfolio AI Engineer)" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      article{max-width:980px;margin:0 auto}
+      .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:18px 0}
+      .topbar a{text-decoration:none}
+      .doc h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+      .doc h2{margin:22px 0 10px;font-size:18px;letter-spacing:.2px}
+      .doc h3{margin:16px 0 8px;font-size:15px;letter-spacing:.2px}
+      .doc p{margin:10px 0}
+      .doc code{background:rgba(0,0,0,.18);border:1px solid var(--border);padding:1px 6px;border-radius:8px}
+      .doc .meta{color:var(--muted);font-size:13px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <a class="btn btn--ghost" href="../index.html">← Retour au portfolio</a>
+        <a class="btn btn--ghost" href="./rapport_P15_projet_perso_credit_scoring.html">Ouvrir le rapport P15</a>
+      </div>
+
+      <article class="card doc">
+        <h1>Carte mentale — P15 (portfolio AI Engineer)</h1>
+        <p class="meta">Date : 03 mai 2026</p>
+
+        <p>
+          Objectif : formaliser une <strong>carte mentale / carte conceptuelle</strong> (Étape 2 du P15) qui regroupe compétences,
+          réflexivité, soft skills, et mise en valeur du projet personnel (P8).
+        </p>
+
+        <h2>Centre — Portfolio AI Engineer (P15)</h2>
+
+        <h3>A) Projet personnel (dominante technique) — P8 Credit Scoring API</h3>
+        <ul>
+          <li>
+            Problème
+            <ul>
+              <li>Exposer un modèle de scoring crédit via une API exploitable</li>
+              <li>Produire une décision <code>ACCEPTED/REFUSED</code> à partir d’un seuil</li>
+            </ul>
+          </li>
+          <li>
+            Solution (POC)
+            <ul>
+              <li>API FastAPI : <code>GET /health</code>, <code>POST /predict</code></li>
+              <li>Modèle : pipeline LightGBM (joblib) chargé au démarrage</li>
+              <li>Déploiement : Docker → Hugging Face Spaces</li>
+            </ul>
+          </li>
+          <li>
+            Industrialisation
+            <ul>
+              <li>Tests : Pytest</li>
+              <li>CI/CD : GitHub Actions (tests → build → déploiement)</li>
+              <li>Observabilité : logs JSONL + monitoring latence/drift</li>
+              <li>Performance : profilage et optimisation des goulots</li>
+            </ul>
+          </li>
+          <li>
+            Risques / limites (POC)
+            <ul>
+              <li>Sécurité : pas d’auth, pas de rate-limit</li>
+              <li>Gouvernance data : provenance/licences, fairness (non documenté)</li>
+              <li>Observabilité “prod” : pas de dashboard / alerting</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>B) Compétences techniques (transverses)</h3>
+        <ul>
+          <li>
+            API &amp; backend
+            <ul>
+              <li>FastAPI, Pydantic, endpoints, validation, erreurs</li>
+            </ul>
+          </li>
+          <li>
+            Packaging / déploiement
+            <ul>
+              <li>Docker, release reproductible</li>
+            </ul>
+          </li>
+          <li>
+            Qualité logicielle
+            <ul>
+              <li>Tests, CI, robustesse, gestion d’erreurs</li>
+            </ul>
+          </li>
+          <li>
+            Observabilité
+            <ul>
+              <li>Logging structuré, métriques latence, drift, rapports</li>
+            </ul>
+          </li>
+          <li>
+            Data / retrieval
+            <ul>
+              <li>RAG : embeddings, FAISS, chunking, réponses sourcées</li>
+            </ul>
+          </li>
+          <li>
+            LLM engineering (selon projets)
+            <ul>
+              <li>SFT/LoRA/DPO, garde-fous, audit</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>C) Compétences “delivery” / conduite de projet</h3>
+        <ul>
+          <li>Cadrage POC : périmètre, critères de succès, Go/No-Go</li>
+          <li>Décision : arbitrages coût/latence/qualité ; posture “POC vs prod”</li>
+          <li>Communication : documentation claire, démo, transparence des limites</li>
+        </ul>
+
+        <h3>D) Soft skills mises en avant</h3>
+        <ul>
+          <li>Rigueur et sens du détail (tests, logs, métriques)</li>
+          <li>Autonomie (end-to-end : dev → CI → déploiement)</li>
+          <li>Analyse et esprit critique (drift, limites, plan d’action)</li>
+          <li>Communication (rapports, synthèses, présentation)</li>
+        </ul>
+
+        <h3>E) Réflexivité (axes d’amélioration)</h3>
+        <ul>
+          <li>Sécurité : auth, rate-limit, secrets management, durcissement</li>
+          <li>Gouvernance data : data contracts, qualité, licences, anonymisation</li>
+          <li>Observabilité : dashboards, alerting, runbooks, SLO</li>
+          <li>Évaluation : jeux de tests métier (gold set), suivi qualité dans le temps</li>
+          <li>Cycle de vie modèle : triggers drift → retrain → validation → promotion</li>
+        </ul>
+
+        <h2>Liens</h2>
+        <ul>
+          <li>Portfolio : <a href="../index.html">Ouvrir</a></li>
+          <li>Rapport P15 (projet perso) : <a href="./rapport_P15_projet_perso_credit_scoring.html">Ouvrir</a></li>
+          <li>Rapport P8 : <a href="./rapport_P8_credit_scoring.html">Ouvrir</a></li>
+        </ul>
+      </article>
+
+      <footer class="small muted" style="margin-top:18px">P15 — Portfolio OpenClassrooms</footer>
+    </div>
+  </body>
+</html>

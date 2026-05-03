@@ -122,6 +122,78 @@ Référence : le rapport détaillé du P8 est dans `docs/rapports/rapport_P8_cre
 
 Le P8 est un bon “projet personnel à dominante technique” car il démontre un chemin complet vers la production : exposition via API, packaging, automatisation, observabilité, et une approche rigoureuse des risques (drift, sécurité, gouvernance data).
 
+---
+
+## Annexe — Étape 1 (mise en situation) : messages (transcription)
+
+Ces contenus proviennent des transcriptions déjà présentes dans `tmp_screens/` (initialement ignoré par Git). Je les copie ici pour qu’ils soient consultables directement depuis GitHub Pages.
+
+### Message reçu (FalDatacorps)
+
+Bonjour,
+
+Nous espérons que vous allez bien !
+
+Pour vous proposer des postes en lien avec vos aspirations professionnelles, nous aimerions découvrir vos réalisations et en apprendre davantage sur votre parcours.
+
+Pour cela, nous vous invitons à préparer un portfolio mettant en avant quelques-uns des projets dont vous êtes fier.
+Ce portfolio nous aidera à mieux comprendre vos compétences.
+
+N'hésitez pas à inclure des exemples de vos travaux, une brève description de votre rôle et vos résultats.
+
+Un format PDF ou un lien vers un portfolio en ligne serait parfait !
+
+Nous avons hâte de découvrir votre univers et de poursuivre cette belle aventure avec vous.
+
+À bientôt,
+L’équipe de recrutement
+
+### Réponse envoyée à Myriam
+
+Moi (14:06)
+
+Hello Myriam ! Je viens d'écouter votre message. Je me demandais si c'est pertinent d'ajouter un projet personnel technique dans un portfolio. Qu'en pensez-vous?
+
+Myriam (14:07)
+
+Bien sûr ! C’est pertinent pour le marché du travail. Surtout s'il démontre votre capacité en conduite de projet. Vous pourriez le structurer autour de 5 axes :
+
+- La collecte des besoins métiers et l'analyse du contexte de l'organisation.
+- L'audit de la solution data afin d'en déterminer l'adéquation avec les besoins identifiés.
+- L'identification d'une solution technique afin de répondre aux besoins.
+- L'apport d'un appui stratégique et méthodologique pour faciliter la prise de décision.
+- Le contrôle et l'analyse du projet data en termes de délais, de coûts, de livrables et de performance.
+
+Moi (14:10)
+
+OK ! Merci ! Donc si je comprends bien, je gère ce projet comme en entreprise !
+
+Myriam (14:10)
+
+C'est cela ! Bon courage!
+
+### Message envoyé à Charlotte (manager)
+
+Moi (14:17)
+
+Hello Charlotte ! Comment tu vas ?
+
+Je cherche un sujet qui serait pertinent pour un projet personnel technique. Est-ce que tu aurais des idées ?
+
+Charlotte (14:17)
+
+Hello ! Je vais bien et toi ?
+
+La question à se poser, c'est celle de ton objectif professionnel. Oriente ce projet en fonction de ta future carrière et de ce qui t’intéresse !
+
+Pour démontrer tes compétences d’AI Engineer, le plus adapté, ce serait un projet de “mise en production”. Par exemple : le monitoring de la performance du modèle en production, la journalisation des prédictions, la gestion des nouvelles données ou une nouvelle architecture (versionnement, CI/CD pour modèles…) Ce ne sont que des exemples, les possibilités sont multiples et tu auras toi-même d'autres idées ! Je te laisse y réfléchir.
+
+Tu pourras ensuite intégrer ce projet dans ton portfolio. On en parle ensemble autour d'un café quand tu arrives ?
+
+Moi (14:18)
+
+Ok, merci pour tes suggestions ! À tout à l'heure et avec plaisir pour le café !
+
 ## 5) Liens
 
 - Rapport P8 (HTML) : `docs/rapports/rapport_P8_credit_scoring.html`
