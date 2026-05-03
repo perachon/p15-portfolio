@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapport — P13 Agent IA</title>
+    <meta name="description" content="Rapport de conduite de projet AI Engineering — P13 (Agent IA / LangGraph / RAG / Milvus / APIs)" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      article{max-width:980px;margin:0 auto}
+      .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:18px 0}
+      .topbar a{text-decoration:none}
+      .doc h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+      .doc h2{margin:22px 0 10px;font-size:18px;letter-spacing:.2px}
+      .doc h3{margin:16px 0 8px;font-size:15px;letter-spacing:.2px}
+      .doc p{margin:10px 0}
+      .doc code{background:rgba(0,0,0,.18);border:1px solid var(--border);padding:1px 6px;border-radius:8px}
+      .doc .meta{color:var(--muted);font-size:13px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <a class="btn btn--ghost" href="../index.html">← Retour au portfolio</a>
+      </div>
+
+      <article class="card doc">
+        <h1>Rapport de conduite de projet AI Engineering — P13 (Agent IA / ouvertures aux échecs — FFE)</h1>
+
+        <h2>1. Contexte et objectif</h2>
+        <ul>
+          <li>Sujet : agent IA conversationnel interagissant avec une base de connaissances et des outils externes.</li>
+          <li>Concepts cités : <strong>LangGraph</strong>, <strong>RAG</strong> + base vectorielle (ex. Milvus), intégration d’APIs et <strong>MCP</strong>.</li>
+        </ul>
+        <ul>
+          <li>Client (scénario) : Fédération Française des Échecs (FFE).</li>
+          <li>But : POC d’un agent d’apprentissage des <strong>ouvertures</strong> aux échecs.</li>
+          <li>Délai : <strong>2 semaines</strong>.</li>
+        </ul>
+
+        <h2>2. Fonctionnalités attendues (extraits)</h2>
+        <ul>
+          <li>Meilleurs coups théoriques, contexte via parties historiques.</li>
+          <li>Vidéos explicatives pertinentes via YouTube API.</li>
+          <li>Évaluation de la position via un moteur spécialisé (ex. Stockfish) si la partie sort de la théorie.</li>
+        </ul>
+
+        <h2>3. Stack et intégrations (extraits)</h2>
+        <ul>
+          <li>Frontend : Angular + échiquier interactif (ngx-chessboard/material-chessboard).</li>
+          <li>Backend/agent : LangGraph + FastAPI.</li>
+          <li>Données : Milvus (vector search) + MongoDB.</li>
+          <li>APIs/outils : position au format <strong>FEN</strong>, Lichess (ouvertures/parties), Stockfish, YouTube API.</li>
+        </ul>
+
+        <h2>4. Endpoints et étapes proposées (extraits)</h2>
+        <ul>
+          <li>Setup : dépôt Git, structure <code>backend/</code> + <code>frontend/</code>, <code>docker-compose.yml</code> (FastAPI, Milvus, MongoDB, Angular).</li>
+          <li>Recommandation : healthcheck FastAPI sur <code>/api/v1/healthcheck</code>.</li>
+          <li>Endpoints : <code>/api/v1/moves/{fen}</code> (Lichess), <code>/api/v1/evaluate/{fen}</code> (Stockfish), <code>/vector-search</code> (Milvus).</li>
+          <li>Bonnes pratiques : validation FEN via <code>python-chess</code>, gestion d’erreurs/timeouts, attention aux limites API Lichess.</li>
+        </ul>
+
+        <h2>5. Livrables attendus (extraits)</h2>
+        <ul>
+          <li>Système : Lang Graph, FastAPI, Milvus, MongoDB.</li>
+          <li>Code : dépôt Git.</li>
+          <li>Démo : exécution locale via Docker Compose.</li>
+        </ul>
+
+        <hr />
+        <div class="meta">Source : <code>projets/p13_agent_ia/p13_contexte_mission.md</code>.</div>
+      </article>
+
+      <footer class="small muted" style="margin-top:18px">P15 — Portfolio OpenClassrooms</footer>
+    </div>
+  </body>
+</html>

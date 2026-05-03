@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapport — P14 Fine-tuning LLM</title>
+    <meta name="description" content="Rapport de conduite de projet AI Engineering — P14 (SFT/LoRA/DPO, triage médical, vLLM, CI/CD)" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      article{max-width:980px;margin:0 auto}
+      .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:18px 0}
+      .topbar a{text-decoration:none}
+      .doc h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+      .doc h2{margin:22px 0 10px;font-size:18px;letter-spacing:.2px}
+      .doc h3{margin:16px 0 8px;font-size:15px;letter-spacing:.2px}
+      .doc p{margin:10px 0}
+      .doc code{background:rgba(0,0,0,.18);border:1px solid var(--border);padding:1px 6px;border-radius:8px}
+      .doc .meta{color:var(--muted);font-size:13px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <a class="btn btn--ghost" href="../index.html">← Retour au portfolio</a>
+      </div>
+
+      <article class="card doc">
+        <h1>Rapport de conduite de projet AI Engineering — P14 (Fine-tuning LLM / POC triage médical — CHSA)</h1>
+
+        <h2>1. Contexte et objectif</h2>
+        <ul>
+          <li>Client (scénario) : Centre Hospitalier Saint‑Aurélien (CHSA), urgences surchargées.</li>
+          <li>But : POC d’un agent IA de <strong>triage médical</strong> (priorité urgence maximale / modérée / différée).</li>
+          <li>Attendus : questionnaire adaptatif, explications, intégration SIH, <strong>traçabilité</strong> pour audit.</li>
+          <li>Échéance : <strong>4 semaines</strong>.</li>
+        </ul>
+
+        <h2>2. Stratégie en phases (extraits)</h2>
+        <ul>
+          <li>Phase 1 : validation conceptuelle avec <strong>Qwen3‑1.7B‑Base</strong>.</li>
+          <li>Phase 2 : spécialisation via <strong>SFT</strong> + <strong>LoRA</strong> puis alignement par préférences (<strong>DPO</strong>).</li>
+          <li>Phase 3 : projection industrielle (modèles plus grands 32B+ en cas de validation).</li>
+        </ul>
+
+        <h2>3. Données et gouvernance (extraits)</h2>
+        <ul>
+          <li>Datasets cités : MediQA, FrenchMedMCQA, MedQuAD, UltraMedical‑Preference.</li>
+          <li>Objectif SFT : ~<strong>5 000</strong> paires instruction‑réponse.</li>
+          <li>DPO : paires préférentielles (réponses validées/non validées).</li>
+          <li>RGPD : anonymisation + justification ; recommandation d’outil <strong>Presidio</strong>.</li>
+          <li>Formats : JSONL / Hugging Face Datasets + schéma de métadonnées.</li>
+        </ul>
+
+        <h2>4. Entraînement et traçabilité expérimentale (extraits)</h2>
+        <ul>
+          <li>Outils : PyTorch, Transformers, PEFT (LoRA) ; tracking via <strong>MLflow</strong> (ou W&amp;B).</li>
+          <li>Bonnes pratiques : petits runs LoRA, checkpoints, documentation (hyperparams + seed).</li>
+          <li>Contrôles : métriques cliniques + sécurité (hallucinations, recommandations dangereuses).</li>
+        </ul>
+
+        <h2>5. API, sécurité et traçabilité (extraits)</h2>
+        <ul>
+          <li>Garde‑fous : logique de <strong>red flags</strong> (priorité forcée + réponse prudente, génératif court‑circuité).</li>
+          <li>Traçabilité : audit des interactions en <strong>SQLite</strong> + endpoint <code>/audit/{interaction_id}</code>.</li>
+          <li>Ordre de démo (extrait) : <code>GET /health</code> → <code>POST /triage</code> (standard) → <code>POST /triage</code> (red flag) → <code>GET /audit/{interaction_id}</code>.</li>
+        </ul>
+
+        <h2>6. Déploiement, performance et CI/CD (extraits)</h2>
+        <ul>
+          <li>Déploiement : Docker + FastAPI ; trajectoire vLLM pour inférence optimisée.</li>
+          <li>CI/CD : GitHub Actions (lint Ruff, tests Pytest, build Docker).</li>
+          <li>Latence (extraits) : local réel P50 ~13,5 s ; cloud stub P50 ~0,23 s.</li>
+        </ul>
+
+        <h2>7. Livrables attendus (extraits)</h2>
+        <ul>
+          <li>Dataset médical bilingue (HF Datasets/JSONL) versionné.</li>
+          <li>Modèle spécialisé (SFT+LoRA) + alignement (DPO).</li>
+          <li>Endpoint de démonstration optimisé (vLLM) + CI/CD GitHub Actions.</li>
+          <li>Rapport technique + recommandations (20 pages max).</li>
+        </ul>
+
+        <hr />
+        <div class="meta">
+          Sources :
+          <code>projets/p14_finetuning_poc_ia/p14_contexte_mission.md</code>,
+          <code>projets/p14_finetuning_poc_ia/p14_livrables_soutenance.md</code>,
+          <code>projets/p14_finetuning_poc_ia/p14_questions.md</code> et
+          <code>projets/p14_finetuning_poc_ia/p14_vocabulaire.md</code>.
+        </div>
+      </article>
+
+      <footer class="small muted" style="margin-top:18px">P15 — Portfolio OpenClassrooms</footer>
+    </div>
+  </body>
+</html>

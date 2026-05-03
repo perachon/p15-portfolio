@@ -533,6 +533,111 @@
             </div>
 
             <div class="card col-6">
+              <h3>Agent IA (POC) — Ouvertures aux échecs (FFE)</h3>
+              <p class="small mt-0">
+                POC d’un agent IA outillé pour apprendre des ouvertures : orchestration LangGraph, récupération de coups théoriques (Lichess), évaluation de position (Stockfish), contexte via RAG (Milvus) et contenus pédagogiques (YouTube API).
+              </p>
+
+              <div class="badges" aria-label="stack p13">
+                <span class="badge">Agent IA</span>
+                <span class="badge">LangGraph</span>
+                <span class="badge">RAG</span>
+                <span class="badge">Milvus</span>
+                <span class="badge">FastAPI</span>
+                <span class="badge">MongoDB</span>
+                <span class="badge">Stockfish</span>
+                <span class="badge">Lichess API</span>
+                <span class="badge">Angular</span>
+                <span class="badge">Docker Compose</span>
+              </div>
+
+              <ul>
+                <li>Entrée clé : position au format FEN ; objectif “meilleurs coups + explication”.</li>
+                <li>Intégrations citées : Lichess (théorie/parties), Stockfish (évaluation), YouTube API (vidéos), Milvus (vector-search).</li>
+                <li>Démo locale : stack conteneurisée (FastAPI + Milvus + MongoDB + Angular).</li>
+              </ul>
+
+              <hr />
+              <div class="small">
+                Ce que le projet démontre :
+                <ul>
+                  <li>Conception d’un agent outillé (outils externes + RAG), structuré et intégrable (API).</li>
+                  <li>Modélisation d’un cas d’usage “métier” : apprentissage d’ouvertures, recherche de contexte et explications.</li>
+                  <li>Approche “POC démo‑ready” : dockerisation et endpoints dédiés (moves/evaluate/vector-search).</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Chiffres (extraits) :
+                <ul>
+                  <li>Contraintes : POC à livrer en 2 semaines.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Liens :
+                <ul>
+                  <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P13_agent_ia.html">Ouvrir</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card col-6">
+              <h3>Fine-tuning LLM (POC) — Triage médical (CHSA)</h3>
+              <p class="small mt-0">
+                POC d’un agent de triage : spécialisation d’un LLM (Qwen3‑1.7B‑Base) via SFT+LoRA puis alignement DPO, garde‑fous “red flags”, traçabilité SQLite et trajectoire de déploiement vLLM + CI/CD.
+              </p>
+
+              <div class="badges" aria-label="stack p14">
+                <span class="badge">Qwen3‑1.7B‑Base</span>
+                <span class="badge">SFT</span>
+                <span class="badge">LoRA (PEFT)</span>
+                <span class="badge">DPO</span>
+                <span class="badge">FastAPI</span>
+                <span class="badge">vLLM</span>
+                <span class="badge">SQLite (audit)</span>
+                <span class="badge">Ruff</span>
+                <span class="badge">Pytest</span>
+                <span class="badge">GitHub Actions</span>
+              </div>
+
+              <ul>
+                <li>Données : dataset médical bilingue (HF Datasets/JSONL) avec objectif ~5 000 paires SFT + paires préférentielles DPO.</li>
+                <li>Sécurité : red flags (ex. douleur thoracique/malaise/saignement important) → priorité forcée + réponse prudente.</li>
+                <li>Traçabilité : audit des interactions et endpoint <code>/audit/{interaction_id}</code> ; démo type <code>/health</code> → <code>/triage</code>.</li>
+              </ul>
+
+              <hr />
+              <div class="small">
+                Ce que le projet démontre :
+                <ul>
+                  <li>Spécialisation LLM réaliste sur ressources contraintes (LoRA) + alignement par préférences (DPO).</li>
+                  <li>Prise en compte “healthcare” : gouvernance données, garde‑fous de sécurité et traçabilité.</li>
+                  <li>Chemin d’industrialisation : Docker/FastAPI, CI/CD, et trajectoire vLLM.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Chiffres (extraits) :
+                <ul>
+                  <li>Contraintes : POC à livrer en 4 semaines ; SFT ~5 000 paires.</li>
+                  <li>Latence (P50, extraits) : local réel ~13,5s ; cloud stub ~0,23s.</li>
+                </ul>
+              </div>
+
+              <hr />
+              <div class="small">
+                Liens :
+                <ul>
+                  <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P14_finetuning_poc_ia.html">Ouvrir</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card col-6">
               <h3>Segmentation vestimentaire (PoC) — ModeTrends</h3>
               <p class="small mt-0">
                 Évaluation d’un modèle de segmentation pré‑entraîné (SegFormer) pour isoler des pièces vestimentaires dans des images, avec validation (IoU) et estimation de coût d’exécution (local vs Inference API).
