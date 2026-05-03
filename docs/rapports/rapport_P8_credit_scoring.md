@@ -142,5 +142,6 @@ Résumé des choix clés :
 ## 7. Annexes (exemples)
 
 - Démo : https://perachon-credit-scoring-api-v2.hf.space/docs
+- Code (GitHub) : https://github.com/perachon/p6-8-MLOps
 - Repo (Spaces) : https://huggingface.co/spaces/perachon/credit-scoring-api-v2/tree/main
 - Modèle HF Hub : `perachon/credit-scoring-model`
