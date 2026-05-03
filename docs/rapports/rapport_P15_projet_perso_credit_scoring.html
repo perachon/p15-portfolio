@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapport — P15 (Projet personnel) : P8 Credit Scoring</title>
+    <meta name="description" content="Rapport P15 — projet personnel à dominante technique, centré sur le P8 Credit Scoring API" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      article{max-width:980px;margin:0 auto}
+      .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:18px 0}
+      .topbar a{text-decoration:none}
+      .doc h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+      .doc h2{margin:22px 0 10px;font-size:18px;letter-spacing:.2px}
+      .doc h3{margin:16px 0 8px;font-size:15px;letter-spacing:.2px}
+      .doc p{margin:10px 0}
+      .doc code{background:rgba(0,0,0,.18);border:1px solid var(--border);padding:1px 6px;border-radius:8px}
+      .doc .meta{color:var(--muted);font-size:13px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <a class="btn btn--ghost" href="../index.html">← Retour au portfolio</a>
+        <a class="btn btn--ghost" href="./rapport_P8_credit_scoring.html">Ouvrir le rapport P8</a>
+      </div>
+
+      <article class="card doc">
+        <h1>Rapport — P15 (projet personnel à dominante technique)</h1>
+        <p class="meta"><strong>Projet mis en avant :</strong> P8 — Credit Scoring API • <strong>Date :</strong> 03 mai 2026</p>
+
+        <p>
+          Objectif : fournir un document court, directement aligné avec les <strong>5 compétences évaluées</strong> au P15,
+          en s’appuyant sur le projet P8 comme projet personnel à dominante technique.
+        </p>
+        <p><strong>Règle :</strong> ne pas inventer. Si une information n’est pas disponible dans les livrables existants, elle reste <code>TBD</code>.</p>
+
+        <h2>1) Contexte P15 et choix du projet</h2>
+        <p>
+          Le P15 demande de réaliser un <strong>projet personnel à dominante technique</strong> autour de problématiques d’IA en production
+          (MLOps, versioning, monitoring des dérives, etc.), puis de le valoriser dans un portfolio.
+        </p>
+        <p><strong>Pourquoi P8 (Credit Scoring API)</strong></p>
+        <ul>
+          <li>Dominante technique “IA en production” : API, Docker, CI/CD, tests, logs structurés, monitoring (latence + drift).</li>
+          <li>Projet défendable en soutenance : démonstration simple (<code>/health</code>, <code>/predict</code>) + preuves (logs, scripts, analyses).</li>
+          <li>Support pour discuter des compromis et risques : sécurité (auth/rate-limit), gouvernance data (provenance / fairness), drift et stratégie de retraining.</li>
+        </ul>
+
+        <h2>2) Résumé de la solution (P8)</h2>
+        <ul>
+          <li>Service : FastAPI avec <code>GET /health</code> et <code>POST /predict</code>.</li>
+          <li>Modèle : pipeline LightGBM (joblib), récupéré depuis Hugging Face Hub, chargé au démarrage.</li>
+          <li>Packaging : Docker (déploiement démo sur Hugging Face Spaces).</li>
+          <li>Qualité : tests Pytest en CI ; validation d’entrée via Pydantic.</li>
+          <li>Observabilité (POC) : logs JSONL + analyses de latence et drift (Evidently).</li>
+        </ul>
+        <p>Référence : détails techniques et preuves chiffrées dans le rapport P8.</p>
+
+        <h2>3) Compétences évaluées (P15) — preuves et positionnement</h2>
+
+        <h3>3.1 Collecter les besoins métiers et analyser le contexte de l’organisation</h3>
+        <p><strong>Ce qui est fait</strong></p>
+        <ul>
+          <li>Besoin métier cadré : estimer <code>P(défaut)</code> et produire une décision <code>ACCEPTED/REFUSED</code> à partir d’un seuil.</li>
+          <li>Contexte et parties prenantes (scénario OpenClassrooms) : département “Crédit Express”, DS lead, manager, usage quasi temps réel.</li>
+        </ul>
+        <p><strong>Preuves / éléments vérifiables</strong></p>
+        <ul>
+          <li>Endpoint <code>POST /predict</code> + schéma d’entrée Pydantic.</li>
+          <li>Décision par seuil <code>THRESHOLD=0.2</code> (tel qu’utilisé dans le POC).</li>
+        </ul>
+        <p><strong>Points à améliorer (posture prod)</strong></p>
+        <ul>
+          <li>Formaliser exigences non-fonctionnelles : SLO latence, sécurité, conformité, rétention des logs.</li>
+          <li>Relier le seuil à un score métier (coût FP/FN) et définir un protocole de revue.</li>
+        </ul>
+
+        <h3>3.2 Auditer la solution data afin d’en déterminer l’adéquation avec des besoins identifiés</h3>
+        <p><strong>Ce qui est fait</strong></p>
+        <ul>
+          <li>Audit “POC vs prod” : robustesse OK (validation + tests), observabilité partielle (monitoring sans alerting), sécurité à renforcer.</li>
+          <li>Analyse de performance : latences observées + investigation des goulots (profiling).</li>
+        </ul>
+        <p><strong>Preuves / éléments vérifiables</strong></p>
+        <ul>
+          <li>Latence /predict mesurée via logs (extrait : moyenne, médiane, max).</li>
+          <li>Signal de drift via test K‑S sur distribution de scores (<code>dataset_drift=true</code>) + plan d’action proposé.</li>
+        </ul>
+        <p><strong>Points à améliorer</strong></p>
+        <ul>
+          <li>Chiffrage coût (hébergement, trafic, stockage/rotation logs) : <code>TBD</code>.</li>
+          <li>Gouvernance data : provenance/licences, data quality, fairness (non documenté dans le POC).</li>
+        </ul>
+
+        <h3>3.3 Identifier une solution technique afin de répondre aux besoins</h3>
+        <p><strong>Ce qui est fait</strong></p>
+        <ul>
+          <li>Choix technique adapté au temps réel : FastAPI + modèle en mémoire + Docker.</li>
+          <li>Reproductibilité : artefact modèle (Hub) + runs (MLflow) selon livrables.</li>
+        </ul>
+        <p><strong>Preuves / éléments vérifiables</strong></p>
+        <ul>
+          <li>Démo publique Swagger <code>/docs</code> (Spaces).</li>
+          <li>CI/CD : tests → build image → déploiement (Spaces).</li>
+        </ul>
+        <p><strong>Points à améliorer</strong></p>
+        <ul>
+          <li>Sécuriser l’exposition : auth, rate-limit, redaction/PII dans les logs.</li>
+          <li>Stratégie de retraining : triggers, pipeline, validation, promotion (registry).</li>
+        </ul>
+
+        <h3>3.4 Apporter un appui stratégique et méthodologique pour faciliter la prise de décision</h3>
+        <p><strong>Ce qui est fait</strong></p>
+        <ul>
+          <li>Identification des risques (sécurité, conformité, drift, biais) + trajectoire d’industrialisation proposée.</li>
+          <li>Explicitation des compromis : qualité ML vs latence, monitoring vs effort, POC vs prod.</li>
+        </ul>
+        <p><strong>Preuves / éléments vérifiables</strong></p>
+        <ul>
+          <li>Sections “écarts / limites” et “risques &amp; mitigation” dans le rapport P8.</li>
+          <li>Recommandations : dashboard/alerting, durcissement sécurité, gouvernance data.</li>
+        </ul>
+        <p><strong>Points à améliorer</strong></p>
+        <ul>
+          <li>Formaliser un Go/No-Go : critères d’acceptation (KPI métier + KPI techniques), calendrier.</li>
+        </ul>
+
+        <h3>3.5 Contrôler et analyser le projet data en termes de délais, coûts, livrables et performance</h3>
+        <p><strong>Ce qui est fait</strong></p>
+        <ul>
+          <li>Livrables contrôlables : API fonctionnelle, CI/tests, logs structurés, scripts de monitoring.</li>
+          <li>Performance : analyse latence + drift ; investigations via profiling.</li>
+        </ul>
+        <p><strong>Preuves / éléments vérifiables</strong></p>
+        <ul>
+          <li>Logs JSONL ; mesures de latence ; rapport de drift.</li>
+          <li>Tests automatisés exécutés en CI.</li>
+        </ul>
+        <p><strong>Points à améliorer</strong></p>
+        <ul>
+          <li>Coûts : chiffrage et suivi (€/mois) selon trafic attendu : <code>TBD</code>.</li>
+          <li>Délais : planification explicite (jalons, risques, buffer) : <code>TBD</code>.</li>
+        </ul>
+
+        <h2>4) Conclusion</h2>
+        <p>
+          Le P8 est un bon projet personnel à dominante technique car il démontre un chemin complet vers la production :
+          exposition via API, packaging, automatisation, observabilité, et une démarche rigoureuse sur les risques (drift, sécurité, gouvernance data).
+        </p>
+
+        <h2>5) Liens</h2>
+        <ul>
+          <li>Rapport P8 (HTML) : <a href="./rapport_P8_credit_scoring.html">Ouvrir</a></li>
+          <li>Démo : <a href="https://perachon-credit-scoring-api-v2.hf.space/docs" target="_blank" rel="noreferrer">Swagger /docs</a></li>
+          <li>Repo (Spaces) : <a href="https://huggingface.co/spaces/perachon/credit-scoring-api-v2/tree/main" target="_blank" rel="noreferrer">Hugging Face</a></li>
+        </ul>
+      </article>
+
+      <footer class="small muted" style="margin-top:18px">P15 — Portfolio OpenClassrooms</footer>
+    </div>
+  </body>
+</html>
