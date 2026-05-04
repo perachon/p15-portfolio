@@ -60,7 +60,4 @@ Vidéo (extraits) :
 
 ---
 
-Sources :
-- `projets/p11_entrainer_agent_rl/p11_contexte_mission.md`
-- `projets/p11_entrainer_agent_rl/p11_diapo.md`
-- `projets/p11_entrainer_agent_rl/p11_questions.md`
+Cas d’étude OpenClassrooms — synthèse du projet.

@@ -103,4 +103,4 @@ Mesures (extraits) :
 
 ---
 
-Sources : `projets/p9_cadrage_projet_ia/p9_contexte_mission.md`, `projets/p9_cadrage_projet_ia/p9_diapo.md`, `projets/p9_cadrage_projet_ia/p9_questions.md`.
+Cas d’étude OpenClassrooms — synthèse du projet.

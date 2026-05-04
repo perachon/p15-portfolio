@@ -1,4 +1,4 @@
-Démonstration soutenance
+Démonstration (démo / revue technique)
 Ordre conseillé :
 1. GET /health
 2. POST /triage sur un cas standard
@@ -23,7 +23,7 @@ Concrètement, ce qu'on fournis sur Hugging Face n’est donc pas le “gros mod
 
 Un adapter LoRA correspond à un ensemble de poids d’adaptation légers qui se branchent sur le modèle de base ; cela permet de spécialiser Qwen3-1.7B pour le triage médical sans republier l’intégralité des poids du modèle.
 
-=> format plus simple à dire à l'oral ?
+=> version plus simple à formuler (pitch) ?
 
 
 ------------
@@ -73,7 +73,7 @@ Tu as mis en place un pipeline GitHub Actions qui exécute automatiquement :
 le lint avec Ruff
 les tests avec Pytest
 la vérification du build Docker
-Version orale simple :
+Version courte (pitch) :
 « L’automatisation permet de sécuriser l’évolution du projet. J’ai mis en place une pipeline GitHub Actions qui vérifie automatiquement la qualité du code, les tests et la conteneurisation. »
 
 

@@ -47,7 +47,7 @@ Plus elle baisse, plus le modèle apprend à mieux reproduire ce qu’on attend 
 
 Eval loss
 C’est la même idée, mais mesurée sur des données de validation que le modèle n’a pas utilisées pour apprendre directement.
-C’est plus intéressant à montrer en soutenance, parce que ça permet de voir si le modèle s’améliore aussi sur des données non vues.
+C’est utile à montrer en démo/revue technique, parce que ça permet de vérifier que le modèle progresse aussi sur des données non vues.
 
 
 Batch size faible

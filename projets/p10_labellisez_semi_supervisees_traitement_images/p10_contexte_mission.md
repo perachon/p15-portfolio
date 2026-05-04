@@ -40,9 +40,9 @@ Option A – Mission en entreprise : vous appliquez vos compétences sur un cas 
 
 Option B – Mission fictive : vous travaillez sur un cas guidé de scoring de crédit avec un dataset fourni. Cette option vous permet de vous exercer dans un cadre structuré, proche d’un cas réel, avec des données simulées.
 
-Vous terminerez en complétant la fiche d’autoévaluation qui servira de base de discussion avec votre mentor avant la session de soutenance.
+Vous terminerez en complétant la fiche d’autoévaluation, qui servira de base de discussion avec votre mentor.
 
-À l’issue de ce projet, vous présenterez les livrables de la mission à un mentor évaluateur lors d’une soutenance. Cela vous permettra de valider les compétences visées par ce projet.
+À l’issue de ce projet, vous finaliserez et partagerez les livrables de la mission (démo + revue des choix/limites), afin de consolider les compétences visées par ce projet.
 
 Objectifs pédagogiques
 Identifier ou créer un modèle d’apprentissage adapté aux contraintes et aux besoins métier

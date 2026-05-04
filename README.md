@@ -5,7 +5,7 @@ Ce repo sert à construire un **portfolio** (P15) à partir :
 - d’une **carte mentale** (compétences + réflexivité + soft skills)
 - d’un **site portfolio** (ou PDF) pour présenter l’ensemble.
 
-Référence cahier des charges : [CONSIGNES_P15.md](CONSIGNES_P15.md) (copie versionnée de `tmp_screens/p15.md`).
+Référence cahier des charges : [CONSIGNES_P15.md](CONSIGNES_P15.md).
 
 ## Hébergement gratuit (recommandé) : GitHub Pages
 
@@ -38,5 +38,3 @@ Le site est dans [docs/](docs/) (page d’accueil : [docs/index.html](docs/index
 ## Note importante
 
 Le cahier des charges P15 **n’impose pas** une techno (il cite seulement des supports possibles : page GitHub / CMS / support PDF). GitHub Pages + site statique est généralement le plus simple à maintenir.
-
-Note : le dossier `tmp_screens/` est ignoré par Git (voir `.gitignore`), donc les fichiers “screens” ne sont pas destinés à être poussés.

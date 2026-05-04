@@ -2,13 +2,11 @@
 
 _Date : 22 avril 2026_
 
-> Ce document est un **brouillon pré-rempli** basé sur le template OpenClassrooms.
->
-> Règle : **ne pas inventer**. Si une info manque, indiquer explicitement qu’elle n’est pas couverte / non documentée dans le POC.
+> Ce document est une **synthèse structurée** (inspirée d’un canevas de la formation), adaptée pour un usage portfolio/entretien.
 
 ## 1. Contexte et analyse des besoins
 
-### 1.1 Présentation (organisation et / ou contexte)
+### 1.1 Organisation & contexte
 
 - Contexte : système d’aide à la décision pour l’**octroi de crédit** via une API.
 - Type d’organisation (scénario OpenClassrooms) : société financière fictive **"Prêt à Dépenser"**, avec un département **"Crédit Express"** qui souhaite traiter des demandes en quasi temps réel.
@@ -139,7 +137,7 @@ Résumé des choix clés :
 - API FastAPI containerisée, modèle LightGBM (pipeline), CI/CD vers Spaces.
 - Logs structurés + monitoring latence et drift.
 
-## 7. Annexes (exemples)
+## 7. Liens
 
 - Démo : https://perachon-credit-scoring-api-v2.hf.space/docs
 - Code (GitHub) : https://github.com/perachon/p6-8-MLOps

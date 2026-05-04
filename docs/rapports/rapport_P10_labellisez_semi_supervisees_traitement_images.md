@@ -64,7 +64,4 @@
 
 ---
 
-Sources :
-- `projets/p10_labellisez_semi_supervisees_traitement_images/p10_contexte_mission.md`
-- `projets/p10_labellisez_semi_supervisees_traitement_images/p10_diapo.md`
-- `projets/p10_labellisez_semi_supervisees_traitement_images/p10_questions.md`
+Cas d’étude OpenClassrooms — synthèse du projet.

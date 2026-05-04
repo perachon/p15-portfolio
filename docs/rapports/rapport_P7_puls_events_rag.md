@@ -2,13 +2,11 @@
 
 _Date : 24 avril 2026_
 
-> Ce document est un **brouillon pré-rempli** basé sur le template OpenClassrooms.
->
-> Règle : **ne pas inventer**. Si une info manque, indiquer explicitement qu’elle n’est pas couverte / non documentée dans le POC.
+> Ce document est une **synthèse structurée** (inspirée d’un canevas de la formation), adaptée pour un usage portfolio/entretien.
 
 ## 1. Contexte et analyse des besoins
 
-### 1.1 Présentation (organisation et / ou contexte)
+### 1.1 Organisation & contexte
 
 - Contexte : assistant conversationnel (RAG) pour répondre à des questions sur des **événements culturels** (récents < 1 an et à venir) sur un périmètre géographique (Paris-Saclay).
 - Type d’organisation (scénario OpenClassrooms) : mission freelance pour **Puls-Events**, entreprise tech qui développe une plateforme de recommandations culturelles.
@@ -75,6 +73,6 @@ Résumé :
 - POC RAG complet data → index → API → Docker.
 - Garde-fous anti-hallucination + évaluation reproductible.
 
-## 7. Annexes (exemples)
+## 7. Liens
 
 - Repo : https://github.com/perachon/p7-puls-events-rag

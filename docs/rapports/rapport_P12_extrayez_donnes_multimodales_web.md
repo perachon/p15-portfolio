@@ -45,4 +45,4 @@
 
 ---
 
-Source : `projets/p12_extrayez_donnes_multimodales_web/p12_contexte_mission.md`.
+Cas d’étude OpenClassrooms — synthèse du projet.

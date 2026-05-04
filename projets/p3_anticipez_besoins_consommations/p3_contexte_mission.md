@@ -296,7 +296,7 @@ Essayer de donner du sens métier aux résultats de modélisation. Par exemple :
 
 Points de vigilance  
 
-Restez le plus concis possible, vous avez peu de temps en soutenance pour rentrer dans le détail. 
+Restez le plus concis possible : le temps est limité pour rentrer dans le détail.
 
 Cet équilibre entre richesse de contenu et temps imparti peut être difficile à trouver, vous progresserez en gagnant en expérience.
 

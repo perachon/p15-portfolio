@@ -4,9 +4,9 @@
 
 _Date : 03 mai 2026_
 
-> Objectif : fournir un document court, directement aligné avec les **5 compétences évaluées** attendues, en s’appuyant sur le projet Credit Scoring API comme projet personnel à dominante technique.
->
-> Règle : **ne pas inventer**. Si une information n’est pas disponible dans les livrables existants, indiquer explicitement qu’elle n’est pas couverte / non documentée dans le POC.
+> Objectif : fournir un document court, aligné avec un **référentiel de 5 compétences** (AI Engineer), en s’appuyant sur le projet Credit Scoring API comme projet personnel à dominante technique.
+
+> Note : j’utilise ce référentiel comme grille de lecture “entretien” (contexte → choix → preuves → limites → axes d’amélioration).
 
 ## 1) Contexte et choix du projet
 
@@ -15,7 +15,7 @@ Ce projet consiste à réaliser un **projet personnel à dominante technique** a
 Pourquoi **Credit Scoring API** :
 
 - Dominante technique “IA en production” : **API**, **Docker**, **CI/CD**, **tests**, **logs structurés**, **monitoring** (latence + drift).
-- Projet facilement “défendable” en soutenance : démonstration claire (`/health`, `/predict`) + preuves (logs, scripts de monitoring, analyses).
+- Projet facile à illustrer en démo : endpoints simples (`/health`, `/predict`) + preuves (logs, scripts de monitoring, analyses).
 - Bon support pour parler de compromis et risques : sécurité (auth/rate-limit), gouvernance data (provenance / fairness), observabilité (alerting), drift et stratégie de retraining.
 
 ## 2) Résumé de la solution
@@ -30,7 +30,7 @@ Référence : le rapport détaillé du projet est dans `docs/rapports/rapport_P8
 
 ---
 
-## 3) Compétences évaluées — preuves et positionnement
+## 3) Compétences (référentiel) — preuves et positionnement
 
 ### 3.1 Collecter les besoins métiers et analyser le contexte de l’organisation
 
@@ -123,76 +123,6 @@ Référence : le rapport détaillé du projet est dans `docs/rapports/rapport_P8
 Ce projet est un bon “projet personnel à dominante technique” car il démontre un chemin complet vers la production : exposition via API, packaging, automatisation, observabilité, et une approche rigoureuse des risques (drift, sécurité, gouvernance data).
 
 ---
-
-## Annexe — Étape 1 (mise en situation) : messages (transcription)
-
-Ces contenus proviennent des transcriptions déjà présentes dans `tmp_screens/` (initialement ignoré par Git). Je les copie ici pour qu’ils soient consultables directement depuis GitHub Pages.
-
-### Message reçu (FalDatacorps)
-
-Bonjour,
-
-Nous espérons que vous allez bien !
-
-Pour vous proposer des postes en lien avec vos aspirations professionnelles, nous aimerions découvrir vos réalisations et en apprendre davantage sur votre parcours.
-
-Pour cela, nous vous invitons à préparer un portfolio mettant en avant quelques-uns des projets dont vous êtes fier.
-Ce portfolio nous aidera à mieux comprendre vos compétences.
-
-N'hésitez pas à inclure des exemples de vos travaux, une brève description de votre rôle et vos résultats.
-
-Un format PDF ou un lien vers un portfolio en ligne serait parfait !
-
-Nous avons hâte de découvrir votre univers et de poursuivre cette belle aventure avec vous.
-
-À bientôt,
-L’équipe de recrutement
-
-### Réponse envoyée à Myriam
-
-Moi (14:06)
-
-Hello Myriam ! Je viens d'écouter votre message. Je me demandais si c'est pertinent d'ajouter un projet personnel technique dans un portfolio. Qu'en pensez-vous?
-
-Myriam (14:07)
-
-Bien sûr ! C’est pertinent pour le marché du travail. Surtout s'il démontre votre capacité en conduite de projet. Vous pourriez le structurer autour de 5 axes :
-
-- La collecte des besoins métiers et l'analyse du contexte de l'organisation.
-- L'audit de la solution data afin d'en déterminer l'adéquation avec les besoins identifiés.
-- L'identification d'une solution technique afin de répondre aux besoins.
-- L'apport d'un appui stratégique et méthodologique pour faciliter la prise de décision.
-- Le contrôle et l'analyse du projet data en termes de délais, de coûts, de livrables et de performance.
-
-Moi (14:10)
-
-OK ! Merci ! Donc si je comprends bien, je gère ce projet comme en entreprise !
-
-Myriam (14:10)
-
-C'est cela ! Bon courage!
-
-### Message envoyé à Charlotte (manager)
-
-Moi (14:17)
-
-Hello Charlotte ! Comment tu vas ?
-
-Je cherche un sujet qui serait pertinent pour un projet personnel technique. Est-ce que tu aurais des idées ?
-
-Charlotte (14:17)
-
-Hello ! Je vais bien et toi ?
-
-La question à se poser, c'est celle de ton objectif professionnel. Oriente ce projet en fonction de ta future carrière et de ce qui t’intéresse !
-
-Pour démontrer tes compétences d’AI Engineer, le plus adapté, ce serait un projet de “mise en production”. Par exemple : le monitoring de la performance du modèle en production, la journalisation des prédictions, la gestion des nouvelles données ou une nouvelle architecture (versionnement, CI/CD pour modèles…) Ce ne sont que des exemples, les possibilités sont multiples et tu auras toi-même d'autres idées ! Je te laisse y réfléchir.
-
-Tu pourras ensuite intégrer ce projet dans ton portfolio. On en parle ensemble autour d'un café quand tu arrives ?
-
-Moi (14:18)
-
-Ok, merci pour tes suggestions ! À tout à l'heure et avec plaisir pour le café !
 
 ## 5) Liens
 

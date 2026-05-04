@@ -7,7 +7,7 @@ Requêtez des services IA
 Qu’allez-vous apprendre dans ce projet ?
  
 
-Ce premier projet de votre parcours est un projet d'entraînement qui ne fera pas l’objet d'une soutenance. Il sera l’opportunité de découvrir ou de renforcer vos compétences dans le langage Python et dans l'utilisation du notebook Jupyter. 
+Ce premier projet de votre parcours est un projet d'entraînement, sans revue finale formalisée. Il sera l’opportunité de découvrir ou de renforcer vos compétences en Python et dans l'utilisation du notebook Jupyter.
 
 Jupyter est un outil puissant qui combine l'écriture de code, les commentaires et les visualisations, ce qui facilite la tâche pour structurer vos analyses et les communiquer à tout type d’audience.
 
@@ -105,7 +105,7 @@ Aujourd’hui, j’utilise des outils d’IA Générative pour aller plus vite s
 
 Par contre, si un junior intègre l’équipe, je vais limiter son utilisation de l’IA a de la conception de documentation et à de l’aide à la compréhension de code et de concepts mais pas à la génération pure de code.
 
- J’utilise aussi beaucoup l’IA comme coach personnel et professionnel. C’est comme avoir un mentor particulier, disponible 24h sur 24, 7j sur 7, et que j’ai paramétré pour qu’il me challenge sur mes points aveugles. (Prompt system en annexe ci-dessous).
+
 
  J’apprends beaucoup plus vite qu’avant, l’IA me permet de comprendre en moins de 15 minutes un concept en lui posant  des questions très précises, là où il m’aurait fallu probablement une bonne heure de recherche internet.
 

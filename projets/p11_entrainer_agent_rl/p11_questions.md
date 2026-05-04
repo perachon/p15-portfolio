@@ -76,7 +76,7 @@ R: “Non, il lit les logs (plus simple), mais il pourrait.”
 8)
 
 Q: “Pourquoi /play plutôt qu’un streaming temps réel ?”
-R: “C’était plus simple et suffisant pour la soutenance.”
+R: “C’était plus simple et suffisant pour une démo de POC (et plus fiable à exécuter).”
 
 Q: “Qu’est-ce qui est loggé ?”
 R: “Reward total, steps, seed, modèle, URL de la vidéo.”

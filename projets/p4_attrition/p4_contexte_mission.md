@@ -22,15 +22,13 @@ Mission - partie 1 :
 
 Vous allez réaliser votre première approche de classification supervisée dans un contexte RH. 
 
-Vous terminerez en complétant la fiche d’autoévaluation qui servira de base de discussion avec votre mentor avant la soutenance. 
+Vous terminerez en complétant la fiche d’autoévaluation qui servira de base de discussion avec votre mentor.
 
 Optionnel :
 
 Cours : "Requêtez une base de données SQL"
 Mission - partie 2 : À partir du même contexte projet, initiez-vous à la gestion des bases de données et au langage SQL.
-À l’issue de ce projet, vous présenterez les livrables de la première partie de la mission à un mentor évaluateur lors d’une soutenance.
-
-Cela vous permettra de valider les compétences visées par ce projet.
+À l’issue de ce projet, vous finaliserez et partagerez les livrables de la première partie de la mission (revue + discussion) afin de valider les compétences visées par ce projet.
 
 
  

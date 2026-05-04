@@ -88,4 +88,4 @@ Couverture : ~85% (extrait).
 
 ---
 
-Sources : `projets/p5_deploiement_modele_ml/p5_contexte_mission.md` et `projets/p5_deploiement_modele_ml/p5_diapo.md`.
+Cas d’étude OpenClassrooms — synthèse du projet.

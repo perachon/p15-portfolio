@@ -29,13 +29,11 @@ Cours : Vous suivrez 3 cours en alternance avec 3 parties de la mission.
 
 Mission : Vous effectuerez la mission en trois parties “Réalisez un cadrage de projet IA” en alternance avec les cours correspondants. 
 
-Vous terminerez en complétant la fiche d’autoévaluation qui servira de base de discussion avec votre mentor avant la soutenance.
+Vous terminerez en complétant la fiche d’autoévaluation qui servira de base de discussion avec votre mentor.
 
  
 
-À l’issue de ce projet, vous présenterez les livrables de la mission à un mentor évaluateur lors d’une soutenance.
-
-Cela vous permettra de valider les compétences visées par ce projet.
+À l’issue de ce projet, vous finaliserez et partagerez les livrables (revue de cadrage + recommandations) afin de valider les compétences visées par ce projet.
 
  
  Objectifs pédagogiques
