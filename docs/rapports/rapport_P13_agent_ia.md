@@ -50,4 +50,4 @@ Bonnes pratiques citées : validation FEN et légalité des coups via `python-ch
 
 ---
 
-Source : `projets/p13_agent_ia/p13_contexte_mission.md`.
+Cas d’étude OpenClassrooms — synthèse du projet.

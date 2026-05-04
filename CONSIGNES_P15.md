@@ -1,7 +1,5 @@
 # P15 — Réalisez le portfolio d’AI Engineer (OpenClassrooms)
 
-_Copie versionnée (git) des consignes initialement stockées dans_ `tmp_screens/p15.md` _afin de garder le cahier des charges accessible dans le repo._
-
 _Date du contexte : 20 avril 2026_
 
 ## Contexte
@@ -11,7 +9,7 @@ Dernier projet de la formation OpenClassrooms (parcours AI Engineer / Data Engin
 ## Objectif général du projet
 
 - Consolider les compétences d’ingénierie IA via un projet concret, centré sur des problématiques de mise en production.
-- Produire des livrables “portfolio” présentables à un mentor évaluateur lors d’une **soutenance**.
+- Produire des livrables “portfolio” réutilisables en entretien : lisibles, vérifiables, et orientés décisions/compromis (technique, coût, risques).
 
 ## Thématiques techniques possibles (dominante technique)
 
@@ -30,7 +28,7 @@ Mission en **trois étapes successives** :
 2. Création d’une **carte conceptuelle** qui structure ce qui a été appris.
 3. Création du **portfolio** qui valorise l’ensemble du travail.
 
-À l’issue : présentation du portfolio à un **mentor évaluateur** lors d’une **soutenance**.
+À l’issue : finalisation du portfolio (publication + relecture), pour pouvoir le réutiliser comme support en entretien.
 
 ---
 
@@ -47,12 +45,12 @@ Mise en situation fictive, comme dans un contexte professionnel réel : prépare
 
 ### Scénario détaillé (Étape 1)
 
-- À votre arrivée à **FalDatacorps**, vous recevez un message (preuve : `message_screen_1`).
-- Vous répondez (preuve : `reponse_1_screen`).
-- Vous envoyez un message à votre manager **Charlotte** (preuve : `reponse_2_screen`).
+- À votre arrivée à **FalDatacorps**, vous recevez un message.
+- Vous répondez.
+- Vous envoyez un message à votre manager **Charlotte**.
 - Après échange, vous décidez de joindre un **rapport** au portfolio et d’y intégrer un **lien vers le projet**.
 
-### Compétences évaluées
+### Compétences visées
 
 - Collecter les besoins métiers et analyser le contexte de l’organisation.
 - Auditer la solution data afin d’en déterminer l’adéquation avec des besoins identifiés.
@@ -72,7 +70,7 @@ Attendus principaux :
 
 3) Mettre en valeur les soft skills (analyse, curiosité, communication, gestion de projet, etc.).
 
-Livrable : formaliser le document préparatoire dans une **carte mentale**, en s’inspirant d’un modèle (cf. `modele_etape2_point3`).
+Livrable : formaliser le document préparatoire dans une **carte mentale**, en s’inspirant d’un modèle.
 
 ---
 
@@ -84,12 +82,12 @@ Livrable : formaliser le document préparatoire dans une **carte mentale**, en s
 
 ---
 
-## Soutenance (30 minutes)
+## Format de démo / entretien (≈ 30 minutes)
 
 Structure :
 
-1) Présentation des livrables (15 min)
+1) Démo + tour des livrables (10–15 min)
 
-2) Discussion (10 min)
+2) Questions/réponses (10 min)
 
-3) Debrief (5 min)
+3) Conclusion (2–5 min)

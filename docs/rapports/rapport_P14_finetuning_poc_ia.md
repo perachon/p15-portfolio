@@ -52,7 +52,7 @@ Points de vigilance cités : ne pas mélanger entraînement et évaluation, cons
 - API de triage : recommandation “API plutôt qu’un notebook” (testable, intégrable).
 - Garde‑fous de sécurité (extraits) : logique de **red flags** (ex. douleur thoracique, malaise, saignement important) ; priorité forcée et réponse prudente, en court‑circuitant le génératif.
 - Traçabilité (extraits) : audit des interactions stocké en **SQLite** avec endpoint dédié ` /audit/{interaction_id}`.
-- Démonstration soutenance (ordre conseillé) :
+- Démonstration (ordre conseillé) :
   1) `GET /health`
   2) `POST /triage` cas standard
   3) `POST /triage` cas avec red flag
@@ -79,8 +79,4 @@ Mesures de latence (extraits vocabulaire) :
 
 ---
 
-Sources :
-- `projets/p14_finetuning_poc_ia/p14_contexte_mission.md`
-- `projets/p14_finetuning_poc_ia/p14_livrables_soutenance.md`
-- `projets/p14_finetuning_poc_ia/p14_questions.md`
-- `projets/p14_finetuning_poc_ia/p14_vocabulaire.md`
+Cas d’étude OpenClassrooms — synthèse du projet.

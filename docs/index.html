@@ -7,7 +7,7 @@
     <meta name="description" content="Portfolio OpenClassrooms : projets, compétences et contact." />
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
+  <body data-view="short">
     <div class="container">
       <header>
         <div class="brand">
@@ -30,6 +30,15 @@
           <a href="#competences">Compétences</a>
           <a href="#contact">Contact</a>
         </nav>
+
+        <div class="view-toggle" role="group" aria-label="Version d’affichage">
+          <button type="button" class="btn btn--ghost btn--sm" data-set-view="short" aria-pressed="true">
+            Version classique
+          </button>
+          <button type="button" class="btn btn--ghost btn--sm" data-set-view="long" aria-pressed="false">
+            Version détaillée
+          </button>
+        </div>
 
         <div class="hero">
           <div class="card">
@@ -78,7 +87,7 @@
               <div>Python, FastAPI, Pydantic, Docker, GitHub Actions, MLflow, Evidently, FAISS, LangChain/LangGraph, Transformers/PEFT, Airflow, SQL (PostgreSQL/SQLite).</div>
 
               <div>Projet personnel</div>
-              <div>Credit Scoring API — projet à dominante technique mis en avant pour la soutenance.</div>
+              <div>Credit Scoring API — projet à dominante technique (focus production, MLOps et qualité logicielle).</div>
             </div>
             <div class="badges" aria-label="mots-clés">
               <span class="badge">Industrialisation ML</span>
@@ -95,7 +104,7 @@
         <section id="projets">
           <h2>Projets</h2>
           <div class="grid">
-            <div class="card col-12">
+            <div class="card col-12 card--primary">
               <h3>Credit Scoring API</h3>
               <p class="small mt-0">
                 Projet de déploiement, monitoring et optimisation d’un modèle de scoring crédit réalisé dans un contexte MLOps — Avec API FastAPI : prédiction & décision `ACCEPTED/REFUSED` à partir d'un seuil métier.
@@ -129,7 +138,7 @@
               </ul>
 
               <hr />
-              <div class="small">
+              <div class="small only-long">
                 Ce que le projet démontre (côté prod) :
                 <ul>
                   <li>CI/CD : à chaque commit → exécution des tests → build image Docker → déploiement.</li>
@@ -141,7 +150,7 @@
               </div>
 
               <hr />
-              <div class="small">
+              <div class="small only-long">
                 Chiffres (extraits du POC) :
                 <ul>
                   <li>Métriques ML : AUC ~0.77 selon le comparatif multi-modèles (CV).</li>
@@ -154,7 +163,7 @@
                 </ul>
               </div>
               <hr />
-              <div class="small">
+              <div class="small project-links">
                 Liens :
                 <ul>
                   <li>Rapport projet personnel (HTML) : <a target="_blank" href="./rapports/rapport_P15_projet_perso_credit_scoring.html">Ouvrir</a></li>
@@ -169,48 +178,57 @@
             <div class="card col-6">
               <h3>Puls-Events RAG</h3>
               <p class="small mt-0">
-                Système Retrieval-Augmented Generation (RAG) fonctionnel basé sur LangChain et le modèle Mistral, soutenu par une base vectorielle FAISS — OpenAgenda : ingestion → index FAISS → API FastAPI → garde-fous anti-hallucination + évaluation.
+                RAG événements (OpenAgenda) : ingestion → FAISS → API FastAPI, réponses sourcées + évaluation.
               </p>
 
-              <div class="badges" aria-label="stack p7">
+              <div class="badges only-short" aria-label="skills p7">
+                <span class="badge">RAG</span>
                 <span class="badge">FastAPI</span>
-                <span class="badge">Docker</span>
-                <span class="badge">Docker Compose</span>
                 <span class="badge">FAISS</span>
-                <span class="badge">LangChain</span>
-                <span class="badge">sentence-transformers</span>
-                <span class="badge">Mistral API</span>
+                <span class="badge">Docker</span>
               </div>
 
-              <ul>
-                <li>Contexte (scénario OC) : mission freelance pour Puls-Events — chatbot événements (POC).</li>
-                <li>Données : OpenAgenda (périmètre Paris-Saclay) (POC).</li>
-                <li>Index : FAISS persistée ; embeddings `all-MiniLM-L6-v2` (local) ; chunking 800, overlap 120.</li>
-                <li>API : `POST /ask` (question → réponse sourcée) ; `POST /rebuild` (reconstruction index).</li>
-                <li>Qualité : réponses sourcées + évaluation reproductible (gold set).</li>
-              </ul>
+              <div class="only-long">
+                <div class="badges" aria-label="stack p7">
+                  <span class="badge">FastAPI</span>
+                  <span class="badge">Docker</span>
+                  <span class="badge">Docker Compose</span>
+                  <span class="badge">FAISS</span>
+                  <span class="badge">LangChain</span>
+                  <span class="badge">sentence-transformers</span>
+                  <span class="badge">Mistral API</span>
+                </div>
 
-              <hr />
-              <div class="small">
-                Ce que le projet démontre (POC) :
                 <ul>
-                  <li>Architecture RAG de bout en bout : pipeline offline (collecte/nettoyage/chunking/index) + exécution online (retrieval FAISS → génération LLM).</li>
-                  <li>Traçabilité : réponse construite à partir des documents récupérés (sources), pour limiter l’hallucination.</li>
-                  <li>Exposition : API FastAPI testable via Swagger ; exécution locale via Docker Compose.</li>
-                  <li>Limites assumées : dépendance à un LLM externe (Mistral), latence variable, périmètre géographique restreint.</li>
+                  <li>Contexte (scénario OC) : mission freelance pour Puls-Events — chatbot événements (POC).</li>
+                  <li>Données : OpenAgenda (périmètre Paris-Saclay) (POC).</li>
+                  <li>Index : FAISS persistée ; embeddings `all-MiniLM-L6-v2` (local) ; chunking 800, overlap 120.</li>
+                  <li>API : `POST /ask` (question → réponse sourcée) ; `POST /rebuild` (reconstruction index).</li>
+                  <li>Qualité : réponses sourcées + évaluation reproductible (gold set).</li>
                 </ul>
-              </div>
 
-              <hr />
-              <div class="small">
-                Chiffres (extraits du POC) :
-                <ul>
-                  <li>Volumétrie : ~3800 événements bruts ; ~661 indexés.</li>
-                  <li>Gold set (10 Q) : 5 correct, 5 partial, 0 incorrect ; precision=0.6183 ; recall=1.0 ; f1=0.69.</li>
-                </ul>
+                <hr />
+                <div class="small only-long">
+                  Ce que le projet démontre (POC) :
+                  <ul>
+                    <li>Architecture RAG de bout en bout : pipeline offline (collecte/nettoyage/chunking/index) + exécution online (retrieval FAISS → génération LLM).</li>
+                    <li>Traçabilité : réponse construite à partir des documents récupérés (sources), pour limiter l’hallucination.</li>
+                    <li>Exposition : API FastAPI testable via Swagger ; exécution locale via Docker Compose.</li>
+                    <li>Limites assumées : dépendance à un LLM externe (Mistral), latence variable, périmètre géographique restreint.</li>
+                  </ul>
+                </div>
+
+                <hr />
+                <div class="small only-long">
+                  Chiffres (extraits du POC) :
+                  <ul>
+                    <li>Volumétrie : ~3800 événements bruts ; ~661 indexés.</li>
+                    <li>Gold set (10 Q) : 5 correct, 5 partial, 0 incorrect ; precision=0.6183 ; recall=1.0 ; f1=0.69.</li>
+                  </ul>
+                </div>
               </div>
-              <hr />
-              <div class="small">
+              <hr class="only-long" />
+              <div class="small project-links">
                 Liens :
                 <ul>
                   <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P7_puls_events_rag.html">Ouvrir</a></li>
@@ -222,54 +240,62 @@
             <div class="card col-6">
               <h3>Attrition RH — TechNova Partners</h3>
               <p class="small mt-0">
-                Projet de classification supervisée en contexte RH : explorer 3 sources de données (SIRH, évaluations annuelles, sondage), prédire une probabilité de départ et interpréter les facteurs clés.
+                Classification RH : prédire le départ, interpréter les facteurs, piloter le seuil.
               </p>
 
-              <div class="badges" aria-label="stack p4">
-                <span class="badge">Classification supervisée</span>
-                <span class="badge">EDA</span>
-                <span class="badge">Régression logistique</span>
-                <span class="badge">Imbalance</span>
-                <span class="badge">Validation croisée</span>
-                <span class="badge">Seuil de décision</span>
-                <span class="badge">One‑Hot Encoding</span>
-                <span class="badge">Analyse d’erreurs</span>
+              <div class="badges only-short" aria-label="skills p4">
+                <span class="badge">Classification</span>
+                <span class="badge">scikit-learn</span>
+                <span class="badge">Seuil</span>
+                <span class="badge">Interprétation</span>
               </div>
 
-              <ul>
-                <li>Volumétrie (extraits) : 1470 employés ; 237 démissionnés (~16%).</li>
-                <li>Baseline : Dummy Classifier accuracy ≈ 84% mais ne détecte pas la classe minoritaire.</li>
-                <li>Modèle retenu (extrait) : régression logistique ; recall(« départ ») ≈ 0.68.</li>
-                <li>Compromis métier : ajustement du seuil (precision/recall) pour « mieux alerter que rater ».</li>
-              </ul>
+              <div class="only-long">
+                <div class="badges" aria-label="stack p4">
+                  <span class="badge">Classification supervisée</span>
+                  <span class="badge">EDA</span>
+                  <span class="badge">Régression logistique</span>
+                  <span class="badge">Imbalance</span>
+                  <span class="badge">Validation croisée</span>
+                  <span class="badge">Seuil de décision</span>
+                  <span class="badge">One‑Hot Encoding</span>
+                  <span class="badge">Analyse d’erreurs</span>
+                </div>
 
-              <hr />
-              <div class="small">
-                Ce que le projet démontre (POC) :
                 <ul>
-                  <li>Fusion multi-sources RH : structurer un dataset unique à partir de 3 fichiers (SIRH, évaluations annuelles, sondage) avec recouvrement via identifiants.</li>
-                  <li>Préparation : nettoyage, suppression de colonnes non pertinentes/constantes, encodage catégoriel (One‑Hot), gestion de corrélations fortes.</li>
-                  <li>Évaluation adaptée au déséquilibre : aller au-delà de l’accuracy (precision/recall, matrice de confusion) et comparer des modèles via validation croisée.</li>
-                  <li>Décision métier : piloter le compromis faux positifs / faux négatifs avec un seuil de décision ajustable.</li>
-                  <li>Interprétation : lecture des coefficients (logistique) + analyse FN/FP pour comprendre les limites du modèle.</li>
+                  <li>Volumétrie (extraits) : 1470 employés ; 237 démissionnés (~16%).</li>
+                  <li>Baseline : Dummy Classifier accuracy ≈ 84% mais ne détecte pas la classe minoritaire.</li>
+                  <li>Modèle retenu (extrait) : régression logistique ; recall(« départ ») ≈ 0.68.</li>
+                  <li>Compromis métier : ajustement du seuil (precision/recall) pour « mieux alerter que rater ».</li>
                 </ul>
-              </div>
 
-              <hr />
-              <div class="small">
-                Chiffres (extraits) :
-                <ul>
-                  <li>Données : 3 sources (SIRH, évaluations annuelles, sondage).</li>
-                  <li>Classe minoritaire : 237 démissionnés (~16%).</li>
-                  <li>Après préparation (extrait) : 1233 employés restants.</li>
-                  <li>Dummy : accuracy ≈ 84% mais recall sur « départ » ≈ 0.</li>
-                  <li>Régression logistique : recall(« départ ») ≈ 0.68 (seuil 0.50, extrait).</li>
-                  <li>Effet du seuil (extraits) : 0.20 → recall=0.91 / precision=0.22 ; 0.90 → precision=1.00 / recall=0.17.</li>
-                </ul>
-              </div>
+                <hr />
+                <div class="small only-long">
+                  Ce que le projet démontre (POC) :
+                  <ul>
+                    <li>Fusion multi-sources RH : structurer un dataset unique à partir de 3 fichiers (SIRH, évaluations annuelles, sondage) avec recouvrement via identifiants.</li>
+                    <li>Préparation : nettoyage, suppression de colonnes non pertinentes/constantes, encodage catégoriel (One‑Hot), gestion de corrélations fortes.</li>
+                    <li>Évaluation adaptée au déséquilibre : aller au-delà de l’accuracy (precision/recall, matrice de confusion) et comparer des modèles via validation croisée.</li>
+                    <li>Décision métier : piloter le compromis faux positifs / faux négatifs avec un seuil de décision ajustable.</li>
+                    <li>Interprétation : lecture des coefficients (logistique) + analyse FN/FP pour comprendre les limites du modèle.</li>
+                  </ul>
+                </div>
 
-              <hr />
-              <div class="small">
+                <hr />
+                <div class="small only-long">
+                  Chiffres (extraits) :
+                  <ul>
+                    <li>Données : 3 sources (SIRH, évaluations annuelles, sondage).</li>
+                    <li>Classe minoritaire : 237 démissionnés (~16%).</li>
+                    <li>Après préparation (extrait) : 1233 employés restants.</li>
+                    <li>Dummy : accuracy ≈ 84% mais recall sur « départ » ≈ 0.</li>
+                    <li>Régression logistique : recall(« départ ») ≈ 0.68 (seuil 0.50, extrait).</li>
+                    <li>Effet du seuil (extraits) : 0.20 → recall=0.91 / precision=0.22 ; 0.90 → precision=1.00 / recall=0.17.</li>
+                  </ul>
+                </div>
+              </div>
+              <hr class="only-long" />
+              <div class="small project-links">
                 Liens :
                 <ul>
                   <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P4_attrition.html">Ouvrir</a></li>
@@ -280,52 +306,60 @@
             <div class="card col-6">
               <h3>Déploiement d’un modèle ML (POC) — Futurisys</h3>
               <p class="small mt-0">
-                Déploiement d’un modèle ML via une API FastAPI avec CI/CD, tests automatisés, et traçabilité des prédictions en base (PostgreSQL) — démo déployée sur Hugging Face Spaces.
+                API FastAPI + CI/tests + traçabilité en base (PostgreSQL), déployée sur Hugging Face Spaces.
               </p>
 
-              <div class="badges" aria-label="stack p5">
+              <div class="badges only-short" aria-label="skills p5">
                 <span class="badge">FastAPI</span>
-                <span class="badge">Pydantic</span>
-                <span class="badge">Pytest</span>
-                <span class="badge">Coverage</span>
-                <span class="badge">GitHub Actions</span>
-                <span class="badge">Docker</span>
-                <span class="badge">Hugging Face Spaces</span>
+                <span class="badge">Tests</span>
+                <span class="badge">CI/CD</span>
                 <span class="badge">PostgreSQL</span>
-                <span class="badge">SQLAlchemy</span>
               </div>
 
-              <ul>
-                <li>Endpoints (extraits) : `GET /health`, `POST /predict`, `POST /p4/predict`.</li>
-                <li>Validation : schémas Pydantic + types stricts ; erreurs 422 automatiques si input invalide.</li>
-                <li>Traçabilité : chaque prédiction est loggée en base (table `prediction_logs`).</li>
-                <li>Qualité : suite de tests (unitaires/fonctionnels/intégration) + exécution automatique en CI.</li>
-              </ul>
+              <div class="only-long">
+                <div class="badges" aria-label="stack p5">
+                  <span class="badge">FastAPI</span>
+                  <span class="badge">Pydantic</span>
+                  <span class="badge">Pytest</span>
+                  <span class="badge">Coverage</span>
+                  <span class="badge">GitHub Actions</span>
+                  <span class="badge">Docker</span>
+                  <span class="badge">Hugging Face Spaces</span>
+                  <span class="badge">PostgreSQL</span>
+                  <span class="badge">SQLAlchemy</span>
+                </div>
 
-              <hr />
-              <div class="small">
-                Ce que le projet démontre (POC) :
                 <ul>
-                  <li>Industrialisation : transformer un modèle en service API documenté (`/docs`) avec endpoints stables.</li>
-                  <li>Fiabilité : stratégie de tests multi-niveaux (validation, endpoints, intégration API↔DB) et couverture suivie.</li>
-                  <li>CI/CD : pipeline qui installe, teste, mesure la couverture et déploie si la CI est verte.</li>
-                  <li>Sécurité des secrets : déploiement Hugging Face via `HF_TOKEN` en GitHub Secrets (pas en clair dans le repo).</li>
-                  <li>Traçabilité & audit : persistance des requêtes/réponses et métadonnées de prédiction en base.</li>
+                  <li>Endpoints (extraits) : `GET /health`, `POST /predict`, `POST /p4/predict`.</li>
+                  <li>Validation : schémas Pydantic + types stricts ; erreurs 422 automatiques si input invalide.</li>
+                  <li>Traçabilité : chaque prédiction est loggée en base (table `prediction_logs`).</li>
+                  <li>Qualité : suite de tests (unitaires/fonctionnels/intégration) + exécution automatique en CI.</li>
                 </ul>
-              </div>
 
-              <hr />
-              <div class="small">
-                Chiffres (extraits) :
-                <ul>
-                  <li>Couverture de tests : ~85% (extrait).</li>
-                  <li>DB : exemple mentionné de 23 lignes de logs dans `prediction_logs` (extrait).</li>
-                  <li>Tags/versions (exemples donnés) : `v0.3.0` (Dummy Model), `v0.4.0` (PostgreSQL), `v0.5.0` (Tests complets).</li>
-                </ul>
-              </div>
+                <hr />
+                <div class="small only-long">
+                  Ce que le projet démontre (POC) :
+                  <ul>
+                    <li>Industrialisation : transformer un modèle en service API documenté (`/docs`) avec endpoints stables.</li>
+                    <li>Fiabilité : stratégie de tests multi-niveaux (validation, endpoints, intégration API↔DB) et couverture suivie.</li>
+                    <li>CI/CD : pipeline qui installe, teste, mesure la couverture et déploie si la CI est verte.</li>
+                    <li>Sécurité des secrets : déploiement Hugging Face via `HF_TOKEN` en GitHub Secrets (pas en clair dans le repo).</li>
+                    <li>Traçabilité & audit : persistance des requêtes/réponses et métadonnées de prédiction en base.</li>
+                  </ul>
+                </div>
 
-              <hr />
-              <div class="small">
+                <hr />
+                <div class="small only-long">
+                  Chiffres (extraits) :
+                  <ul>
+                    <li>Couverture de tests : ~85% (extrait).</li>
+                    <li>DB : exemple mentionné de 23 lignes de logs dans `prediction_logs` (extrait).</li>
+                    <li>Tags/versions (exemples donnés) : `v0.3.0` (Dummy Model), `v0.4.0` (PostgreSQL), `v0.5.0` (Tests complets).</li>
+                  </ul>
+                </div>
+              </div>
+              <hr class="only-long" />
+              <div class="small project-links">
                 Liens :
                 <ul>
                   <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P5_deploiement_modele_ml.html">Ouvrir</a></li>
@@ -337,52 +371,60 @@
             <div class="card col-6">
               <h3>Cadrage d’un projet IA (POC) — Fashion‑Insta</h3>
               <p class="small mt-0">
-                Cadrage complet d’un projet IA de recommandation vestimentaire par photo : définition du périmètre POC, critères de succès (métier + technique), system design cible, dimensionnement (timeline/coûts/ROI) et volet RGPD/risques.
+                Cadrage POC recommandation photo : périmètre, critères, design cible, risques/RGPD, coûts/ROI.
               </p>
 
-              <div class="badges" aria-label="stack p9">
-                <span class="badge">Vision (ViT / CNN)</span>
+              <div class="badges only-short" aria-label="skills p9">
+                <span class="badge">Cadrage</span>
                 <span class="badge">Embeddings</span>
-                <span class="badge">Similarité (cosinus)</span>
-                <span class="badge">Recall@K / Precision@K</span>
-                <span class="badge">System design</span>
-                <span class="badge">Azure (cible)</span>
-                <span class="badge">ROI</span>
                 <span class="badge">RGPD</span>
+                <span class="badge">ROI</span>
               </div>
 
-              <ul>
-                <li>POC : entrée photo → sortie top N d’articles visuellement similaires (pas de personnalisation dans le POC).</li>
-                <li>Approche : modèle vision pré-entraîné → embeddings → recherche de similarité dans le catalogue.</li>
-                <li>Critères : Recall@K/Precision@K + temps d’inférence &lt; 500 ms + validation métier (pertinence).</li>
-                <li>Plan : staffing POC (DS + AI/DE + référent métier), timeline globale (POC → MVP → Run) et chiffrage coûts/ROI.</li>
-              </ul>
+              <div class="only-long">
+                <div class="badges" aria-label="stack p9">
+                  <span class="badge">Vision (ViT / CNN)</span>
+                  <span class="badge">Embeddings</span>
+                  <span class="badge">Similarité (cosinus)</span>
+                  <span class="badge">Recall@K / Precision@K</span>
+                  <span class="badge">System design</span>
+                  <span class="badge">Azure (cible)</span>
+                  <span class="badge">ROI</span>
+                  <span class="badge">RGPD</span>
+                </div>
 
-              <hr />
-              <div class="small">
-                Ce que le projet démontre (POC) :
                 <ul>
-                  <li>Cadrage “décideurs” : clarifier valeur IA vs filtres classiques, périmètre limité, et critères d’échec (Go/No Go).</li>
-                  <li>Choix technique justifié : pré-entraîné + embeddings + similarité pour minimiser risque/délai du POC.</li>
-                  <li>Évaluation adaptée : métriques de ranking (Recall@K/Precision@K) + contrainte latence (&lt; 500 ms).</li>
-                  <li>Vision prod : system design cible sur Azure (ingestion, stockage temporaire, inférence, recherche vectorielle, monitoring).</li>
-                  <li>Gouvernance risques : analyse RGPD (minimisation, rétention, consentement) et mesures (pas d’API publique, suppression image, chiffrement, logs anonymisés).</li>
+                  <li>POC : entrée photo → sortie top N d’articles visuellement similaires (pas de personnalisation dans le POC).</li>
+                  <li>Approche : modèle vision pré-entraîné → embeddings → recherche de similarité dans le catalogue.</li>
+                  <li>Critères : Recall@K/Precision@K + temps d’inférence &lt; 500 ms + validation métier (pertinence).</li>
+                  <li>Plan : staffing POC (DS + AI/DE + référent métier), timeline globale (POC → MVP → Run) et chiffrage coûts/ROI.</li>
                 </ul>
-              </div>
 
-              <hr />
-              <div class="small">
-                Chiffres (extraits) :
-                <ul>
-                  <li>POC : 4 à 8 semaines ; profils : 1 Data Scientist, 1 AI/DE, 1 référent métier mode.</li>
-                  <li>Latence cible : temps d’inférence &lt; 500 ms (critère technique POC).</li>
-                  <li>Coûts : ~116 500 € (RH) + ~10 000 € (one-shot) + ~20 000 €/an (run) → ~146 500 € 1ère année.</li>
-                  <li>ROI (hypothèses marketing) : gains annuels ~468 000 € ; rentabilité atteinte dès la première année (extrait).</li>
-                </ul>
-              </div>
+                <hr />
+                <div class="small only-long">
+                  Ce que le projet démontre (POC) :
+                  <ul>
+                    <li>Cadrage “décideurs” : clarifier valeur IA vs filtres classiques, périmètre limité, et critères d’échec (Go/No Go).</li>
+                    <li>Choix technique justifié : pré-entraîné + embeddings + similarité pour minimiser risque/délai du POC.</li>
+                    <li>Évaluation adaptée : métriques de ranking (Recall@K/Precision@K) + contrainte latence (&lt; 500 ms).</li>
+                    <li>Vision prod : system design cible sur Azure (ingestion, stockage temporaire, inférence, recherche vectorielle, monitoring).</li>
+                    <li>Gouvernance risques : analyse RGPD (minimisation, rétention, consentement) et mesures (pas d’API publique, suppression image, chiffrement, logs anonymisés).</li>
+                  </ul>
+                </div>
 
-              <hr />
-              <div class="small">
+                <hr />
+                <div class="small only-long">
+                  Chiffres (extraits) :
+                  <ul>
+                    <li>POC : 4 à 8 semaines ; profils : 1 Data Scientist, 1 AI/DE, 1 référent métier mode.</li>
+                    <li>Latence cible : temps d’inférence &lt; 500 ms (critère technique POC).</li>
+                    <li>Coûts : ~116 500 € (RH) + ~10 000 € (one-shot) + ~20 000 €/an (run) → ~146 500 € 1ère année.</li>
+                    <li>ROI (hypothèses marketing) : gains annuels ~468 000 € ; rentabilité atteinte dès la première année (extrait).</li>
+                  </ul>
+                </div>
+              </div>
+              <hr class="only-long" />
+              <div class="small project-links">
                 Liens :
                 <ul>
                   <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P9_cadrage_projet_ia.html">Ouvrir</a></li>
@@ -393,52 +435,60 @@
             <div class="card col-6">
               <h3>Semi‑supervisé (Computer Vision) — BrainScanAI</h3>
               <p class="small mt-0">
-                Démo technique de classification d’images IRM (tumeur vs normal) avec peu de labels : extraction d’embeddings, clustering, pseudo‑labels et comparaison supervisé vs semi‑supervisé, avec garde‑fous anti fuite de données.
+                Semi‑supervisé IRM : embeddings → clustering → pseudo‑labels, comparaison vs supervisé.
               </p>
 
-              <div class="badges" aria-label="stack p10">
-                <span class="badge">Computer Vision</span>
-                <span class="badge">Semi‑supervisé</span>
-                <span class="badge">Embeddings (ResNet50)</span>
-                <span class="badge">Clustering (KMeans/DBSCAN)</span>
+              <div class="badges only-short" aria-label="skills p10">
+                <span class="badge">CV</span>
+                <span class="badge">Embeddings</span>
+                <span class="badge">Clustering</span>
                 <span class="badge">Pseudo‑labels</span>
-                <span class="badge">ARI</span>
-                <span class="badge">F1 macro</span>
-                <span class="badge">Data leakage</span>
-                <span class="badge">QC données</span>
               </div>
 
-              <ul>
-                <li>Données : 1506 images ; 100 labellisées (50/50) ; 1406 non labellisées.</li>
-                <li>Prétraitement : gris → RGB, resize 224×224, normalisation ImageNet (compatibilité backbones pré‑entraînés).</li>
-                <li>Pipeline : embeddings → clustering → mapping cluster→classe (train only) → pseudo‑labels filtrés → entraînement + comparaison équitable (test strict).</li>
-              </ul>
+              <div class="only-long">
+                <div class="badges" aria-label="stack p10">
+                  <span class="badge">Computer Vision</span>
+                  <span class="badge">Semi‑supervisé</span>
+                  <span class="badge">Embeddings (ResNet50)</span>
+                  <span class="badge">Clustering (KMeans/DBSCAN)</span>
+                  <span class="badge">Pseudo‑labels</span>
+                  <span class="badge">ARI</span>
+                  <span class="badge">F1 macro</span>
+                  <span class="badge">Data leakage</span>
+                  <span class="badge">QC données</span>
+                </div>
 
-              <hr />
-              <div class="small">
-                Ce que le projet démontre :
                 <ul>
-                  <li>Structuration d’un pipeline semi‑supervisé avec séparation train/val/test et interdiction d’utiliser le test pour guider les choix.</li>
-                  <li>Feature extraction via modèle pré‑entraîné (embeddings) pour travailler sur des représentations plutôt que sur les pixels.</li>
-                  <li>Contrôle qualité (outliers/quasi‑doublons) et garde‑fous pour préserver le jeu labellisé.</li>
-                  <li>Comparaison méthodique : baseline supervisée vs semi‑supervisé + robustesse via multi‑seeds.</li>
-                  <li>Projection “passage à l’échelle” : pipeline batch relançable + traçabilité (artefacts) + monitoring simple.</li>
+                  <li>Données : 1506 images ; 100 labellisées (50/50) ; 1406 non labellisées.</li>
+                  <li>Prétraitement : gris → RGB, resize 224×224, normalisation ImageNet (compatibilité backbones pré‑entraînés).</li>
+                  <li>Pipeline : embeddings → clustering → mapping cluster→classe (train only) → pseudo‑labels filtrés → entraînement + comparaison équitable (test strict).</li>
                 </ul>
-              </div>
 
-              <hr />
-              <div class="small">
-                Chiffres (extraits) :
-                <ul>
-                  <li>Embeddings : 2048 dimensions/image ; matrice 1506×2048.</li>
-                  <li>Pseudo‑labels : ~1406 générés puis filtrage (≈ un quart conservé, autour de 350 images).</li>
-                  <li>Test final (extraits) : supervisé ~95% accuracy / F1 macro ~0.95 ; semi‑supervisé ~90% / ~0.90, avec stabilité accrue (variance plus faible) en multi‑seeds.</li>
-                  <li>Budgets mentionnés : 300 € (dataset) ; 5 000 € pour 4 M d’images à labelliser.</li>
-                </ul>
-              </div>
+                <hr />
+                <div class="small only-long">
+                  Ce que le projet démontre :
+                  <ul>
+                    <li>Structuration d’un pipeline semi‑supervisé avec séparation train/val/test et interdiction d’utiliser le test pour guider les choix.</li>
+                    <li>Feature extraction via modèle pré‑entraîné (embeddings) pour travailler sur des représentations plutôt que sur les pixels.</li>
+                    <li>Contrôle qualité (outliers/quasi‑doublons) et garde‑fous pour préserver le jeu labellisé.</li>
+                    <li>Comparaison méthodique : baseline supervisée vs semi‑supervisé + robustesse via multi‑seeds.</li>
+                    <li>Projection “passage à l’échelle” : pipeline batch relançable + traçabilité (artefacts) + monitoring simple.</li>
+                  </ul>
+                </div>
 
-              <hr />
-              <div class="small">
+                <hr />
+                <div class="small only-long">
+                  Chiffres (extraits) :
+                  <ul>
+                    <li>Embeddings : 2048 dimensions/image ; matrice 1506×2048.</li>
+                    <li>Pseudo‑labels : ~1406 générés puis filtrage (≈ un quart conservé, autour de 350 images).</li>
+                    <li>Test final (extraits) : supervisé ~95% accuracy / F1 macro ~0.95 ; semi‑supervisé ~90% / ~0.90, avec stabilité accrue (variance plus faible) en multi‑seeds.</li>
+                    <li>Budgets mentionnés : 300 € (dataset) ; 5 000 € pour 4 M d’images à labelliser.</li>
+                  </ul>
+                </div>
+              </div>
+              <hr class="only-long" />
+              <div class="small project-links">
                 Liens :
                 <ul>
                   <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P10_labellisez_semi_supervisees_traitement_images.html">Ouvrir</a></li>
@@ -449,48 +499,56 @@
             <div class="card col-6">
               <h3>Apprentissage par renforcement (RL) — Eagle‑1 (LunarLander‑v3)</h3>
               <p class="small mt-0">
-                Entraînement d’un agent RL pour piloter un atterrisseur (LunarLander‑v3), avec critère de validation sur mean reward, choix d’algorithme (DQN → PPO) et livrables de démonstration (API/GUI/dashboard + vidéo).
+                Agent RL LunarLander : PPO/DQN, validation mean reward, livrables démo.
               </p>
 
-              <div class="badges" aria-label="stack p11">
-                <span class="badge">Reinforcement Learning</span>
-                <span class="badge">LunarLander‑v3</span>
+              <div class="badges only-short" aria-label="skills p11">
+                <span class="badge">RL</span>
                 <span class="badge">PPO</span>
-                <span class="badge">DQN</span>
-                <span class="badge">Reward</span>
                 <span class="badge">API</span>
-                <span class="badge">Swagger (/docs)</span>
                 <span class="badge">Dashboard</span>
               </div>
 
-              <ul>
-                <li>Formulation : observation = 8 valeurs ; actions = 4 actions discrètes ; reward favorise atterrissage stable et pénalise crash/fuel.</li>
-                <li>Validation : mean_reward sur 100 épisodes, objectif &gt; 200 stable.</li>
-                <li>Choix final : PPO (meilleur run avec gamma=0.999), après essais DQN.</li>
-              </ul>
+              <div class="only-long">
+                <div class="badges" aria-label="stack p11">
+                  <span class="badge">Reinforcement Learning</span>
+                  <span class="badge">LunarLander‑v3</span>
+                  <span class="badge">PPO</span>
+                  <span class="badge">DQN</span>
+                  <span class="badge">Reward</span>
+                  <span class="badge">API</span>
+                  <span class="badge">Swagger (/docs)</span>
+                  <span class="badge">Dashboard</span>
+                </div>
 
-              <hr />
-              <div class="small">
-                Ce que le projet démontre :
                 <ul>
-                  <li>Rigueur d’évaluation RL : baseline, tuning incrémental, et métrique agrégée sur 100 épisodes.</li>
-                  <li>Capacité à arbitrer un algorithme selon stabilité/performance (DQN vs PPO).</li>
-                  <li>“Mise en usage” : API centrale + GUI client + dashboard basé logs, plutôt qu’un simple notebook.</li>
-                  <li>Traçabilité : logs CSV (training + runs de démo) et sauvegarde du best model.</li>
+                  <li>Formulation : observation = 8 valeurs ; actions = 4 actions discrètes ; reward favorise atterrissage stable et pénalise crash/fuel.</li>
+                  <li>Validation : mean_reward sur 100 épisodes, objectif &gt; 200 stable.</li>
+                  <li>Choix final : PPO (meilleur run avec gamma=0.999), après essais DQN.</li>
                 </ul>
-              </div>
 
-              <hr />
-              <div class="small">
-                Chiffres (extraits) :
-                <ul>
-                  <li>Résultat annoncé : ~267 ± 21 de mean reward (sur 100 épisodes) ; objectif &gt; 200 atteint.</li>
-                  <li>Vidéo démo : contrainte 20–30s ; réglage 30 fps + répétition de frames (ex. frame_repeat=3) pour ~25–30s.</li>
-                </ul>
-              </div>
+                <hr />
+                <div class="small only-long">
+                  Ce que le projet démontre :
+                  <ul>
+                    <li>Rigueur d’évaluation RL : baseline, tuning incrémental, et métrique agrégée sur 100 épisodes.</li>
+                    <li>Capacité à arbitrer un algorithme selon stabilité/performance (DQN vs PPO).</li>
+                    <li>“Mise en usage” : API centrale + GUI client + dashboard basé logs, plutôt qu’un simple notebook.</li>
+                    <li>Traçabilité : logs CSV (training + runs de démo) et sauvegarde du best model.</li>
+                  </ul>
+                </div>
 
-              <hr />
-              <div class="small">
+                <hr />
+                <div class="small only-long">
+                  Chiffres (extraits) :
+                  <ul>
+                    <li>Résultat annoncé : ~267 ± 21 de mean reward (sur 100 épisodes) ; objectif &gt; 200 atteint.</li>
+                    <li>Vidéo démo : contrainte 20–30s ; réglage 30 fps + répétition de frames (ex. frame_repeat=3) pour ~25–30s.</li>
+                  </ul>
+                </div>
+              </div>
+              <hr class="only-long" />
+              <div class="small project-links">
                 Liens :
                 <ul>
                   <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P11_entrainer_agent_rl.html">Ouvrir</a></li>
@@ -501,39 +559,47 @@
             <div class="card col-6">
               <h3>Extraction multimodale (ETL) — Fake news (CheckIt.AI)</h3>
               <p class="small mt-0">
-                Conception d’un pipeline d’acquisition de données multimodales (texte + image) pour entraîner un détecteur de fake news : qualification de sources, extraction automatisée, transformation, schéma de données, orchestration Airflow et KPI de monitoring.
+                Pipeline ETL multimodal fake news : extraction, transformation, orchestration Airflow + KPI.
               </p>
 
-              <div class="badges" aria-label="stack p12">
+              <div class="badges only-short" aria-label="skills p12">
                 <span class="badge">ETL</span>
-                <span class="badge">Données multimodales</span>
-                <span class="badge">APIs / Scraping</span>
-                <span class="badge">RSS</span>
-                <span class="badge">JSON / CSV</span>
-                <span class="badge">Airflow (DAG)</span>
-                <span class="badge">Logging</span>
+                <span class="badge">Airflow</span>
+                <span class="badge">Scraping</span>
                 <span class="badge">KPI</span>
               </div>
 
-              <ul>
-                <li>Étape 1 : identifier et qualifier ≥ 3 sources (format, langue, labels, méthode d’extraction).</li>
-                <li>Étapes 2–3 : scripts Python modulaires (logs + erreurs) puis transformation reproductible (nettoyage/normalisation/mapping/export).</li>
-                <li>Étape 4 : orchestration Airflow (DAG) ; preuves d’exécution ; tâches simples et séparées.</li>
-              </ul>
+              <div class="only-long">
+                <div class="badges" aria-label="stack p12">
+                  <span class="badge">ETL</span>
+                  <span class="badge">Données multimodales</span>
+                  <span class="badge">APIs / Scraping</span>
+                  <span class="badge">RSS</span>
+                  <span class="badge">JSON / CSV</span>
+                  <span class="badge">Airflow (DAG)</span>
+                  <span class="badge">Logging</span>
+                  <span class="badge">KPI</span>
+                </div>
 
-              <hr />
-              <div class="small">
-                Ce que le projet démontre :
                 <ul>
-                  <li>Approche “data pipeline” : extraction → transformation → stockage, pensée pour être relançable et maintenable.</li>
-                  <li>Rigueur sur la qualité/usage : association texte‑image, champs secondaires utiles (URL, domaine), quotas API.</li>
-                  <li>Conformité/prudence : vérification des droits d’usage et légalité du scraping.</li>
-                  <li>Industrialisation : orchestration Airflow + définition de KPI (qualité, rapidité, coût) et plan de monitoring.</li>
+                  <li>Étape 1 : identifier et qualifier ≥ 3 sources (format, langue, labels, méthode d’extraction).</li>
+                  <li>Étapes 2–3 : scripts Python modulaires (logs + erreurs) puis transformation reproductible (nettoyage/normalisation/mapping/export).</li>
+                  <li>Étape 4 : orchestration Airflow (DAG) ; preuves d’exécution ; tâches simples et séparées.</li>
                 </ul>
-              </div>
 
-              <hr />
-              <div class="small">
+                <hr />
+                <div class="small only-long">
+                  Ce que le projet démontre :
+                  <ul>
+                    <li>Approche “data pipeline” : extraction → transformation → stockage, pensée pour être relançable et maintenable.</li>
+                    <li>Rigueur sur la qualité/usage : association texte‑image, champs secondaires utiles (URL, domaine), quotas API.</li>
+                    <li>Conformité/prudence : vérification des droits d’usage et légalité du scraping.</li>
+                    <li>Industrialisation : orchestration Airflow + définition de KPI (qualité, rapidité, coût) et plan de monitoring.</li>
+                  </ul>
+                </div>
+              </div>
+              <hr class="only-long" />
+              <div class="small project-links">
                 Liens :
                 <ul>
                   <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P12_extrayez_donnes_multimodales_web.html">Ouvrir</a></li>
@@ -544,48 +610,56 @@
             <div class="card col-6">
               <h3>Agent IA (POC) — Ouvertures aux échecs (FFE)</h3>
               <p class="small mt-0">
-                POC d’un agent IA outillé pour apprendre des ouvertures : orchestration LangGraph, récupération de coups théoriques (Lichess), évaluation de position (Stockfish), contexte via RAG (Milvus) et contenus pédagogiques (YouTube API).
+                Agent outillé ouvertures d’échecs : LangGraph + Stockfish + RAG (Milvus).
               </p>
 
-              <div class="badges" aria-label="stack p13">
-                <span class="badge">Agent IA</span>
+              <div class="badges only-short" aria-label="skills p13">
+                <span class="badge">Agent</span>
                 <span class="badge">LangGraph</span>
                 <span class="badge">RAG</span>
-                <span class="badge">Milvus</span>
-                <span class="badge">FastAPI</span>
-                <span class="badge">MongoDB</span>
-                <span class="badge">Stockfish</span>
-                <span class="badge">Lichess API</span>
-                <span class="badge">Angular</span>
-                <span class="badge">Docker Compose</span>
+                <span class="badge">Docker</span>
               </div>
 
-              <ul>
-                <li>Entrée clé : position au format FEN ; objectif “meilleurs coups + explication”.</li>
-                <li>Intégrations citées : Lichess (théorie/parties), Stockfish (évaluation), YouTube API (vidéos), Milvus (vector-search).</li>
-                <li>Démo locale : stack conteneurisée (FastAPI + Milvus + MongoDB + Angular).</li>
-              </ul>
+              <div class="only-long">
+                <div class="badges" aria-label="stack p13">
+                  <span class="badge">Agent IA</span>
+                  <span class="badge">LangGraph</span>
+                  <span class="badge">RAG</span>
+                  <span class="badge">Milvus</span>
+                  <span class="badge">FastAPI</span>
+                  <span class="badge">MongoDB</span>
+                  <span class="badge">Stockfish</span>
+                  <span class="badge">Lichess API</span>
+                  <span class="badge">Angular</span>
+                  <span class="badge">Docker Compose</span>
+                </div>
 
-              <hr />
-              <div class="small">
-                Ce que le projet démontre :
                 <ul>
-                  <li>Conception d’un agent outillé (outils externes + RAG), structuré et intégrable (API).</li>
-                  <li>Modélisation d’un cas d’usage “métier” : apprentissage d’ouvertures, recherche de contexte et explications.</li>
-                  <li>Approche “POC démo‑ready” : dockerisation et endpoints dédiés (moves/evaluate/vector-search).</li>
+                  <li>Entrée clé : position au format FEN ; objectif “meilleurs coups + explication”.</li>
+                  <li>Intégrations citées : Lichess (théorie/parties), Stockfish (évaluation), YouTube API (vidéos), Milvus (vector-search).</li>
+                  <li>Démo locale : stack conteneurisée (FastAPI + Milvus + MongoDB + Angular).</li>
                 </ul>
-              </div>
 
-              <hr />
-              <div class="small">
-                Chiffres (extraits) :
-                <ul>
-                  <li>Contraintes : POC à livrer en 2 semaines.</li>
-                </ul>
-              </div>
+                <hr />
+                <div class="small only-long">
+                  Ce que le projet démontre :
+                  <ul>
+                    <li>Conception d’un agent outillé (outils externes + RAG), structuré et intégrable (API).</li>
+                    <li>Modélisation d’un cas d’usage “métier” : apprentissage d’ouvertures, recherche de contexte et explications.</li>
+                    <li>Approche “POC démo‑ready” : dockerisation et endpoints dédiés (moves/evaluate/vector-search).</li>
+                  </ul>
+                </div>
 
-              <hr />
-              <div class="small">
+                <hr />
+                <div class="small only-long">
+                  Chiffres (extraits) :
+                  <ul>
+                    <li>Contraintes : POC à livrer en 2 semaines.</li>
+                  </ul>
+                </div>
+              </div>
+              <hr class="only-long" />
+              <div class="small project-links">
                 Liens :
                 <ul>
                   <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P13_agent_ia.html">Ouvrir</a></li>
@@ -596,49 +670,57 @@
             <div class="card col-6">
               <h3>Fine-tuning LLM (POC) — Triage médical (CHSA)</h3>
               <p class="small mt-0">
-                POC d’un agent de triage : spécialisation d’un LLM (Qwen3‑1.7B‑Base) via SFT+LoRA puis alignement DPO, garde‑fous “red flags”, traçabilité SQLite et trajectoire de déploiement vLLM + CI/CD.
+                Fine-tuning Qwen : SFT/LoRA + DPO pour triage, garde‑fous + audit SQLite.
               </p>
 
-              <div class="badges" aria-label="stack p14">
-                <span class="badge">Qwen3‑1.7B‑Base</span>
-                <span class="badge">SFT</span>
-                <span class="badge">LoRA (PEFT)</span>
+              <div class="badges only-short" aria-label="skills p14">
+                <span class="badge">Fine‑tuning</span>
+                <span class="badge">LoRA</span>
                 <span class="badge">DPO</span>
-                <span class="badge">FastAPI</span>
                 <span class="badge">vLLM</span>
-                <span class="badge">SQLite (audit)</span>
-                <span class="badge">Ruff</span>
-                <span class="badge">Pytest</span>
-                <span class="badge">GitHub Actions</span>
               </div>
 
-              <ul>
-                <li>Données : dataset médical bilingue (HF Datasets/JSONL) avec objectif ~5 000 paires SFT + paires préférentielles DPO.</li>
-                <li>Sécurité : red flags (ex. douleur thoracique/malaise/saignement important) → priorité forcée + réponse prudente.</li>
-                <li>Traçabilité : audit des interactions et endpoint <code>/audit/{interaction_id}</code> ; démo type <code>/health</code> → <code>/triage</code>.</li>
-              </ul>
+              <div class="only-long">
+                <div class="badges" aria-label="stack p14">
+                  <span class="badge">Qwen3‑1.7B‑Base</span>
+                  <span class="badge">SFT</span>
+                  <span class="badge">LoRA (PEFT)</span>
+                  <span class="badge">DPO</span>
+                  <span class="badge">FastAPI</span>
+                  <span class="badge">vLLM</span>
+                  <span class="badge">SQLite (audit)</span>
+                  <span class="badge">Ruff</span>
+                  <span class="badge">Pytest</span>
+                  <span class="badge">GitHub Actions</span>
+                </div>
 
-              <hr />
-              <div class="small">
-                Ce que le projet démontre :
                 <ul>
-                  <li>Spécialisation LLM réaliste sur ressources contraintes (LoRA) + alignement par préférences (DPO).</li>
-                  <li>Prise en compte “healthcare” : gouvernance données, garde‑fous de sécurité et traçabilité.</li>
-                  <li>Chemin d’industrialisation : Docker/FastAPI, CI/CD, et trajectoire vLLM.</li>
+                  <li>Données : dataset médical bilingue (HF Datasets/JSONL) avec objectif ~5 000 paires SFT + paires préférentielles DPO.</li>
+                  <li>Sécurité : red flags (ex. douleur thoracique/malaise/saignement important) → priorité forcée + réponse prudente.</li>
+                  <li>Traçabilité : audit des interactions et endpoint <code>/audit/{interaction_id}</code> ; démo type <code>/health</code> → <code>/triage</code>.</li>
                 </ul>
-              </div>
 
-              <hr />
-              <div class="small">
-                Chiffres (extraits) :
-                <ul>
-                  <li>Contraintes : POC à livrer en 4 semaines ; SFT ~5 000 paires.</li>
-                  <li>Latence (p50, extraits) : local réel ~13,5s ; cloud stub ~0,23s.</li>
-                </ul>
-              </div>
+                <hr />
+                <div class="small only-long">
+                  Ce que le projet démontre :
+                  <ul>
+                    <li>Spécialisation LLM réaliste sur ressources contraintes (LoRA) + alignement par préférences (DPO).</li>
+                    <li>Prise en compte “healthcare” : gouvernance données, garde‑fous de sécurité et traçabilité.</li>
+                    <li>Chemin d’industrialisation : Docker/FastAPI, CI/CD, et trajectoire vLLM.</li>
+                  </ul>
+                </div>
 
-              <hr />
-              <div class="small">
+                <hr />
+                <div class="small only-long">
+                  Chiffres (extraits) :
+                  <ul>
+                    <li>Contraintes : POC à livrer en 4 semaines ; SFT ~5 000 paires.</li>
+                    <li>Latence (p50, extraits) : local réel ~13,5s ; cloud stub ~0,23s.</li>
+                  </ul>
+                </div>
+              </div>
+              <hr class="only-long" />
+              <div class="small project-links">
                 Liens :
                 <ul>
                   <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P14_finetuning_poc_ia.html">Ouvrir</a></li>
@@ -649,47 +731,55 @@
             <div class="card col-6">
               <h3>Segmentation vestimentaire (POC) — ModeTrends</h3>
               <p class="small mt-0">
-                Évaluation d’un modèle de segmentation pré‑entraîné (SegFormer) pour isoler des pièces vestimentaires dans des images, avec validation (IoU) et estimation de coût d’exécution (local vs Inference API).
+                Segmentation SegFormer : évaluation IoU + estimation coût local vs API.
               </p>
 
-              <div class="badges" aria-label="stack p2">
-                <span class="badge">Computer Vision</span>
+              <div class="badges only-short" aria-label="skills p2">
                 <span class="badge">Segmentation</span>
                 <span class="badge">SegFormer</span>
-                <span class="badge">Transformers</span>
-                <span class="badge">Hugging Face</span>
                 <span class="badge">IoU</span>
-                <span class="badge">API tokens</span>
+                <span class="badge">Transformers</span>
               </div>
 
-              <ul>
-                <li>Métrique : IoU (Intersection over Union) pour comparer masques prédits vs ground truth.</li>
-                <li>Deux modes : traitement local via `transformers` vs exécution distante via Hugging Face Inference API.</li>
-                <li>Focus “prod” : gestion des tokens, optimisation pré-traitement, gestion d’erreurs et formats.</li>
-              </ul>
+              <div class="only-long">
+                <div class="badges" aria-label="stack p2">
+                  <span class="badge">Computer Vision</span>
+                  <span class="badge">Segmentation</span>
+                  <span class="badge">SegFormer</span>
+                  <span class="badge">Transformers</span>
+                  <span class="badge">Hugging Face</span>
+                  <span class="badge">IoU</span>
+                  <span class="badge">API tokens</span>
+                </div>
 
-              <hr />
-              <div class="small">
-                Ce que le projet démontre (POC) :
                 <ul>
-                  <li>Capacité à évaluer un modèle pré‑entraîné sur un jeu de tests annoté (masques) avec une métrique adaptée (IoU).</li>
-                  <li>Pré-traitement image robuste : redimensionnement + padding pour éviter la déformation.</li>
-                  <li>Qualité d’intégration : alignement naming image/masque et gestion des formats (`.png`, `.jpg`…).</li>
-                  <li>Arbitrage coût/infra : comparaison local (0€ hors machine) vs API Hugging Face (coût à l’usage).</li>
+                  <li>Métrique : IoU (Intersection over Union) pour comparer masques prédits vs ground truth.</li>
+                  <li>Deux modes : traitement local via `transformers` vs exécution distante via Hugging Face Inference API.</li>
+                  <li>Focus “prod” : gestion des tokens, optimisation pré-traitement, gestion d’erreurs et formats.</li>
                 </ul>
-              </div>
 
-              <hr />
-              <div class="small">
-                Chiffres (extraits) :
-                <ul>
-                  <li>Qualité : IoU global ≈ 74%.</li>
-                  <li>Inference API : ~1s/image ; estimation donnée ≈ 800$ (≈ 140h de calcul) dans l’exemple.</li>
-                </ul>
-              </div>
+                <hr />
+                <div class="small only-long">
+                  Ce que le projet démontre (POC) :
+                  <ul>
+                    <li>Capacité à évaluer un modèle pré‑entraîné sur un jeu de tests annoté (masques) avec une métrique adaptée (IoU).</li>
+                    <li>Pré-traitement image robuste : redimensionnement + padding pour éviter la déformation.</li>
+                    <li>Qualité d’intégration : alignement naming image/masque et gestion des formats (`.png`, `.jpg`…).</li>
+                    <li>Arbitrage coût/infra : comparaison local (0€ hors machine) vs API Hugging Face (coût à l’usage).</li>
+                  </ul>
+                </div>
 
-              <hr />
-              <div class="small">
+                <hr />
+                <div class="small only-long">
+                  Chiffres (extraits) :
+                  <ul>
+                    <li>Qualité : IoU global ≈ 74%.</li>
+                    <li>Inference API : ~1s/image ; estimation donnée ≈ 800$ (≈ 140h de calcul) dans l’exemple.</li>
+                  </ul>
+                </div>
+              </div>
+              <hr class="only-long" />
+              <div class="small project-links">
                 Liens :
                 <ul>
                   <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P2_requetez_services_ia.html">Ouvrir</a></li>
@@ -700,47 +790,55 @@
             <div class="card col-6">
               <h3>Prédiction conso énergie & CO2 (régression) — Seattle</h3>
               <p class="small mt-0">
-                Modélisation supervisée guidée : analyse exploratoire, feature engineering, comparaison de modèles de régression et interprétation pour prédire consommation d’énergie et émissions CO2 de bâtiments non résidentiels.
+                Régression énergie/CO2 (Seattle) : EDA → features → modèles → interprétation.
               </p>
 
-              <div class="badges" aria-label="stack p3">
-                <span class="badge">EDA</span>
-                <span class="badge">Feature engineering</span>
+              <div class="badges only-short" aria-label="skills p3">
                 <span class="badge">Régression</span>
-                <span class="badge">scikit-learn</span>
-                <span class="badge">Cross-validation</span>
-                <span class="badge">R2 / MAE</span>
-                <span class="badge">Data leakage</span>
+                <span class="badge">Feature eng.</span>
+                <span class="badge">CV</span>
+                <span class="badge">Interprétation</span>
               </div>
 
-              <ul>
-                <li>Cibles : consommation totale d’énergie et émissions CO2 (bâtiments non résidentiels).</li>
-                <li>Données : relevés 2016 + variables structurelles (taille, usage, année de construction, localisation…).</li>
-                <li>Démarche : EDA → préparation → features → modèles → optimisation (GridSearchCV) → interprétation.</li>
-              </ul>
+              <div class="only-long">
+                <div class="badges" aria-label="stack p3">
+                  <span class="badge">EDA</span>
+                  <span class="badge">Feature engineering</span>
+                  <span class="badge">Régression</span>
+                  <span class="badge">scikit-learn</span>
+                  <span class="badge">Cross-validation</span>
+                  <span class="badge">R2 / MAE</span>
+                  <span class="badge">Data leakage</span>
+                </div>
 
-              <hr />
-              <div class="small">
-                Ce que le projet démontre :
                 <ul>
-                  <li>Démarche ML complète et structurée : de l’EDA à l’optimisation et l’interprétation.</li>
-                  <li>Rigueur data : gestion des valeurs manquantes/outliers sans “casser” le dataset.</li>
-                  <li>Prévention des erreurs classiques : attention au data leakage et à l’encodage des catégorielles.</li>
-                  <li>Évaluation : comparaison de modèles via validation croisée et métriques de régression (R2/MAE).</li>
+                  <li>Cibles : consommation totale d’énergie et émissions CO2 (bâtiments non résidentiels).</li>
+                  <li>Données : relevés 2016 + variables structurelles (taille, usage, année de construction, localisation…).</li>
+                  <li>Démarche : EDA → préparation → features → modèles → optimisation (GridSearchCV) → interprétation.</li>
                 </ul>
-              </div>
 
-              <hr />
-              <div class="small">
-                Chiffres (extraits) :
-                <ul>
-                  <li>Campagne de mesures : 2016 (relevés ville de Seattle).</li>
-                  <li>Contrainte : relevés coûteux → motivation de la prédiction.</li>
-                </ul>
-              </div>
+                <hr />
+                <div class="small only-long">
+                  Ce que le projet démontre :
+                  <ul>
+                    <li>Démarche ML complète et structurée : de l’EDA à l’optimisation et l’interprétation.</li>
+                    <li>Rigueur data : gestion des valeurs manquantes/outliers sans “casser” le dataset.</li>
+                    <li>Prévention des erreurs classiques : attention au data leakage et à l’encodage des catégorielles.</li>
+                    <li>Évaluation : comparaison de modèles via validation croisée et métriques de régression (R2/MAE).</li>
+                  </ul>
+                </div>
 
-              <hr />
-              <div class="small">
+                <hr />
+                <div class="small only-long">
+                  Chiffres (extraits) :
+                  <ul>
+                    <li>Campagne de mesures : 2016 (relevés ville de Seattle).</li>
+                    <li>Contrainte : relevés coûteux → motivation de la prédiction.</li>
+                  </ul>
+                </div>
+              </div>
+              <hr class="only-long" />
+              <div class="small project-links">
                 Liens :
                 <ul>
                   <li>Rapport (HTML) : <a target="_blank" href="./rapports/rapport_P3_anticipez_besoins_consommations.html">Ouvrir</a></li>
@@ -752,9 +850,40 @@
         </section>
 
         <section id="competences">
-          <h2>Compétences & réflexivité</h2>
+          <h2>Compétences & retour d’expérience</h2>
           <div class="card">
-            <p class="mt-0">
+            <p class="small muted mt-0">
+              Retour d’expérience (réflexivité) : analyser ce qui a marché, ce qui a été difficile, et comment je l’améliorerais en contexte “prod”.
+            </p>
+
+            <p class="mt-0 only-short">
+              Compétences mises en avant (support) : exposition via API, packaging Docker, tests/CI, et observabilité (logs/monitoring) pour piloter qualité et risques.
+            </p>
+
+            <div class="badges only-short" aria-label="compétences clés">
+              <span class="badge">API (FastAPI)</span>
+              <span class="badge">Docker</span>
+              <span class="badge">Tests</span>
+              <span class="badge">CI/CD</span>
+              <span class="badge">Logs/metrics</span>
+              <span class="badge">RAG</span>
+              <span class="badge">ETL</span>
+              <span class="badge">Fine‑tuning</span>
+            </div>
+
+            <div class="small only-short">
+              Pour une lecture rapide (essentiel), je m’appuie sur 5 points :
+              <ul>
+                <li>Besoin métier & contexte</li>
+                <li>Audit d’adéquation POC ↔ besoins</li>
+                <li>Solution technique (architecture, choix, limites)</li>
+                <li>Appui décisionnel (risques, Go/No‑Go)</li>
+                <li>Contrôle (délais, coûts, livrables, performance)</li>
+              </ul>
+              <div class="muted">La version détaillée garde les démonstrations, chiffres et réflexivité projet par projet.</div>
+            </div>
+
+            <p class="mt-0 only-long">
               Sur ces projets, je me suis concentré sur la transformation d’un POC en un système exploitable : API stables, packaging Docker,
               tests et automatisation, puis observabilité (logs/monitoring) pour piloter qualité, latence et risques (ex. dérive), tout en gardant une traçabilité utile (audit) sur les domaines sensibles.
             </p>
@@ -828,7 +957,7 @@
               </div>
             </div>
 
-            <ul>
+            <ul class="only-long">
               <li>Compétences techniques : API (FastAPI/Pydantic), packaging Docker, CI (GitHub Actions), tests (Pytest), persistance & audit (PostgreSQL/SQLite), logging structuré, monitoring (latence/drift), tracking expérimental (MLflow), data pipelines (ETL + orchestration), RAG (FAISS, embeddings, chunking, réponses sourcées), LLM engineering (SFT/LoRA/DPO, garde-fous), et bases RL (PPO/DQN).</li>
               <li>Compétences “delivery” : cadrage POC (périmètre, critères de succès, Go/No-Go), documentation et communication claire, arbitrages (coût/latence/qualité), et démarche itérative guidée par métriques.</li>
               <li>Rétrospective : renforcer la sécurité (auth/rate-limit, gestion des secrets), l’alerting/observabilité “prod”, la gouvernance data (provenance/licences, anonymisation, data quality), et étendre l’évaluation (gold set/cas métier) pour industrialiser davantage.</li>
@@ -867,5 +996,35 @@
         <div>Portfolio construit dans le cadre de la fin de formation OpenClassrooms.</div>
       </footer>
     </div>
+
+    <script>
+      (() => {
+        const getInitialView = () => {
+          const params = new URLSearchParams(window.location.search);
+          return params.get("view") === "long" ? "long" : "short";
+        };
+
+        const setView = (view, { updateUrl } = { updateUrl: true }) => {
+          document.body.dataset.view = view;
+
+          document.querySelectorAll("[data-set-view]").forEach((btn) => {
+            const pressed = btn.getAttribute("data-set-view") === view;
+            btn.setAttribute("aria-pressed", pressed ? "true" : "false");
+          });
+
+          if (!updateUrl) return;
+          const url = new URL(window.location.href);
+          if (view === "long") url.searchParams.set("view", "long");
+          else url.searchParams.delete("view");
+          window.history.replaceState({}, "", url);
+        };
+
+        setView(getInitialView(), { updateUrl: false });
+
+        document.querySelectorAll("[data-set-view]").forEach((btn) => {
+          btn.addEventListener("click", () => setView(btn.getAttribute("data-set-view")));
+        });
+      })();
+    </script>
   </body>
 </html>

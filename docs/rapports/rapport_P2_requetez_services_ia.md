@@ -48,4 +48,4 @@ Résultat (extrait) :
 
 ---
 
-Sources : `projets/p2_requetez_services_ia/p2_contexte_mission.md` et `projets/p2_requetez_services_ia/p2_diapo.md`.
+Cas d’étude OpenClassrooms — synthèse du projet.

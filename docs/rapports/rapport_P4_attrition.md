@@ -87,8 +87,8 @@ Conclusion (extrait) : le modèle repère surtout les signes visibles de surchar
 
 - Un fichier `pyproject.toml` (versions Python + dépendances).
 - Notebooks et/ou scripts : nettoyage, exploration et modélisation.
-- Un support de présentation du travail (diapo).
+- Un support de synthèse du travail (slides).
 
 ---
 
-Sources : `projets/p4_attrition/p4_contexte_mission.md` et `projets/p4_attrition/p4_diapo.md`.
+Cas d’étude OpenClassrooms — synthèse du projet.

@@ -31,12 +31,10 @@ c'est quoi modèles de type CLIP
 c'est quoi modèles de type LLM multimodaux
 → Un modèle capable de comprendre plusieurs types de données à la fois, comme du texte et des images.
 
-c'est quoi Recall@K et Precision@K comment ça se prononce à l'oral
+c'est quoi Recall@K et Precision@K
 Recall@K
 → La proportion d’éléments pertinents retrouvés parmi les K recommandations proposées.
-(À l’oral : “Recall at K”)
 → La proportion d’éléments réellement pertinents parmi les K recommandations affichées.
-(À l’oral : “Precision at K”)
 
 c'est quoi le temps d’inférence
 → Le temps nécessaire au modèle pour produire une prédiction après réception d’une requête.

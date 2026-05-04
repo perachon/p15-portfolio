@@ -44,4 +44,4 @@
 
 ---
 
-Source : `projets/p3_anticipez_besoins_consommations/p3_contexte_mission.md`.
+Cas d’étude OpenClassrooms — synthèse du projet.

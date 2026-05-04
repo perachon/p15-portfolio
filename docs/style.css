@@ -121,13 +121,32 @@ section{scroll-margin-top:84px}
   background: rgba(147,197,253,.14);
   color:var(--text);
   text-decoration:none;
+  font: inherit;
+  cursor:pointer;
   transition: transform .15s ease, border-color .15s ease, background-color .15s ease, box-shadow .15s ease;
   box-shadow: 0 0 0 rgba(0,0,0,0);
 }
 .btn:hover{transform:translateY(-1px);border-color:var(--border-strong);background:rgba(147,197,253,.18);box-shadow: var(--shadow-soft)}
 .btn--ghost{background:rgba(0,0,0,.10)}
 .btn--ghost:hover{background:rgba(0,0,0,.20)}
+.btn--sm{padding:7px 10px;border-radius:999px}
 .btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+
+.view-toggle{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px}
+.view-toggle .btn[aria-pressed="true"]{border-color:var(--border-strong);background:rgba(147,197,253,.18)}
+
+/* View modes (short = classique, long = détaillée) */
+body[data-view="short"] .only-long{display:none !important}
+body[data-view="long"] .only-short{display:none !important}
+
+/* Mini project cards in classic view */
+body[data-view="short"] #projets .card:not(.card--primary){padding:12px}
+body[data-view="short"] #projets .card:not(.card--primary) h3{margin:0 0 6px;font-size:14px}
+body[data-view="short"] #projets .card:not(.card--primary) .small.mt-0{margin:0}
+body[data-view="short"] #projets .card:not(.card--primary) .badges{margin-top:8px;gap:6px}
+body[data-view="short"] #projets .card:not(.card--primary) .badge{font-size:11px;padding:3px 7px}
+body[data-view="short"] #projets .project-links ul{margin-top:6px;padding-left:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px 14px}
+body[data-view="short"] #projets .project-links li{margin:0}
 
 main{padding-top:22px}
 section{margin:28px 0}
@@ -138,6 +157,15 @@ section h2{
   display:flex;
   align-items:center;
   gap:10px;
+}
+section h2::before{
+  content:"";
+  width:9px;
+  height:9px;
+  border-radius:999px;
+  background: linear-gradient(180deg, rgba(147,197,253,.85), rgba(34,197,94,.55));
+  box-shadow: 0 0 0 4px rgba(147,197,253,.08);
+  flex:0 0 auto;
 }
 section h2::after{
   content:"";
@@ -156,6 +184,15 @@ section h2::after{
   overflow:hidden;
   will-change: transform;
 }
+.card--primary{
+  border-color: rgba(229,231,235,.20);
+  background:
+    radial-gradient(800px 260px at 18% 0%, rgba(147,197,253,.14), transparent 60%),
+    radial-gradient(760px 240px at 86% 0%, rgba(34,197,94,.10), transparent 62%),
+    linear-gradient(180deg, rgba(17,24,39,.94), rgba(17,24,39,.70));
+}
+.card--primary::before{height:3px;opacity:.70}
+.card--primary:hover{box-shadow: var(--shadow), 0 0 0 1px rgba(147,197,253,.14)}
 .card::before{
   content:"";
   position:absolute;
@@ -196,11 +233,27 @@ li::marker{color:rgba(147,197,253,.55)}
   border:1px solid var(--border);
   padding:4px 8px;
   border-radius:999px;
-  background:rgba(0,0,0,.10);
+  background: linear-gradient(180deg, rgba(0,0,0,.14), rgba(0,0,0,.06));
   backdrop-filter: blur(8px);
   transition: transform .15s ease, border-color .15s ease, background-color .15s ease;
 }
 .badge:hover{transform:translateY(-1px);border-color:rgba(147,197,253,.28);background:rgba(147,197,253,.06)}
+
+/* Project links: slightly more “button-like” without adding new components */
+.project-links a{
+  display:inline-flex;
+  align-items:center;
+  padding:4px 8px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background: rgba(0,0,0,.10);
+  text-decoration:none;
+}
+.project-links a:hover{
+  border-color:var(--border-strong);
+  background:rgba(147,197,253,.10);
+}
+.project-links a:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
 hr{border:0;border-top:1px solid var(--border);margin:18px 0}
 footer{margin-top:28px;color:var(--muted);font-size:13px}
 .small{font-size:13px;color:var(--muted)}

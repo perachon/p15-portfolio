@@ -36,9 +36,7 @@ Vous consulterez la ressource pédagogique Hugging Face Spaces Overview pour dé
 
 Mission : Vous réaliserez la mission principale. 
 
-À l’issue de ce projet, vous présenterez les livrables de la mission à un mentor évaluateur lors d’une soutenance.
-
-Cela vous permettra de valider les compétences visées par ce projet.
+À l’issue de ce projet, vous finaliserez et partagerez les livrables de la mission (démo + revue technique), afin de valider les compétences visées par ce projet.
 
 Objectifs pédagogiques
 Configurer l'environnement de travail

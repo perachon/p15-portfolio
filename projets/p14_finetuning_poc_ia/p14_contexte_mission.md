@@ -29,9 +29,9 @@ Cours - Ce cours “Post-training 101” décrit comment on part d’un modèle 
 
 Cours - Fine Tuning supervisé. Vous apprendrez à votre modèle à mieux répondre aux besoins spécifiques de la tâche.
 
-Mission : Vous réaliserez la mission principale du projet : le développement d'un Proof of Concept (POC) d'un agent IA de triage médical pour le compte d'un centre hospitalier. Vous terminerez en complétant la fiche d’autoévaluation qui servira de base de discussion avec votre mentor avant la soutenance.
+Mission : Vous réaliserez la mission principale du projet : le développement d'un Proof of Concept (POC) d'un agent IA de triage médical pour le compte d'un centre hospitalier. Vous terminerez en complétant la fiche d’autoévaluation qui servira de base de discussion avec votre mentor.
 
-À l’issue de ce projet, vous présenterez les livrables de la mission à un mentor évaluateur lors d’une soutenance. Cela vous permettra de valider les compétences visées par ce projet.
+À l’issue de ce projet, vous finaliserez et partagerez les livrables de la mission (démo + revue technique) afin de valider les compétences visées par ce projet.
 
  
 
