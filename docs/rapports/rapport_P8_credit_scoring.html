@@ -16,6 +16,17 @@
       .doc p{margin:10px 0}
       .doc code{background:rgba(0,0,0,.18);border:1px solid var(--border);padding:1px 6px;border-radius:8px}
       .doc .meta{color:var(--muted);font-size:13px}
+      .doc .notice{margin:12px 0}
+      .doc .table-wrap{overflow:auto;border:1px solid var(--border);border-radius:12px}
+      .doc table{width:100%;border-collapse:collapse;min-width:760px;background:rgba(0,0,0,.06)}
+      .doc th,.doc td{border-bottom:1px solid var(--border);padding:10px 10px;vertical-align:top;font-size:13px}
+      .doc th{color:var(--text);text-align:left;background:rgba(147,197,253,.08)}
+      .doc tr:last-child td{border-bottom:0}
+      .doc .kpi-ok{color:#a7f3d0}
+      .doc .kpi-partial{color:#fde68a}
+      .doc .kpi-no{color:#fca5a5}
+      .doc figure{margin:14px 0;padding:12px;border:1px solid var(--border);border-radius:14px;background:rgba(0,0,0,.08)}
+      .doc figcaption{color:var(--muted);font-size:13px;margin-top:8px}
     </style>
   </head>
   <body>
@@ -27,8 +38,10 @@
       <article class="card doc">
         <h1>Rapport de conduite de projet AI Engineering — Credit Scoring API</h1>
 
-        <h2>1. Contexte et analyse des besoins</h2>
-        <h3>1.1 Organisation &amp; contexte</h3>
+        <p class="meta">Date : 22 avril 2026 — version “projet technique” (preuves + décisions)</p>
+
+        <h2 id="besoins">1. Contexte et analyse des besoins</h2>
+        <h3 id="contexte">1.1 Organisation &amp; contexte</h3>
         <ul>
           <li>Contexte : système d’aide à la décision pour l’octroi de crédit via une API.</li>
           <li>Type d’organisation (scénario OpenClassrooms) : société financière fictive <strong>"Prêt à Dépenser"</strong> ; département <strong>"Crédit Express"</strong> (traitement quasi temps réel).</li>
@@ -37,12 +50,19 @@
           <li>Niveau de maturité IA / MLOps : <strong>maturité intermédiaire</strong> — déploiement Docker + CI/tests + logs + monitoring ; pas encore de sécurité/alerting/retraining automatisé.</li>
         </ul>
 
-        <h3>1.2 Besoin métier</h3>
+        <h3 id="recueil">1.2 Besoin métier, recueil et méthodologie</h3>
         <ul>
           <li>Besoin : estimer <code>P(défaut)</code> et produire une décision <code>ACCEPTED/REFUSED</code> à partir d’un seuil <code>THRESHOLD=0.2</code>.</li>
           <li>Parties prenantes (scénario OC) : Chloé Dubois (Lead Data Scientist), Michaël (manager), département Crédit Express + chargé d’études.</li>
           <li>KPI business : minimiser le coût d’erreur en tenant compte d’un coût FN &gt;&gt; FP (mission OC : FN supposé 10× FP) + suivi taux d’acceptation / taux de défaut.</li>
           <li>Conformité : non cadré juridiquement dans le POC (pas de DPIA, pas de politique formalisée d’accès/rétention). POC exposé publiquement et sans auth/rate-limit → points de vigilance à traiter en prod.</li>
+        </ul>
+
+        <p><strong>Méthodologie (recueil &amp; analyse) — adaptée à un POC</strong></p>
+        <ul>
+          <li>Recueil : analyse documentaire (brief + consignes) + clarification des objectifs (business/tech) + revue de la solution cible (API/logs/monitoring) pour faire émerger les exigences non-fonctionnelles.</li>
+          <li>Analyse : formulation en items testables (fonctionnels + non-fonctionnels) + identification des contraintes (sécurité, conformité, exploitation).</li>
+          <li>Justification : prioriser fiabilité/traçabilité (tests/logs/monitoring) pour rendre le système mesurable, puis durcir sécurité/alerting/retraining en itérations.</li>
         </ul>
 
         <p><strong>Axes de réalisation</strong></p>
@@ -53,7 +73,137 @@
           <li>Analyser et optimiser les performances.</li>
         </ul>
 
-        <h2>2. Solution (POC)</h2>
+        <h3 id="priorisation">1.3 Backlog de besoins &amp; priorisation</h3>
+        <div class="table-wrap" role="region" aria-label="Backlog de besoins">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:64px">ID</th>
+                <th>Besoin</th>
+                <th style="width:140px">Dimension</th>
+                <th style="width:160px">Type</th>
+                <th style="width:90px">Priorité</th>
+                <th style="width:240px">Critère d’acceptation (extrait)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>B1</strong></td>
+                <td>Prédire <code>P(défaut)</code> et retourner une décision <code>ACCEPTED/REFUSED</code> via API</td>
+                <td>Métier</td>
+                <td>Fonctionnel</td>
+                <td>Must</td>
+                <td><code>POST /predict</code> répond 200 + champs attendus + décision par seuil</td>
+              </tr>
+              <tr>
+                <td><strong>B2</strong></td>
+                <td>API stable + documentée</td>
+                <td>Tech</td>
+                <td>Non-fonctionnel</td>
+                <td>Must</td>
+                <td>Swagger <code>/docs</code> + <code>GET /health</code></td>
+              </tr>
+              <tr>
+                <td><strong>B3</strong></td>
+                <td>Validation d’entrée + gestion d’erreurs</td>
+                <td>Tech</td>
+                <td>Non-fonctionnel</td>
+                <td>Must</td>
+                <td>422 sur input invalide ; erreurs système séparées</td>
+              </tr>
+              <tr>
+                <td><strong>B4</strong></td>
+                <td>Traçabilité (logs structurés)</td>
+                <td>Exploitation</td>
+                <td>Non-fonctionnel</td>
+                <td>Must</td>
+                <td>log JSONL : <code>request_id</code>, <code>latency_ms</code>, <code>status_code</code></td>
+              </tr>
+              <tr>
+                <td><strong>B5</strong></td>
+                <td>Suivi performance (latence)</td>
+                <td>Exploitation</td>
+                <td>Non-fonctionnel</td>
+                <td>Should</td>
+                <td>KPI latence calculables + détection outliers</td>
+              </tr>
+              <tr>
+                <td><strong>B6</strong></td>
+                <td>Monitoring drift (signal de dérive)</td>
+                <td>Métier/Exploit.</td>
+                <td>Non-fonctionnel</td>
+                <td>Should</td>
+                <td>test KS sur distribution scores + rapport</td>
+              </tr>
+              <tr>
+                <td><strong>B7</strong></td>
+                <td>Sécurité (auth + rate-limit)</td>
+                <td>Tech/Orga</td>
+                <td>Non-fonctionnel</td>
+                <td>Could (POC)</td>
+                <td>endpoints protégés ; limitation d’usage</td>
+              </tr>
+              <tr>
+                <td><strong>B8</strong></td>
+                <td>Conformité (RGPD, rétention logs, minimisation)</td>
+                <td>Réglementaire</td>
+                <td>Non-fonctionnel</td>
+                <td>Should</td>
+                <td>politique de rétention + redaction PII dans logs</td>
+              </tr>
+              <tr>
+                <td><strong>B9</strong></td>
+                <td>Coûts &amp; capacité (infra, stockage logs)</td>
+                <td>Business/Tech</td>
+                <td>Non-fonctionnel</td>
+                <td>Should</td>
+                <td>estimation ordre de grandeur + variables de chiffrage</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>Priorisation (valeur/effort) — lecture rapide</strong></p>
+        <div class="table-wrap" role="region" aria-label="Priorisation valeur effort">
+          <table>
+            <thead>
+              <tr>
+                <th>Groupe</th>
+                <th style="width:140px">Valeur métier</th>
+                <th style="width:110px">Effort</th>
+                <th>Décision</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>B1–B4</strong></td>
+                <td>Élevée</td>
+                <td>Moyen</td>
+                <td>1ère itération (POC) : rendre le service stable, testable et traçable</td>
+              </tr>
+              <tr>
+                <td><strong>B5–B6</strong></td>
+                <td>Élevée</td>
+                <td>Moyen</td>
+                <td>2e itération : observabilité (latence + drift) et diagnostic</td>
+              </tr>
+              <tr>
+                <td><strong>B8–B9</strong></td>
+                <td>Moyenne → Élevée</td>
+                <td>Moyen</td>
+                <td>Avant prod : conformité + chiffrage</td>
+              </tr>
+              <tr>
+                <td><strong>B7</strong></td>
+                <td>Élevée</td>
+                <td>Élevé</td>
+                <td>Itération “durcissement” : auth, rate limit, secrets, redaction</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="solution">2. Solution (POC)</h2>
         <ul>
           <li>API FastAPI : <code>GET /health</code>, <code>POST /predict</code> + validation Pydantic.</li>
           <li>Modèle : chargé au démarrage (startup) et conservé en mémoire ; artefact joblib téléchargé depuis Hugging Face Hub (<code>perachon/credit-scoring-model</code>, <code>lightgbm_api_pipeline.pkl</code>) avec cache Hugging Face.</li>
@@ -62,11 +212,25 @@
           <li>Logs : JSONL request-level + événements <code>prediction</code> / <code>validation_error</code> (ex. <code>logs/api_requests.jsonl</code>).</li>
         </ul>
 
-        <h3>2.2 Évaluation de l’adéquation aux besoins</h3>
+        <h3 id="audit">2.1 Démarche d’audit (méthodologie)</h3>
+        <p class="notice">
+          Objectif : évaluer l’adéquation <strong>POC ↔ besoins</strong> sur 4 axes : (1) robustesse API/contrat,
+          (2) traçabilité, (3) performance/latence, (4) risques (sécurité, conformité, biais).
+        </p>
+        <ol>
+          <li><strong>Définir le périmètre</strong> : endpoints, schéma d’entrée, décision (seuil).</li>
+          <li><strong>Audit API/robustesse</strong> : tests (pytest), validation Pydantic, codes d’erreurs.</li>
+          <li><strong>Audit observabilité</strong> : inspection logs JSONL (champs, volumétrie, doublons de <code>request_id</code>).</li>
+          <li><strong>Audit performance</strong> : métriques latence + profiling (<code>cProfile</code>) pour isoler un goulot.</li>
+          <li><strong>Audit drift</strong> : Evidently + test KS sur la distribution des probabilités.</li>
+          <li><strong>Audit risques</strong> : checklist POC vs prod (auth/rate-limit, rétention logs, DPIA, fairness).</li>
+        </ol>
+
+        <h3 id="adequation">2.2 Évaluation de l’adéquation aux besoins</h3>
         <ul>
           <li>Robustesse : validation Pydantic + tests automatisés.</li>
           <li>Sécurité : pas d’auth/rate-limit (écart par rapport à une prod).</li>
-          <li>Coût : estimation non réalisée (POC). Drivers principaux : compute CPU, cold start/téléchargement modèle, stockage/rotation des logs, hébergement (Spaces). Chiffrage (€/mois).</li>
+          <li>Coût : estimation partielle (ordre de grandeur) + méthode de chiffrage (cf. section 5.3). Drivers principaux : compute CPU, cold start/téléchargement modèle, stockage/rotation des logs, hébergement.</li>
         </ul>
 
         <p><strong>Écarts / limites (POC)</strong></p>
@@ -77,16 +241,214 @@
 
         <p><strong>Logging vs monitoring</strong> : le logging stocke les événements ; le monitoring analyse ces événements pour détecter des anomalies.</p>
 
-        <h2>5. Contrôle et suivi (extraits)</h2>
+        <h2 id="mapping">3. Mapping besoins ↔ solution ↔ écarts</h2>
+        <div class="table-wrap" role="region" aria-label="Mapping besoins solution">
+          <table>
+            <thead>
+              <tr>
+                <th>Besoin</th>
+                <th>Implémentation POC</th>
+                <th style="width:110px">État</th>
+                <th>Commentaire</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>B1 (prédire + décider)</td>
+                <td><code>POST /predict</code> + seuil <code>THRESHOLD=0.2</code></td>
+                <td class="kpi-ok">OK</td>
+                <td>Relier le seuil à un score métier (coût FP/FN) pour justifier la décision</td>
+              </tr>
+              <tr>
+                <td>B2 (API stable)</td>
+                <td>FastAPI + <code>/docs</code> + <code>/health</code></td>
+                <td class="kpi-ok">OK</td>
+                <td>Démontrable en public (Spaces)</td>
+              </tr>
+              <tr>
+                <td>B3 (validation)</td>
+                <td>Pydantic + tests</td>
+                <td class="kpi-ok">OK</td>
+                <td>Erreurs input (422) distinguées</td>
+              </tr>
+              <tr>
+                <td>B4 (logs structurés)</td>
+                <td>JSONL request-level</td>
+                <td class="kpi-ok">OK</td>
+                <td>Prévoir redaction/rotation en prod</td>
+              </tr>
+              <tr>
+                <td>B5 (latence)</td>
+                <td>KPI via logs</td>
+                <td class="kpi-partial">Partiel</td>
+                <td>Outliers présents → traiter cold start / warmup</td>
+              </tr>
+              <tr>
+                <td>B6 (drift)</td>
+                <td>Evidently + KS sur scores</td>
+                <td class="kpi-partial">Partiel</td>
+                <td>Signal OK ; étendre à drift features + impact sur métriques</td>
+              </tr>
+              <tr>
+                <td>B7 (sécurité)</td>
+                <td>Non implémentée</td>
+                <td class="kpi-no">Non (POC)</td>
+                <td>À ajouter avant prod (auth/rate-limit/secrets)</td>
+              </tr>
+              <tr>
+                <td>B8 (RGPD/rétention)</td>
+                <td>Non formalisé</td>
+                <td class="kpi-no">Non (POC)</td>
+                <td>À cadrer (DPIA, rétention, minimisation, redaction logs)</td>
+              </tr>
+              <tr>
+                <td>B9 (coûts/capacité)</td>
+                <td>Chiffrage fournisseur à renseigner</td>
+                <td class="kpi-partial">Partiel</td>
+                <td>Méthode + variables + hypothèses trafic (cf. 5.3)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="solution-cible">3.2 Solution technique cible (sécurité, conformité, scalabilité, coûts)</h3>
         <ul>
-          <li>Latence /predict (42 requêtes) : mean 262.70 ms ; median 0.92 ms ; min 0.45 ms ; max 2599.65 ms.</li>
-          <li>Note latence : 42 lignes /predict dans les logs, 40 <code>request_id</code> uniques (doublons présents).</li>
-          <li>Drift (Evidently, K‑S) : drift détecté sur <code>probability_default</code> — p-value ≈ 0.015873 (&lt; 0.05), <code>dataset_drift=true</code> (cf. <code>drift_report.json</code>).</li>
-          <li>Interprétation : signal à investiguer (échantillon, drift sur scores uniquement, impact sur métriques) qui déclenche un plan d’action.</li>
-          <li>Plan d’action : analyser les features contributrices, suivre les KPI techniques, éventuel retraining/recalibration → revalidation → redéploiement via CI/CD.</li>
+          <li><strong>Sécurité</strong> : authentification (API key/OAuth), rate limiting, gestion des secrets (CI secrets/vault), durcissement CORS et protection des endpoints.</li>
+          <li><strong>Conformité/RGPD</strong> : minimisation des données, redaction/anonymisation dans les logs, politique de rétention (ex. 30 jours), et DPIA si données personnelles réelles.</li>
+          <li><strong>Scalabilité</strong> : service stateless + autoscaling, cache de l’artefact modèle, warmup au démarrage pour réduire les cold starts.</li>
+          <li><strong>Coûts</strong> : chiffrage à partir des unités (CPU-heures, GB logs, egress) avec hypothèses de trafic ; arbitrages (latence vs coût).</li>
+          <li><strong>Observabilité</strong> : dashboard (latence/erreurs/drift) + alerting + runbook (cadence de revue et actions).</li>
         </ul>
 
-        <h3>5.2 Outils et process de suivi</h3>
+        <h3 id="use-cases">3.3 Cas d’usage (identification, description, priorisation)</h3>
+        <div class="table-wrap" role="region" aria-label="Cas d’usage">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:190px">Cas d’usage</th>
+                <th>Description</th>
+                <th style="width:110px">Valeur</th>
+                <th style="width:120px">Complexité</th>
+                <th style="width:120px">Priorité</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>UC1 — Scoring temps réel</strong></td>
+                <td>Requête → score + décision <code>ACCEPTED/REFUSED</code></td>
+                <td>Élevée</td>
+                <td>Moyenne</td>
+                <td>Must</td>
+              </tr>
+              <tr>
+                <td><strong>UC2 — Traçabilité / audit</strong></td>
+                <td>Logs structurés (<code>request_id</code>, latence, statut, événements)</td>
+                <td>Élevée</td>
+                <td>Moyenne</td>
+                <td>Must</td>
+              </tr>
+              <tr>
+                <td><strong>UC3 — Monitoring & itération</strong></td>
+                <td>Détection drift/latence anormale + déclenchement revue</td>
+                <td>Élevée</td>
+                <td>Moyenne</td>
+                <td>Should</td>
+              </tr>
+              <tr>
+                <td><strong>UC4 — Durcissement sécurité</strong></td>
+                <td>Auth + rate-limit + redaction + rétention</td>
+                <td>Élevée</td>
+                <td>Élevée</td>
+                <td>Could (POC) / Should (prod)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="notice">Méthode : priorisation valeur/effort (impact métier + risques), alignée avec le contexte (API exposée, contraintes latence, exigence de traçabilité).</p>
+
+        <h2 id="jalons">4. Jalons, livrables, ressources (estimation)</h2>
+        <ul>
+          <li><strong>J1 — Cadrage</strong> : backlog priorisé (B1–B9) + critères d’acceptation + risques.</li>
+          <li><strong>J2 — API &amp; contrat</strong> : endpoints + schéma d’entrée + tests critiques.</li>
+          <li><strong>J3 — CI/CD</strong> : pipeline vert (tests) + build Docker + déploiement.</li>
+          <li><strong>J4 — Observabilité</strong> : logs structurés + scripts KPI + rapport drift.</li>
+          <li><strong>J5 — Revue Go/No-Go</strong> : KPI vs SLO + plan durcissement (sécurité/conformité).</li>
+        </ul>
+        <p><strong>Ressources (ordre de grandeur, POC)</strong></p>
+        <ul>
+          <li>AI Engineer / MLOps : 4–7 jours (API, packaging, CI, logs, monitoring POC).</li>
+          <li>Data Scientist : 1–2 jours (KPI ML, seuil, analyse dérive).</li>
+          <li>Référent métier : 0,5–1 jour (validation coûts FP/FN, critères business).</li>
+          <li>Conformité/sécurité : 0,5–1 jour (exigences d’accès, rétention, redaction).</li>
+        </ul>
+
+        <h2 id="kpi">5. Contrôle, KPI &amp; suivi</h2>
+        <div class="table-wrap" role="region" aria-label="Tableau KPI">
+          <table>
+            <thead>
+              <tr>
+                <th>KPI</th>
+                <th style="width:240px">Objectif (SLO / règle)</th>
+                <th style="width:210px">Valeur observée (POC)</th>
+                <th style="width:120px">Statut</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Latence médiane <code>/predict</code></td>
+                <td>&lt; 50 ms</td>
+                <td>0,92 ms</td>
+                <td class="kpi-ok"><strong>OK</strong></td>
+                <td>Médiane excellente</td>
+              </tr>
+              <tr>
+                <td>Latence moyenne <code>/predict</code></td>
+                <td>&lt; 200 ms</td>
+                <td>262,70 ms</td>
+                <td class="kpi-partial"><strong>Partiel</strong></td>
+                <td>Moyenne tirée par un outlier (cold start)</td>
+              </tr>
+              <tr>
+                <td>Latence max <code>/predict</code></td>
+                <td>&lt; 1500 ms</td>
+                <td>2599,65 ms</td>
+                <td class="kpi-no"><strong>Non</strong></td>
+                <td>Outlier à traiter (warmup/cache, chargement modèle)</td>
+              </tr>
+              <tr>
+                <td>Drift scores (KS)</td>
+                <td>p-value &lt; 0,05 = drift (déclencheur)</td>
+                <td>p-value ≈ 0,015873 → drift</td>
+                <td class="kpi-ok"><strong>OK</strong></td>
+                <td>Signal à investiguer (taille échantillon, impact perf)</td>
+              </tr>
+              <tr>
+                <td>Qualité modèle (AUC)</td>
+                <td>AUC ≥ 0,75 (POC)</td>
+                <td>~0,77 (comparatif CV)</td>
+                <td class="kpi-ok"><strong>OK</strong></td>
+                <td>À compléter par KPI business (taux défaut/acceptation)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <figure aria-label="visualisation latence">
+          <img src="./assets/credit_scoring_latency.svg" alt="Résumé de latence /predict (log scale): médiane 0,92 ms, moyenne 262,70 ms, maximum 2599,65 ms." style="width:100%;height:auto" />
+          <figcaption>Figure 1 — Visualisation simple (lisible en revue) : médiane très basse mais présence d’un outlier (cold start) qui tire la moyenne et le maximum.</figcaption>
+        </figure>
+
+        <p><strong>Extraits mesurés</strong></p>
+        <ul>
+          <li>Latence /predict (42 requêtes) : mean 262,70 ms ; median 0,92 ms ; min 0,45 ms ; max 2599,65 ms.</li>
+          <li>Qualité logs : 42 lignes /predict ; 40 <code>request_id</code> uniques (doublons présents).</li>
+          <li>Drift (Evidently, K‑S) : drift sur <code>probability_default</code> — p-value ≈ 0,015873 (&lt; 0,05), <code>dataset_drift=true</code> (cf. <code>drift_report.json</code>).</li>
+          <li>Plan d’action drift : analyser features contributrices, vérifier impact sur métriques, puis retraining/recalibration → revalidation → redéploiement CI/CD.</li>
+        </ul>
+
+        <h3 id="outils">5.2 Outils et process de suivi</h3>
         <ul>
           <li>Tests : exécution en CI.</li>
           <li>Monitoring : scripts latence/drift + rapports Evidently.</li>
@@ -94,11 +456,28 @@
           <li>Process : non formalisé dans le POC (pas de cadence revue drift définie ; pas de runbook).</li>
         </ul>
 
-        <h2>Risques & mitigation (POC)</h2>
+        <h3 id="couts">5.3 Estimation infra / coûts (ordre de grandeur)</h3>
         <ul>
-          <li>Légal/réglementaire : DPIA RGPD non réalisé (hors périmètre POC).</li>
-          <li>Sécurité : auth/rate-limit non implémentés (POC).</li>
-          <li>Biais/fairness : non documenté dans le POC ; vigilance sur variables sensibles potentielles.</li>
+          <li>Compute : 1 service API CPU (container) + mémoire pour charger le modèle.</li>
+          <li>Stockage logs (ordre de grandeur) : si 1 ligne JSONL ≈ 1–2 KB et 10 000 requêtes/jour → 10–20 MB/jour → 0,3–0,6 GB/mois.</li>
+          <li>Coût “à renseigner” : coût = (CPU-heures × prix CPU) + (GB logs × prix stockage) + (egress × prix réseau).</li>
+          <li>Décision prod : définir une politique de rétention (ex. 30 jours) + rotation, et redacter/anonymiser les champs sensibles.</li>
+        </ul>
+
+        <h2 id="risques">6. Risques &amp; impacts + mitigation (POC)</h2>
+        <ul>
+          <li><strong>Légal/réglementaire</strong> : DPIA RGPD non réalisé (hors périmètre POC) ; à cadrer si données personnelles réelles + politique d’accès/rétention.</li>
+          <li><strong>Sécurité</strong> : API publique en démo sans auth/rate-limit → risque d’abus, d’exfiltration et de coût.</li>
+          <li><strong>Éthique / biais</strong> : fairness non documenté ; vigilance sur variables sensibles et impacts d’un refus “automatisé”.</li>
+          <li><strong>Business</strong> : un seuil mal calibré dégrade coût FP/FN ou taux d’acceptation ; nécessité d’un KPI métier et d’une revue.</li>
+          <li><strong>Organisation</strong> : intégration au workflow (chargé d’études) + capacité à expliquer la décision et gérer les contestations.</li>
+        </ul>
+
+        <p><strong>Recommandations décisionnelles (extraits)</strong></p>
+        <ul>
+          <li>Formaliser un Go/No-Go : SLO latence (p95), KPI business (coût FP/FN, taux d’acceptation), critères de rollback.</li>
+          <li>Avant prod : auth + rate-limit, redaction logs + rétention, et checks fairness si variables sensibles.</li>
+          <li>Drift : étendre aux features + impact sur métriques (AUC/recall), définir runbook (cadence, seuils, actions).</li>
         </ul>
 
         <h2>Liens</h2>
